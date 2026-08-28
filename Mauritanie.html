@@ -1,0 +1,1044 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mauritanie — Terre de fer, de sable et d'oiseaux</title>
+<meta name="description" content="Géographie, ressources, parcs nationaux, économie et patrimoine de la Mauritanie — un pays entre Sahara et Atlantique." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Carte satellite : Leaflet -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+
+<style>
+  /* =========================================================
+     PALETTE — drapeau mauritanien (vert, or, rouge) + désert
+     Vert  #006233  ·  Or #FFC400  ·  Rouge #CD2A3E
+     ========================================================= */
+  :root{
+    /* sables du désert : le sol de la page */
+    --sand:#F7F0E0;
+    --sand-2:#EFE3C7;
+    --surface:#FFFDF6;
+    --surface-2:#FAF3E2;
+
+    /* encres, teintées chaud (sable), jamais du gris pur */
+    --ink:#231C10;
+    --ink-soft:#5A4E38;
+    --ink-faint:#8B7C5E;
+
+    /* drapeau */
+    --green:#046A38;
+    --green-deep:#0A4A2B;
+    --green-bright:#00874A;
+    --gold:#B5820E;
+    --gold-bright:#FFC400;
+    --red:#B32639;
+
+    --line:#E0CFA6;
+    --line-strong:#CBB37F;
+
+    --shadow: 0 1px 2px rgba(35,28,16,.06), 0 10px 30px -14px rgba(35,28,16,.22);
+    --radius: 14px;
+    --wrap: 1150px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --sand:#12100A;
+      --sand-2:#1A160E;
+      --surface:#1D1810;
+      --surface-2:#231D13;
+
+      --ink:#F3E9D2;
+      --ink-soft:#C6B694;
+      --ink-faint:#948464;
+
+      --green:#4FBF85;
+      --green-deep:#2E8F5E;
+      --green-bright:#5FD695;
+      --gold:#EDBF4A;
+      --gold-bright:#FFC400;
+      --red:#E8697A;
+
+      --line:#3A3020;
+      --line-strong:#4E4029;
+
+      --shadow: 0 1px 2px rgba(0,0,0,.35), 0 14px 32px -16px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --sand:#12100A;
+    --sand-2:#1A160E;
+    --surface:#1D1810;
+    --surface-2:#231D13;
+    --ink:#F3E9D2;
+    --ink-soft:#C6B694;
+    --ink-faint:#948464;
+    --green:#4FBF85;
+    --green-deep:#2E8F5E;
+    --green-bright:#5FD695;
+    --gold:#EDBF4A;
+    --gold-bright:#FFC400;
+    --red:#E8697A;
+    --line:#3A3020;
+    --line-strong:#4E4029;
+    --shadow: 0 1px 2px rgba(0,0,0,.35), 0 14px 32px -16px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+
+  body{
+    margin:0;
+    background:var(--sand);
+    color:var(--ink);
+    font-family:"Work Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:"Fraunces", Georgia, "Times New Roman", serif;
+    font-weight:700; letter-spacing:-0.01em; text-wrap:balance;
+    color:var(--ink); margin:0;
+  }
+  a{color:inherit}
+  img{max-width:100%; display:block}
+
+  .wrap{max-width:var(--wrap); margin:0 auto; padding:0 28px}
+  @media (max-width:640px){ .wrap{padding:0 20px} }
+  .mono{font-family:"IBM Plex Mono", ui-monospace, monospace; font-variant-numeric:tabular-nums}
+
+  /* ---- bande drapeau : motif structurant récurrent ---- */
+  .flagrule{display:flex; height:4px; width:64px; border-radius:2px; overflow:hidden; flex:none}
+  .flagrule i{display:block; height:100%}
+  .flagrule i:nth-child(1){width:22%; background:var(--red)}
+  .flagrule i:nth-child(2){width:56%; background:var(--green)}
+  .flagrule i:nth-child(3){width:22%; background:var(--gold-bright)}
+
+  /* ============ NAV ============ */
+  header.site{
+    position:sticky; top:0; z-index:600;
+    background:color-mix(in srgb, var(--sand) 90%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{display:flex; align-items:center; justify-content:space-between; height:64px}
+  .brand{
+    display:flex; align-items:center; gap:11px;
+    font-family:"Fraunces", serif; font-weight:700; font-size:1.05rem;
+    text-decoration:none; color:var(--ink);
+  }
+  .brand svg{width:26px; height:auto; border-radius:2px; flex:none; box-shadow:0 0 0 1px var(--line)}
+  nav.links{display:flex; gap:2px; align-items:center}
+  nav.links a{
+    font-size:.86rem; font-weight:600; letter-spacing:.02em;
+    text-decoration:none; color:var(--ink-soft);
+    padding:8px 12px; border-radius:8px;
+    transition:color .15s ease, background .15s ease;
+  }
+  nav.links a:hover{color:var(--green); background:var(--surface-2)}
+  #navToggle{display:none}
+  .burger{display:none; background:none; border:1px solid var(--line-strong); border-radius:8px; width:40px;height:36px; cursor:pointer; color:var(--ink)}
+  @media (max-width: 860px){
+    nav.links{
+      position:absolute; top:64px; left:0; right:0;
+      background:var(--surface); border-bottom:1px solid var(--line);
+      flex-direction:column; align-items:stretch; padding:8px; display:none;
+    }
+    nav.links a{padding:12px 14px}
+    #navToggle:checked ~ nav.links{display:flex}
+    .burger{display:inline-flex; align-items:center; justify-content:center}
+  }
+
+  /* ============ FIGURES / PHOTOS ============ */
+  figure{margin:0; position:relative}
+  .ph{
+    position:relative; overflow:hidden; background:var(--sand-2);
+    border-radius:var(--radius);
+  }
+  .ph img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    transition:transform .8s cubic-bezier(.2,.7,.3,1);
+  }
+  .ph.zoom:hover img{transform:scale(1.04)}
+  @media (prefers-reduced-motion:reduce){ .ph img{transition:none} .ph.zoom:hover img{transform:none} }
+
+  /* repli élégant si une photo ne charge pas */
+  .ph.failed img{display:none}
+  .ph.failed::after{
+    content:attr(data-fallback);
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:24px; font-size:.86rem; color:var(--ink-faint);
+    font-family:"IBM Plex Mono",monospace; line-height:1.5;
+    background:
+      repeating-linear-gradient(115deg, transparent 0 22px, color-mix(in srgb, var(--gold-bright) 8%, transparent) 22px 24px),
+      linear-gradient(160deg, var(--sand-2), var(--surface-2));
+  }
+  figcaption{
+    font-size:.78rem; color:var(--ink-faint); margin-top:8px; line-height:1.45;
+  }
+  figcaption a{color:var(--ink-faint); text-decoration:underline; text-decoration-color:var(--line-strong)}
+  figcaption a:hover{color:var(--green)}
+
+  /* ============ HERO ============ */
+  .hero{position:relative; min-height:92vh; display:flex; align-items:flex-end; overflow:hidden; background:var(--green-deep)}
+  .hero-bg{position:absolute; inset:0; z-index:0; border-radius:0}
+  .hero-bg img{width:100%; height:100%; object-fit:cover}
+  .hero-bg::after{
+    content:""; position:absolute; inset:0;
+    background:
+      linear-gradient(to top, rgba(10,20,12,.94) 0%, rgba(10,20,12,.72) 38%, rgba(10,20,12,.30) 70%, rgba(10,20,12,.45) 100%),
+      radial-gradient(90% 60% at 15% 100%, rgba(4,106,56,.45), transparent 70%);
+  }
+  .hero-inner{position:relative; z-index:2; width:100%; padding:120px 0 0}
+  .hero .eyebrow{
+    display:inline-flex; align-items:center; gap:12px;
+    font-family:"IBM Plex Mono",monospace; font-size:.74rem; letter-spacing:.09em;
+    text-transform:uppercase; color:#F0DCA8; margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(2.9rem, 8.6vw, 6.2rem); line-height:.95; font-weight:900; color:#FFFDF6;
+    text-shadow:0 2px 30px rgba(0,0,0,.35);
+  }
+  .hero h1 em{font-style:italic; font-weight:600; color:var(--gold-bright)}
+  .hero-sub{
+    max-width:640px; margin-top:24px; font-size:1.16rem; color:#EADFC6;
+  }
+  .hero-stats{
+    display:flex; flex-wrap:wrap; margin-top:48px;
+    border-top:1px solid rgba(240,220,168,.28);
+  }
+  .hero-stats .hs{
+    flex:1 1 170px; padding:20px 26px 30px 0;
+    border-right:1px solid rgba(240,220,168,.28);
+  }
+  .hero-stats .hs:last-child{border-right:none}
+  .hs .num{font-family:"IBM Plex Mono",monospace; font-size:1.6rem; font-weight:600; color:var(--gold-bright); display:block; white-space:nowrap}
+  .hs .lab{font-size:.79rem; color:#D9CCAF; margin-top:5px; display:block}
+  @media (max-width:560px){
+    .hero-inner{padding-bottom:26px}
+    .hero-stats .hs{flex-basis:50%; padding:16px 14px 20px 0}
+    .hs .num{font-size:1.05rem}
+    .hs .lab{font-size:.72rem}
+  }
+  .hero-credit{
+    position:absolute; right:14px; bottom:8px; z-index:3;
+    font-size:.66rem; color:rgba(255,253,246,.5); font-family:"IBM Plex Mono",monospace;
+  }
+  .hero-credit a{color:inherit}
+
+  /* ============ SECTIONS ============ */
+  section.chapter{
+    padding:104px 0; border-top:1px solid var(--line);
+    opacity:0; transform:translateY(18px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  section.chapter.in-view{opacity:1; transform:translateY(0)}
+  @media (prefers-reduced-motion:reduce){ section.chapter{opacity:1; transform:none; transition:none} }
+
+  .chapter-head{max-width:700px; margin-bottom:52px}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:12px;
+    font-family:"IBM Plex Mono",monospace; font-size:.73rem; letter-spacing:.09em;
+    text-transform:uppercase; color:var(--green); margin-bottom:16px;
+  }
+  .chapter-head h2{font-size:clamp(2rem, 4.2vw, 2.8rem)}
+  .chapter-head p.lede{margin-top:16px; font-size:1.08rem; color:var(--ink-soft); max-width:62ch}
+
+  .grid{display:grid; gap:16px}
+  .grid.cols-4{grid-template-columns:repeat(4,1fr)}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+  @media (max-width:880px){
+    .grid.cols-4{grid-template-columns:repeat(2,1fr)}
+    .grid.cols-3{grid-template-columns:1fr}
+    .grid.cols-2{grid-template-columns:1fr}
+  }
+  @media (max-width:520px){ .grid.cols-4{grid-template-columns:1fr} }
+
+  .stat-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px 20px; box-shadow:var(--shadow);
+  }
+  .stat-card .num{font-family:"IBM Plex Mono",monospace; font-size:1.8rem; font-weight:600; color:var(--green); display:block}
+  .stat-card .num small{font-size:.95rem; font-weight:500; color:var(--ink-faint)}
+  .stat-card .lab{margin-top:6px; font-size:.87rem; color:var(--ink-soft); line-height:1.45}
+
+  .panel{
+    background:var(--surface); border:1px solid var(--line); border-radius:20px;
+    padding:32px; box-shadow:var(--shadow);
+  }
+  .prose p{color:var(--ink-soft); font-size:1.02rem; max-width:64ch}
+  .prose p + p{margin-top:14px}
+  .prose strong{color:var(--ink); font-weight:600}
+
+  /* deux colonnes texte + photo */
+  .duo{display:grid; grid-template-columns:1fr 1fr; gap:34px; align-items:center}
+  @media (max-width:880px){ .duo{grid-template-columns:1fr; gap:24px} }
+  .duo .ph{aspect-ratio:4/3}
+
+  /* bandeau photo pleine largeur */
+  .band{position:relative; margin:56px 0 0; border-radius:20px; overflow:hidden; min-height:340px; display:flex; align-items:flex-end}
+  .band .ph{position:absolute; inset:0; border-radius:0}
+  .band .ph::after{content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(12,22,14,.9), rgba(12,22,14,.15) 65%)}
+  .band-txt{position:relative; z-index:2; padding:32px; color:#FFFDF6; max-width:60ch}
+  .band-txt h3{color:#fff; font-size:1.5rem}
+  .band-txt p{color:#E4D9C0; font-size:.96rem; margin:8px 0 0}
+  .band-credit{position:absolute; right:12px; top:10px; z-index:3; font-size:.66rem; font-family:"IBM Plex Mono",monospace; color:rgba(255,253,246,.55)}
+  .band-credit a{color:inherit}
+
+  /* ============ TRAIN ============ */
+  .train-wrap{margin-top:40px; border:1px solid var(--line); border-radius:20px; overflow:hidden; background:linear-gradient(180deg, var(--surface-2), var(--surface))}
+  .train-caption{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; padding:20px 24px 0}
+  .train-caption h3{font-size:1.2rem}
+  .train-caption span{font-size:.8rem; color:var(--ink-faint); font-family:"IBM Plex Mono",monospace}
+  .track{position:relative; margin-top:16px; padding:24px 0 30px; overflow:hidden}
+  .track::before{content:""; position:absolute; left:0; right:0; bottom:14px; height:3px; background:repeating-linear-gradient(to right, var(--line-strong) 0 14px, transparent 14px 26px)}
+  .wagons{display:flex; align-items:flex-end; gap:5px; width:max-content; animation:roll 34s linear infinite; padding-left:2%}
+  @media (prefers-reduced-motion:reduce){ .wagons{animation:none} }
+  .wagons .loco,.wagons .wagon{flex:none; height:32px; border-radius:5px 5px 3px 3px; box-shadow:inset 0 -4px 0 rgba(0,0,0,.16)}
+  .wagons .loco{width:52px; height:40px; background:var(--green); border-radius:6px 10px 3px 3px}
+  .wagons .wagon{width:26px; background:#8A4A22}
+  .wagons .wagon:nth-child(3n){background:var(--gold)}
+  .wagons .wagon:nth-child(7n){background:var(--red)}
+  @keyframes roll{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+  .train-stats{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border-top:1px solid var(--line)}
+  @media (max-width:700px){ .train-stats{grid-template-columns:repeat(2,1fr)} }
+  .train-stats div{background:var(--surface); padding:18px 20px}
+  .train-stats .num{font-family:"IBM Plex Mono",monospace; font-weight:600; color:var(--ink); font-size:1.22rem; display:block}
+  .train-stats .lab{font-size:.77rem; color:var(--ink-faint); margin-top:3px}
+
+  /* ============ CARTES RESSOURCES ============ */
+  .res-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:16px;
+    box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+  }
+  .res-card .ph{border-radius:0; aspect-ratio:16/10}
+  .res-card .rc-body{padding:22px; display:flex; flex-direction:column; gap:9px}
+  .res-card .tag{font-family:"IBM Plex Mono",monospace; font-size:.71rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); font-weight:600}
+  .res-card h3{font-size:1.14rem}
+  .res-card p{color:var(--ink-soft); font-size:.92rem; margin:0}
+
+  /* ============ PARCS ============ */
+  .park{
+    display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--line);
+    border-radius:20px; overflow:hidden; box-shadow:var(--shadow); background:var(--surface);
+  }
+  .park + .park{margin-top:24px}
+  @media (max-width:880px){ .park{grid-template-columns:1fr} }
+  .park-visual{position:relative; min-height:300px}
+  .park-visual .ph{position:absolute; inset:0; border-radius:0}
+  .park-visual .ph::after{content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(8,26,16,.88), rgba(8,26,16,.05) 60%)}
+  .park-label{position:absolute; left:0; bottom:0; z-index:2; padding:26px}
+  .park-label .park-tag{font-family:"IBM Plex Mono",monospace; font-size:.74rem; color:var(--gold-bright); margin:0 0 6px}
+  .park-label .park-name{font-family:"Fraunces",serif; font-size:1.6rem; font-weight:700; color:#fff; margin:0}
+  .park-body{padding:28px}
+  .park-body p{color:var(--ink-soft); font-size:.95rem; margin:0}
+  .park-body p + p{margin-top:12px}
+  .mini-stats{display:flex; flex-wrap:wrap; gap:9px; margin-top:16px}
+  .mini-stats span{
+    font-family:"IBM Plex Mono",monospace; font-size:.75rem; background:var(--surface-2);
+    border:1px solid var(--line); border-radius:999px; padding:6px 12px; color:var(--ink-soft);
+  }
+
+  /* ============ ÉCONOMIE ============ */
+  .econ-layout{display:grid; grid-template-columns:1.05fr 1fr; gap:24px; align-items:start}
+  @media (max-width:900px){ .econ-layout{grid-template-columns:1fr} }
+  .bars{display:flex; align-items:flex-end; gap:22px; height:200px; margin-top:26px}
+  .bar-col{display:flex; flex-direction:column; align-items:center; gap:9px; flex:1; justify-content:flex-end}
+  .bar-col .bar{width:100%; max-width:52px; border-radius:6px 6px 3px 3px; background:linear-gradient(180deg, var(--green-bright), var(--green))}
+  .bar-col.proj .bar{background:linear-gradient(180deg, var(--gold-bright), var(--gold))}
+  .bar-col .val{font-family:"IBM Plex Mono",monospace; font-size:.9rem; font-weight:600}
+  .bar-col .yr{font-size:.75rem; color:var(--ink-faint)}
+  .legend-dot{display:inline-block; width:8px;height:8px;border-radius:50%; margin-right:6px}
+  .econ-notes{font-size:.81rem; color:var(--ink-faint); margin-top:14px}
+  .kpi-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:16px}
+  .kpi .k-num{font-family:"IBM Plex Mono",monospace; font-size:1.28rem; font-weight:600; color:var(--green); display:block}
+  .kpi .k-lab{font-size:.81rem; color:var(--ink-soft); margin-top:2px}
+  .split-bar{height:14px; border-radius:999px; overflow:hidden; display:flex; margin-top:10px; border:1px solid var(--line)}
+  .split-bar span{height:100%}
+  .split-legend{display:flex; gap:14px; flex-wrap:wrap; margin-top:10px; font-size:.81rem; color:var(--ink-soft)}
+  .split-legend .k{display:flex; align-items:center}
+
+  /* ============ KSOUR ============ */
+  .ksour{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+  @media (max-width:940px){ .ksour{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:540px){ .ksour{grid-template-columns:1fr} }
+  .ksour-card{
+    border:1px solid var(--line); border-radius:16px; background:var(--surface);
+    box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+  }
+  .ksour-card .ph{border-radius:0; aspect-ratio:3/2}
+  .ksour-card .kc-body{padding:20px}
+  .ksour-card .region{font-family:"IBM Plex Mono",monospace; font-size:.7rem; color:var(--gold); text-transform:uppercase; letter-spacing:.05em}
+  .ksour-card h3{margin-top:7px; font-size:1.2rem}
+  .ksour-card p{color:var(--ink-soft); font-size:.88rem; margin-top:8px}
+
+  /* ============ CARTE SATELLITE ============ */
+  .map-layout{display:grid; grid-template-columns:1.45fr 1fr; gap:24px; align-items:start}
+  @media (max-width:940px){ .map-layout{grid-template-columns:1fr} }
+  #map{
+    height:600px; border-radius:20px; border:1px solid var(--line);
+    box-shadow:var(--shadow); background:var(--sand-2); z-index:1;
+  }
+  @media (max-width:640px){ #map{height:440px} }
+  #mapFallback{
+    display:none; padding:28px; text-align:center; color:var(--ink-soft); font-size:.92rem;
+  }
+  .leaflet-container{font-family:"Work Sans", sans-serif; border-radius:20px}
+  .leaflet-popup-content-wrapper{
+    background:var(--surface); color:var(--ink);
+    border-radius:12px; box-shadow:0 8px 30px -8px rgba(0,0,0,.4);
+  }
+  .leaflet-popup-tip{background:var(--surface)}
+  .leaflet-popup-content{margin:14px 16px; font-size:.88rem; line-height:1.5}
+  .leaflet-popup-content b{font-family:"Fraunces",serif; font-size:1.05rem; display:block; margin-bottom:2px}
+  .leaflet-popup-content .pc{font-family:"IBM Plex Mono",monospace; font-size:.74rem; color:var(--ink-faint); display:block; margin-bottom:7px}
+  .leaflet-popup-content-wrapper a.leaflet-popup-close-button{color:var(--ink-faint)}
+  .mk{
+    width:16px; height:16px; border-radius:50%;
+    background:var(--gold-bright); border:2.5px solid #fff;
+    box-shadow:0 0 0 1.5px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.5);
+    transition:transform .15s ease, background .15s ease;
+  }
+  .mk.park{background:var(--green-bright)}
+  .mk.active{transform:scale(1.45); background:var(--red)}
+
+  .site-list{display:flex; flex-direction:column; gap:2px; max-height:600px; overflow-y:auto; padding-right:4px}
+  @media (max-width:940px){ .site-list{max-height:none} }
+  .site-item{
+    display:flex; justify-content:space-between; gap:10px; align-items:center;
+    padding:13px 15px; border-radius:10px; cursor:pointer; border:1px solid transparent;
+    transition:background .15s ease, border-color .15s ease; text-align:left; width:100%;
+    background:none; font-family:inherit; font-size:1rem; color:inherit;
+  }
+  .site-item:hover,.site-item.active{background:var(--surface-2); border-color:var(--line)}
+  .site-item.active{border-color:var(--green)}
+  .site-item .nm{font-weight:600; font-size:.94rem}
+  .site-item .nm small{font-weight:400; color:var(--ink-faint)}
+  .site-item .co{font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--ink-faint); flex:none}
+
+  /* ============ FOOTER ============ */
+  footer{border-top:1px solid var(--line); padding:56px 0 40px; background:var(--sand-2)}
+  .foot-grid{display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap}
+  footer h4{font-family:"Fraunces",serif; font-size:1rem; margin-bottom:12px}
+  .sources{font-size:.81rem; color:var(--ink-soft); columns:2; column-gap:28px; padding-left:18px}
+  @media (max-width:640px){ .sources{columns:1} }
+  .sources li{margin-bottom:6px; break-inside:avoid}
+  .sources a{color:var(--green); text-decoration:none; border-bottom:1px dotted var(--line-strong)}
+  .fine{margin-top:34px; font-size:.77rem; color:var(--ink-faint); border-top:1px solid var(--line); padding-top:20px}
+
+  ::selection{background:var(--gold-bright); color:#231C10}
+  a:focus-visible, button:focus-visible, .site-item:focus-visible, label:focus-visible{
+    outline:2px solid var(--green); outline-offset:2px; border-radius:4px;
+  }
+</style>
+</head>
+<body>
+<noscript><style>section.chapter{opacity:1!important; transform:none!important}</style></noscript>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a href="#top" class="brand">
+      <svg viewBox="0 0 90 60" aria-hidden="true">
+        <rect width="90" height="60" fill="#046A38"/>
+        <rect width="90" height="10" fill="#CD2A3E"/>
+        <rect y="50" width="90" height="10" fill="#CD2A3E"/>
+        <mask id="bm"><rect width="90" height="60" fill="#000"/>
+          <circle cx="45" cy="38" r="17" fill="#fff"/><circle cx="45" cy="27" r="17" fill="#000"/>
+        </mask>
+        <rect width="90" height="60" fill="#FFC400" mask="url(#bm)"/>
+        <path d="M45 16 47.2 22.4 54 22.4 48.5 26.4 50.6 32.8 45 28.8 39.4 32.8 41.5 26.4 36 22.4 42.8 22.4Z" fill="#FFC400"/>
+      </svg>
+      Mauritanie
+    </a>
+    <input type="checkbox" id="navToggle">
+    <label for="navToggle" class="burger" tabindex="0" aria-label="Ouvrir le menu">☰</label>
+    <nav class="links">
+      <a href="#geographie">Géographie</a>
+      <a href="#ressources">Ressources</a>
+      <a href="#parcs">Parcs</a>
+      <a href="#economie">Économie</a>
+      <a href="#culture">Culture</a>
+      <a href="#carte">Carte</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-bg ph" data-fallback="Photo indisponible">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sahara_Desert_between_Akjoujt_and_Atar%2C_Mauritania_1967_%282833322907%29.jpg?width=1800"
+         alt="Paysage désertique du Sahara mauritanien entre Akjoujt et Atar" fetchpriority="high" decoding="async">
+  </div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> République Islamique de Mauritanie</p>
+    <h1>Entre <em>Sahara</em><br>et Atlantique</h1>
+    <p class="hero-sub">Un territoire grand comme trois fois la France, où le désert descend jusqu'à l'océan, où deux millions d'oiseaux migrateurs hivernent sur les bancs de sable, et où des cités caravanières du XIᵉ siècle dorment encore sous les dunes.</p>
+    <div class="hero-stats">
+      <div class="hs"><span class="num">1 030 700 km²</span><span class="lab">Superficie — 28ᵉ pays du monde</span></div>
+      <div class="hs"><span class="num">~5,46&nbsp;M</span><span class="lab">Habitants (2026)</span></div>
+      <div class="hs"><span class="num">754 km</span><span class="lab">Façade atlantique</span></div>
+      <div class="hs"><span class="num">Nouakchott</span><span class="lab">Capitale — ~1,64 M hab.</span></div>
+    </div>
+  </div>
+  <p class="hero-credit">Photo : <a href="https://commons.wikimedia.org/wiki/File:Sahara_Desert_between_Akjoujt_and_Atar%2C_Mauritania_1967_%282833322907%29.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></p>
+</section>
+
+<!-- ============ GÉOGRAPHIE ============ -->
+<section id="geographie" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> 20°N 12°O · Le territoire</p>
+      <h2>Un pays sculpté par le sable et l'eau</h2>
+      <p class="lede">Quatre paysages se succèdent du nord au sud&nbsp;: le grand désert sablonneux qui borde l'Atlantique, une région centrale de plateaux rocheux escarpés, des cuvettes dunaires à l'est, et au sud, la vallée alluviale du fleuve Sénégal — la seule bande vraiment fertile du pays.</p>
+    </div>
+
+    <div class="grid cols-4">
+      <div class="stat-card"><span class="num">1 030 700<small> km²</small></span><p class="lab">Superficie totale — la Mauritanie est le 28ᵉ plus grand pays du monde.</p></div>
+      <div class="stat-card"><span class="num">~500<small> m</small></span><p class="lab">Altitude des plateaux de l'Adrar, du Tagant et des Mauritanides.</p></div>
+      <div class="stat-card"><span class="num">&lt;250<small> mm/an</small></span><p class="lab">Précipitations — quasi nulles dans le nord-est saharien.</p></div>
+      <div class="stat-card"><span class="num">~50<small> °C</small></span><p class="lab">Températures maximales estivales moyennes dans le nord-est.</p></div>
+    </div>
+
+    <div class="duo" style="margin-top:44px">
+      <div class="prose">
+        <h3 style="font-size:1.4rem; margin-bottom:14px">L'Œil du Sahara</h3>
+        <p>Au cœur de l'Adrar, la <strong>structure de Richat</strong> dessine dans le désert une série d'anneaux concentriques de près de 40&nbsp;km de diamètre. Invisible depuis le sol, elle n'a été révélée que par les vols spatiaux — elle sert aujourd'hui de repère aux astronautes en orbite.</p>
+        <p>C'est devenu l'emblème géologique du pays, et l'illustration la plus parlante d'un territoire dont l'essentiel se lit d'en haut.</p>
+      </div>
+      <figure>
+        <div class="ph zoom" data-fallback="Structure de Richat — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/ISS-42_Richat_Structure%2C_Eye_of_the_Sahara.jpg?width=1200"
+               alt="La structure de Richat, ou Œil du Sahara, vue depuis la Station spatiale internationale">
+        </div>
+        <figcaption>La structure de Richat vue depuis l'ISS. <a href="https://commons.wikimedia.org/wiki/File:ISS-42_Richat_Structure%2C_Eye_of_the_Sahara.jpg" target="_blank" rel="noopener">NASA / Wikimedia Commons</a></figcaption>
+      </figure>
+    </div>
+
+    <div class="panel" style="margin-top:34px">
+      <div class="prose">
+        <p><strong>Deux climats se partagent le pays</strong>&nbsp;: désertique au nord, semi-désertique au sud, avec une moyenne annuelle de 26 à 32&nbsp;°C. Le <strong>fleuve Sénégal</strong> trace la frontière sud du pays et a creusé une plaine alluviale, le Chemama, large de 10 à 25&nbsp;km — c'est là que se concentre l'essentiel de l'agriculture.</p>
+        <p>À l'ouest, l'océan Atlantique borde le pays sur <strong>754&nbsp;km</strong> de côtes, du cap Blanc au sud du delta du fleuve Sénégal — une façade maritime qui abrite l'une des zones de pêche les plus riches au monde et deux parcs nationaux exceptionnels.</p>
+      </div>
+    </div>
+
+    <div class="band">
+      <div class="ph" data-fallback="Plateau de l'Adrar — photo indisponible">
+        <img loading="lazy" decoding="async"
+             src="https://commons.wikimedia.org/wiki/Special:FilePath/The_Adrar_Plateau_%2814980145940%29.jpg?width=1800"
+             alt="Le plateau de l'Adrar, relief rocheux du centre de la Mauritanie">
+      </div>
+      <div class="band-txt">
+        <h3>Le plateau de l'Adrar</h3>
+        <p>Falaises de grès, canyons et palmeraies encaissées&nbsp;: la région centrale culmine vers 500 mètres et abrite deux des quatre cités inscrites à l'UNESCO, Chinguetti et Ouadane.</p>
+      </div>
+      <p class="band-credit"><a href="https://commons.wikimedia.org/wiki/File:The_Adrar_Plateau_%2814980145940%29.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESSOURCES ============ -->
+<section id="ressources" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> 22°44′N 12°29′O · Zouérate</p>
+      <h2>Le fer, l'or et le gaz du sous-sol</h2>
+      <p class="lede">Le secteur extractif est la colonne vertébrale de l'économie mauritanienne&nbsp;: il représente environ <strong>30&nbsp;%</strong> des recettes budgétaires et <strong>70&nbsp;%</strong> des exportations du pays.</p>
+    </div>
+
+    <div class="duo">
+      <figure>
+        <div class="ph zoom" data-fallback="Train minéralier de la SNIM — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/SNIM_Alsthom_CC05_1994_02.JPG?width=1200"
+               alt="Locomotive du train minéralier de la SNIM en Mauritanie">
+        </div>
+        <figcaption>Une locomotive de la SNIM sur la ligne Zouérate–Nouadhibou. <a href="https://commons.wikimedia.org/wiki/File:SNIM_Alsthom_CC05_1994_02.JPG" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+      </figure>
+      <div class="prose">
+        <h3 style="font-size:1.4rem; margin-bottom:14px">704 km à travers le désert</h3>
+        <p>Chaque jour, des convois chargés du minerai de fer extrait à Zouérate traversent le Sahara jusqu'au port de Nouadhibou. Avec <strong>200 à 210 wagons</strong> et jusqu'à <strong>2,5&nbsp;km</strong> de long, ils comptent parmi les plus longs trains du monde.</p>
+        <p>La ligne, ouverte pour l'exportation du fer, sert aussi de moyen de transport aux habitants du nord — les voyageurs s'installent sur le minerai, à ciel ouvert.</p>
+      </div>
+    </div>
+
+    <div class="train-wrap">
+      <div class="train-caption">
+        <h3>Le train du désert</h3>
+        <span>Zouérate → Nouadhibou</span>
+      </div>
+      <div class="track"><div class="wagons" id="wagonsRow" aria-hidden="true"><div class="loco"></div></div></div>
+      <p style="font-size:.85rem; color:var(--ink-soft); padding:0 24px 6px; max-width:62ch">Représentation à échelle réduite du convoi.</p>
+      <div class="train-stats">
+        <div><span class="num">704 km</span><span class="lab">Longueur de la ligne</span></div>
+        <div><span class="num">2,5 km</span><span class="lab">Longueur du train, à pleine charge</span></div>
+        <div><span class="num">200–210</span><span class="lab">Wagons-trémies de minerai</span></div>
+        <div><span class="num">84 t</span><span class="lab">Charge utile par wagon</span></div>
+      </div>
+    </div>
+
+    <div class="grid cols-4" style="margin-top:24px">
+      <div class="res-card">
+        <div class="ph" data-fallback="Photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Mauritania_desert.jpg?width=900"
+               alt="Paysage désertique de Mauritanie, région minière">
+        </div>
+        <div class="rc-body">
+          <span class="tag">Fer</span><h3>SNIM</h3>
+          <p>La Société Nationale Industrielle et Minière exploite le gisement de Kediet Ijill près de Zouérate. Elle est le deuxième employeur du pays, avec environ 6&nbsp;400 salariés.</p>
+        </div>
+      </div>
+      <div class="res-card">
+        <div class="ph" data-fallback="Photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Eye_Of_The_Sahara_Mauritania.jpg?width=900"
+               alt="Vue satellite du désert mauritanien">
+        </div>
+        <div class="rc-body">
+          <span class="tag">Or</span><h3>Tasiast</h3>
+          <p>Dans l'Inchiri, la mine de Tasiast compte parmi les plus grands gisements d'or d'Afrique de l'Ouest, aux côtés de gisements de cuivre également exploités dans le pays.</p>
+        </div>
+      </div>
+      <div class="res-card">
+        <div class="ph" data-fallback="Photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Ships_graveyard%2C_Nouadhibou%2C_Mauritania-2.jpg?width=900"
+               alt="Épaves de navires dans la baie de Nouadhibou, en Mauritanie">
+        </div>
+        <div class="rc-body">
+          <span class="tag">Gaz naturel</span><h3>Grand Tortue Ahmeyim</h3>
+          <p>Ce champ gazier offshore, partagé avec le Sénégal, renferme des réserves estimées à 450&nbsp;milliards de m³. Sa mise en production tire la croissance depuis 2024–2025.</p>
+        </div>
+      </div>
+      <div class="res-card">
+        <div class="ph" data-fallback="Photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Fish_market_nouakchott_mauritania.JPG?width=900"
+               alt="Marché aux poissons de Nouakchott, en Mauritanie">
+        </div>
+        <div class="rc-body">
+          <span class="tag">Pêche</span><h3>Zone franche de Nouadhibou</h3>
+          <p>Les eaux atlantiques, parmi les plus poissonneuses au monde, font vivre près de 40&nbsp;000&nbsp;personnes et fournissent environ 20&nbsp;% des recettes budgétaires.</p>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:.76rem; color:var(--ink-faint); margin-top:14px">Photos : Wikimedia Commons — voir les crédits détaillés en pied de page.</p>
+  </div>
+</section>
+
+<!-- ============ PARCS ============ -->
+<section id="parcs" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> 19°53′N 16°17′O · Banc d'Arguin</p>
+      <h2>Deux sanctuaires entre désert et océan</h2>
+      <p class="lede">Sur la façade atlantique, deux parcs nationaux protègent l'une des plus grandes concentrations d'oiseaux migrateurs de la planète et les derniers phoques moines de l'Atlantique.</p>
+    </div>
+
+    <div class="park">
+      <div class="park-visual">
+        <div class="ph" data-fallback="Banc d'Arguin — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Iwik._Village_du_Banc_d%27Arguin_en_Mauritanie.jpg?width=1200"
+               alt="Le village d'Iwik, dans le parc national du Banc d'Arguin">
+        </div>
+        <div class="park-label">
+          <p class="park-tag">1976 · UNESCO 1989</p>
+          <p class="park-name">Parc national du Banc d'Arguin</p>
+        </div>
+      </div>
+      <div class="park-body">
+        <p>Créé en 1976 et classé au patrimoine mondial de l'UNESCO en 1989, ce parc de <strong>12&nbsp;000&nbsp;km²</strong> de zones terrestres et maritimes accueille chaque hiver près de <strong>deux millions d'oiseaux limicoles</strong> — l'une des plus fortes densités d'échassiers au monde — et 30&nbsp;000 à 40&nbsp;000 couples nicheurs répartis en 15 espèces.</p>
+        <p>Au Cap Blanc, la réserve satellite abrite une colonie de <strong>phoques moines</strong> passée d'une centaine d'individus en 1998 à plus de 350 aujourd'hui — environ la moitié de la population mondiale de l'espèce. Environ 1&nbsp;200 pêcheurs Imraguen vivent dans huit villages côtiers du parc, pratiquant une pêche traditionnelle au filet, historiquement en collaboration avec les dauphins.</p>
+        <div class="mini-stats">
+          <span>12 000 km²</span><span>~2 M oiseaux hivernants</span><span>350+ phoques moines</span><span>~1 200 pêcheurs Imraguen</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="park">
+      <div class="park-visual">
+        <div class="ph" data-fallback="Delta du fleuve Sénégal — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Mauritania_boat.jpg?width=1200"
+               alt="Embarcation traditionnelle sur les eaux mauritaniennes">
+        </div>
+        <div class="park-label">
+          <p class="park-tag">1991 · Ramsar 1994</p>
+          <p class="park-name">Parc national du Diawling</p>
+        </div>
+      </div>
+      <div class="park-body">
+        <p>Dans le bas-delta du fleuve Sénégal, en région du Trarza, le Diawling combine estuaires, mangroves, dunes intérieures et plaines inondables sur une zone centrale de plus de <strong>16&nbsp;000&nbsp;ha</strong>, entourée d'une périphérie de plus de 56&nbsp;000&nbsp;ha.</p>
+        <p>Depuis sa création en 1991, sa biodiversité a explosé&nbsp;: alors que seules trois espèces d'oiseaux aquatiques subsistaient en 1993, le parc en abrite aujourd'hui <strong>plus de 369</strong>, dont 18 bénéficiant d'un statut de protection — aux côtés de 65 espèces de poissons et 39 de mammifères.</p>
+        <div class="mini-stats">
+          <span>16 000+ ha (zone centrale)</span><span>369+ espèces d'oiseaux</span><span>Delta du fleuve Sénégal</span><span>Site Ramsar</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="band">
+      <div class="ph" data-fallback="Banc d'Arguin vu de l'espace — photo indisponible">
+        <img loading="lazy" decoding="async"
+             src="https://commons.wikimedia.org/wiki/Special:FilePath/ISS062-E-82362_-_View_of_Mauritania_-_Tidra_Island_-_Banc_d%27Arguin_%28cropped%29.jpg?width=1800"
+             alt="Le Banc d'Arguin et l'île de Tidra vus depuis la Station spatiale internationale">
+      </div>
+      <div class="band-txt">
+        <h3>Le Banc d'Arguin vu de l'espace</h3>
+        <p>Les hauts-fonds et vasières de l'île de Tidra, photographiés depuis la Station spatiale internationale — ce sont ces bancs découvrant à marée basse qui nourrissent les millions d'oiseaux migrateurs.</p>
+      </div>
+      <p class="band-credit"><a href="https://commons.wikimedia.org/wiki/File:ISS062-E-82362_-_View_of_Mauritania_-_Tidra_Island_-_Banc_d%27Arguin_%28cropped%29.jpg" target="_blank" rel="noopener">NASA / Wikimedia Commons</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ÉCONOMIE ============ -->
+<section id="economie" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> 18°04′N 15°58′O · Nouakchott</p>
+      <h2>Une économie en accélération</h2>
+      <p class="lede">Portée par les mines, la pêche et désormais le gaz offshore, la croissance mauritanienne s'appuie sur un sous-sol riche et une monnaie stabilisée, l'ouguiya (MRU).</p>
+    </div>
+
+    <div class="econ-layout">
+      <div class="panel">
+        <h3 style="font-size:1.1rem">Croissance du PIB réel</h3>
+        <div class="bars">
+          <div class="bar-col"><span class="val">6,3%</span><div class="bar" style="height:140px"></div><span class="yr">2024</span></div>
+          <div class="bar-col"><span class="val">4,0%</span><div class="bar" style="height:89px"></div><span class="yr">2025</span></div>
+          <div class="bar-col proj"><span class="val">4,4%</span><div class="bar" style="height:98px"></div><span class="yr">2026p</span></div>
+          <div class="bar-col proj"><span class="val">4,7%</span><div class="bar" style="height:104px"></div><span class="yr">2027p</span></div>
+        </div>
+        <p class="econ-notes"><span class="legend-dot" style="background:var(--green)"></span>Réalisé &nbsp; <span class="legend-dot" style="background:var(--gold-bright)"></span>Projection (Banque africaine de développement)</p>
+        <p class="econ-notes">Le ralentissement de 2025 reflète une contraction temporaire du secteur extractif (−1,2&nbsp;%) ; le redémarrage attendu en 2026–2027 est porté par l'agriculture et la montée en puissance du gaz de Grand Tortue Ahmeyim.</p>
+      </div>
+
+      <div class="panel">
+        <h3 style="font-size:1.1rem">Indicateurs clés</h3>
+        <div class="kpi-grid">
+          <div class="kpi"><span class="k-num">1,6%</span><div class="k-lab">Inflation (2025)</div></div>
+          <div class="kpi"><span class="k-num">39,9%</span><div class="k-lab">Dette publique / PIB (2025)</div></div>
+          <div class="kpi"><span class="k-num">13,2%</span><div class="k-lab">Investissements directs étrangers / PIB (2024)</div></div>
+          <div class="kpi"><span class="k-num">MRU</span><div class="k-lab">Ouguiya mauritanienne</div></div>
+        </div>
+        <h3 style="font-size:1rem; margin-top:26px">Population active par secteur</h3>
+        <div class="split-bar">
+          <span style="width:40.3%; background:var(--green)"></span>
+          <span style="width:9.5%; background:var(--red)"></span>
+          <span style="width:50.2%; background:var(--gold)"></span>
+        </div>
+        <div class="split-legend">
+          <span class="k"><span class="legend-dot" style="background:var(--green)"></span>Agriculture &amp; pêche — 40,3%</span>
+          <span class="k"><span class="legend-dot" style="background:var(--red)"></span>Mines &amp; industrie — 9,5%</span>
+          <span class="k"><span class="legend-dot" style="background:var(--gold)"></span>Services — 50,2%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CULTURE ============ -->
+<section id="culture" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> XIᵉ siècle · Les ksour</p>
+      <h2>Les cités du sable, patrimoine de l'humanité</h2>
+      <p class="lede">Fondées vers le XIᵉ siècle pour servir de haltes aux caravanes traversant le Sahara, quatre cités-oasis sont devenues des foyers majeurs de la culture saharienne. Inscrites ensemble au patrimoine mondial de l'UNESCO en 1996, elles luttent aujourd'hui contre l'avancée des sables.</p>
+    </div>
+
+    <div class="ksour">
+      <div class="ksour-card">
+        <div class="ph zoom" data-fallback="Chinguetti — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/%D9%85%D8%B3%D8%AC%D8%AF_%D8%B4%D9%86%D9%82%D9%8A%D8%B7_%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%D9%8A.jpg?width=900"
+               alt="La mosquée historique de Chinguetti et son minaret de pierre">
+        </div>
+        <div class="kc-body">
+          <p class="region">Adrar</p><h3>Chinguetti</h3>
+          <p>Ancienne halte caravanière et foyer culturel, connue pour ses bibliothèques de manuscrits anciens conservées par les familles de la ville.</p>
+        </div>
+      </div>
+      <div class="ksour-card">
+        <div class="ph zoom" data-fallback="Ouadane — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Ouadane_%28ksar%29.jpg?width=900"
+               alt="Le ksar en ruines de Ouadane, en Mauritanie">
+        </div>
+        <div class="kc-body">
+          <p class="region">Adrar</p><h3>Ouadane</h3>
+          <p>Cité fondée au XIᵉ siècle, aujourd'hui largement en ruines, dont la vieille ville perchée domine encore la palmeraie.</p>
+        </div>
+      </div>
+      <div class="ksour-card">
+        <div class="ph zoom" data-fallback="Tichitt — photo à ajouter">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Mauritania_desert.jpg?width=900"
+               alt="Paysage désertique du Tagant, région de Tichitt">
+        </div>
+        <div class="kc-body">
+          <p class="region">Tagant</p><h3>Tichitt</h3>
+          <p>Ksar aux maisons de pierre ocre et rose, isolé au bord de l'erg, témoin de l'ancienne route du sel et de l'or.</p>
+        </div>
+      </div>
+      <div class="ksour-card">
+        <div class="ph zoom" data-fallback="Oualata — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Oualata_Decorative_Entrance_1.jpg?width=900"
+               alt="Entrée décorée de motifs géométriques peints à Oualata">
+        </div>
+        <div class="kc-body">
+          <p class="region">Hodh El Chargui</p><h3>Oualata</h3>
+          <p>Célèbre pour ses façades ornées de motifs géométriques peints à la main, à l'extrême est du pays.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="duo" style="margin-top:44px">
+      <div class="prose">
+        <h3 style="font-size:1.4rem; margin-bottom:14px">Une société entre désert et fleuve</h3>
+        <p><strong>Nouakchott</strong>, la capitale, rassemble aujourd'hui environ 1,64&nbsp;million d'habitants — près d'un tiers de la population du pays — contre un simple village de pêcheurs avant d'être choisie comme capitale en 1958.</p>
+        <p>L'arabe est la langue officielle ; le hassaniya, le pulaar, le soninké et le wolof sont parlés selon les régions, et le français reste largement utilisé dans l'administration et les affaires. Le <em>daraa</em>, longue tunique ample bleue ou blanche, reste le vêtement masculin traditionnel.</p>
+      </div>
+      <figure>
+        <div class="ph zoom" data-fallback="Daraa saharien — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Mauritanian_with_Saharan_blue_daraa.jpg?width=1000"
+               alt="Homme mauritanien vêtu du daraa bleu saharien traditionnel">
+        </div>
+        <figcaption>Le daraa bleu, vêtement traditionnel saharien. <a href="https://commons.wikimedia.org/wiki/File:Mauritanian_with_Saharan_blue_daraa.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CARTE SATELLITE ============ -->
+<section id="carte" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Carte satellite</p>
+      <h2>Explorer le pays vu du ciel</h2>
+      <p class="lede">Imagerie satellite réelle du territoire mauritanien. Cliquez sur un repère ou sur un lieu dans la liste — la carte s'y déplace. Zoomez pour découvrir le détail des dunes, du delta et de la côte.</p>
+    </div>
+
+    <div class="map-layout">
+      <div>
+        <div id="map" role="application" aria-label="Carte satellite de la Mauritanie"></div>
+        <div id="mapFallback">La carte satellite n'a pas pu se charger. Vérifiez votre connexion internet, puis rechargez la page.</div>
+      </div>
+      <div class="site-list" id="siteList"></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div style="max-width:400px">
+        <h4>Mauritanie</h4>
+        <p style="font-size:.89rem; color:var(--ink-soft)">Un aperçu de la géographie, des ressources, des parcs nationaux, de l'économie et du patrimoine de la République Islamique de Mauritanie.</p>
+        <span class="flagrule" style="width:90px; height:5px; margin-top:14px"><i></i><i></i><i></i></span>
+      </div>
+      <div style="flex:1; min-width:280px">
+        <h4>Sources &amp; crédits</h4>
+        <ul class="sources">
+          <li><a href="https://fr.wikipedia.org/wiki/G%C3%A9ographie_de_la_Mauritanie" target="_blank" rel="noopener">Wikipédia — Géographie</a></li>
+          <li><a href="https://pnba.mr/presentation/" target="_blank" rel="noopener">PNBA — Banc d'Arguin</a></li>
+          <li><a href="https://whc.unesco.org/en/list/506/" target="_blank" rel="noopener">UNESCO — Banc d'Arguin</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/Parc_national_du_Diawling" target="_blank" rel="noopener">Wikipédia — Diawling</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/Transport_ferroviaire_en_Mauritanie" target="_blank" rel="noopener">Wikipédia — Train SNIM</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/%C3%89conomie_de_la_Mauritanie" target="_blank" rel="noopener">Wikipédia — Économie</a></li>
+          <li><a href="https://www.afdb.org/fr/countries/mauritania/mauritania-economic-outlook" target="_blank" rel="noopener">BAD — Perspectives économiques</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/Anciens_ksour_de_Ouadane,_Chinguetti,_Tichitt_et_Oualata" target="_blank" rel="noopener">Wikipédia — Ksour UNESCO</a></li>
+          <li><a href="https://www.worldometers.info/world-population/mauritania-population/" target="_blank" rel="noopener">Worldometer — Population</a></li>
+          <li><a href="https://commons.wikimedia.org/wiki/Category:Mauritania" target="_blank" rel="noopener">Photos — Wikimedia Commons</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine">Photographies issues de Wikimedia Commons, sous licences libres — chaque image renvoie vers sa page d'origine où figurent l'auteur et la licence exacte ; vérifiez-les avant tout usage commercial. Imagerie satellite&nbsp;: Esri World Imagery. Chiffres économiques structurels issus des dernières données détaillées disponibles ; croissance 2024–2027 d'après la Banque africaine de développement.</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* ---- repli si une photo ne charge pas ---- */
+  document.querySelectorAll('.ph img').forEach(function(img){
+    function fail(){ if(img.parentElement) img.parentElement.classList.add('failed'); }
+    img.addEventListener('error', fail);
+    if(img.complete && img.naturalWidth === 0) fail();
+  });
+
+  /* ---- wagons du train ---- */
+  var wagonsRow = document.getElementById('wagonsRow');
+  if(wagonsRow){
+    function buildSet(){
+      var frag = document.createDocumentFragment();
+      for(var i=0;i<70;i++){ var w=document.createElement('div'); w.className='wagon'; frag.appendChild(w); }
+      var loco=document.createElement('div'); loco.className='loco'; frag.appendChild(loco);
+      return frag;
+    }
+    wagonsRow.appendChild(buildSet());
+    wagonsRow.appendChild(buildSet());
+  }
+
+  /* ---- apparition au défilement ---- */
+  var chapters = document.querySelectorAll('section.chapter');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } });
+    }, {threshold:0.08});
+    chapters.forEach(function(c){ io.observe(c); });
+  } else {
+    chapters.forEach(function(c){ c.classList.add('in-view'); });
+  }
+
+  /* ---- menu mobile ---- */
+  var navToggle = document.getElementById('navToggle');
+  document.querySelectorAll('nav.links a').forEach(function(a){
+    a.addEventListener('click', function(){ if(navToggle) navToggle.checked = false; });
+  });
+  var burger = document.querySelector('label.burger');
+  if(burger){
+    burger.addEventListener('keydown', function(e){
+      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); navToggle.checked = !navToggle.checked; }
+    });
+  }
+
+  /* =========================================================
+     CARTE SATELLITE (Leaflet + imagerie Esri)
+     ========================================================= */
+  var sites = [
+    {name:"Nouakchott", tag:"Capitale", lat:18.0858, lon:-15.9785, type:"city",
+     info:"Capitale depuis 1958, environ 1,64 million d'habitants en 2026 — près d'un tiers de la population du pays."},
+    {name:"Nouadhibou", tag:"Port & pêche", lat:20.9319, lon:-17.0347, type:"city",
+     info:"Deuxième ville du pays, terminus du train minéralier et cœur de la zone franche de pêche."},
+    {name:"Zouérate", tag:"Mines de fer", lat:22.7354, lon:-12.4692, type:"city",
+     info:"Ville minière de la SNIM, point de départ du train de 704 km vers Nouadhibou."},
+    {name:"Banc d'Arguin", tag:"Parc national · UNESCO", lat:19.8833, lon:-16.3000, type:"park",
+     info:"12 000 km² classés UNESCO en 1989, refuge de près de 2 millions d'oiseaux hivernants."},
+    {name:"Diawling", tag:"Parc national · Ramsar", lat:16.4167, lon:-16.4000, type:"park",
+     info:"Parc du delta du fleuve Sénégal, plus de 369 espèces d'oiseaux recensées."},
+    {name:"Structure de Richat", tag:"Œil du Sahara", lat:21.1247, lon:-11.4008, type:"nature",
+     info:"Anneaux concentriques de près de 40 km de diamètre, visibles depuis l'espace."},
+    {name:"Chinguetti", tag:"Cité ksour · UNESCO", lat:20.4633, lon:-12.3644, type:"heritage",
+     info:"Halte caravanière du XIᵉ siècle, réputée pour ses bibliothèques de manuscrits anciens."},
+    {name:"Ouadane", tag:"Cité ksour · UNESCO", lat:20.9333, lon:-11.6333, type:"heritage",
+     info:"Cité fondée au XIᵉ siècle, en grande partie en ruines, dominant une palmeraie."},
+    {name:"Tichitt", tag:"Cité ksour · UNESCO", lat:18.4500, lon:-9.5000, type:"heritage",
+     info:"Ksar isolé du Tagant, ancienne étape des routes du sel et de l'or."},
+    {name:"Oualata", tag:"Cité ksour · UNESCO", lat:17.3000, lon:-7.0333, type:"heritage",
+     info:"À l'extrême est du pays, célèbre pour ses façades peintes de motifs géométriques."},
+    {name:"Atar", tag:"Adrar", lat:20.5169, lon:-13.0499, type:"city",
+     info:"Porte d'entrée de l'Adrar et de ses plateaux, principal point de départ vers Chinguetti."}
+  ];
+
+  function fmtCoord(lat, lon){
+    function dms(v, pos, neg){
+      var d = Math.abs(v), deg = Math.floor(d), min = Math.round((d-deg)*60);
+      if(min === 60){ deg += 1; min = 0; }
+      return deg + "°" + (min<10?"0":"") + min + "′" + (v>=0?pos:neg);
+    }
+    return dms(lat,"N","S") + " " + dms(lon,"E","O");
+  }
+
+  var listEl = document.getElementById('siteList');
+  var markers = [];
+
+  sites.forEach(function(s, i){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'site-item';
+    b.setAttribute('data-i', i);
+    b.innerHTML = '<span class="nm">'+s.name+' <small>— '+s.tag+'</small></span>'+
+                  '<span class="co">'+fmtCoord(s.lat, s.lon)+'</span>';
+    listEl.appendChild(b);
+  });
+
+  if(typeof L === 'undefined'){
+    var mapEl = document.getElementById('map');
+    if(mapEl) mapEl.style.display = 'none';
+    document.getElementById('mapFallback').style.display = 'block';
+    document.querySelectorAll('.site-item').forEach(function(el){
+      el.style.cursor = 'default';
+    });
+  } else {
+    var map = L.map('map', {
+      scrollWheelZoom: false,
+      minZoom: 4,
+      maxZoom: 17
+    });
+
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Imagerie &copy; Esri, Maxar, Earthstar Geographics',
+      maxZoom: 17
+    }).addTo(map);
+
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
+      maxZoom: 17, opacity: 0.9
+    }).addTo(map);
+
+    map.fitBounds([[14.7, -17.2], [27.4, -4.7]], {padding:[16,16]});
+
+    sites.forEach(function(s, i){
+      var cls = (s.type === 'park' || s.type === 'nature') ? 'mk park' : 'mk';
+      var m = L.marker([s.lat, s.lon], {
+        title: s.name,
+        icon: L.divIcon({className:'', html:'<div class="'+cls+'" data-i="'+i+'"></div>', iconSize:[16,16], iconAnchor:[8,8]})
+      }).addTo(map);
+
+      m.bindPopup(
+        '<b>'+s.name+'</b>'+
+        '<span class="pc">'+s.tag+' · '+fmtCoord(s.lat, s.lon)+'</span>'+
+        s.info
+      );
+      m.on('click', function(){ setActive(i, false); });
+      markers.push(m);
+    });
+
+    function setActive(i, fly){
+      document.querySelectorAll('.site-item').forEach(function(el){
+        el.classList.toggle('active', el.getAttribute('data-i') == i);
+      });
+      document.querySelectorAll('.mk').forEach(function(el){
+        el.classList.toggle('active', el.getAttribute('data-i') == i);
+      });
+      if(fly){
+        map.flyTo([sites[i].lat, sites[i].lon], 9, {duration:1.1});
+        markers[i].openPopup();
+      }
+    }
+
+    document.querySelectorAll('.site-item').forEach(function(el){
+      el.addEventListener('click', function(){ setActive(this.getAttribute('data-i'), true); });
+    });
+
+    // molette : zoom seulement après un clic sur la carte, pour ne pas gêner le défilement
+    map.on('focus', function(){ map.scrollWheelZoom.enable(); });
+    map.on('blur',  function(){ map.scrollWheelZoom.disable(); });
+    map.on('click', function(){ map.scrollWheelZoom.enable(); });
+
+    // recalcule la taille une fois la section révélée
+    setTimeout(function(){ map.invalidateSize(); }, 400);
+    window.addEventListener('resize', function(){ map.invalidateSize(); });
+  }
+})();
+</script>
+
+</body>
+</html>
