@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Économie de la Mauritanie — Histoire et transformation</title>
+<meta name="description" content="Histoire économique de la Mauritanie : la création de l'ouguiya en 1973, les crises et l'allègement de dette des années 2000, et la structure de l'économie aujourd'hui." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+
+<style>
+  /* =========================================================
+     PALETTE — drapeau mauritanien (vert, or, rouge) + désert
+     Vert  #006233  ·  Or #FFC400  ·  Rouge #CD2A3E
+     ========================================================= */
+  :root{
+    /* sables du désert : le sol de la page */
+    --sand:#F7F0E0;
+    --sand-2:#EFE3C7;
+    --surface:#FFFDF6;
+    --surface-2:#FAF3E2;
+
+    /* encres, teintées chaud (sable), jamais du gris pur */
+    --ink:#231C10;
+    --ink-soft:#5A4E38;
+    --ink-faint:#8B7C5E;
+
+    /* drapeau */
+    --green:#046A38;
+    --green-deep:#0A4A2B;
+    --green-bright:#00874A;
+    --gold:#B5820E;
+    --gold-bright:#FFC400;
+    --red:#B32639;
+
+    --line:#E0CFA6;
+    --line-strong:#CBB37F;
+
+    --shadow: 0 1px 2px rgba(35,28,16,.06), 0 10px 30px -14px rgba(35,28,16,.22);
+    --radius: 14px;
+    --wrap: 1150px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --sand:#12100A;
+      --sand-2:#1A160E;
+      --surface:#1D1810;
+      --surface-2:#231D13;
+
+      --ink:#F3E9D2;
+      --ink-soft:#C6B694;
+      --ink-faint:#948464;
+
+      --green:#4FBF85;
+      --green-deep:#2E8F5E;
+      --green-bright:#5FD695;
+      --gold:#EDBF4A;
+      --gold-bright:#FFC400;
+      --red:#E8697A;
+
+      --line:#3A3020;
+      --line-strong:#4E4029;
+
+      --shadow: 0 1px 2px rgba(0,0,0,.35), 0 14px 32px -16px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --sand:#12100A;
+    --sand-2:#1A160E;
+    --surface:#1D1810;
+    --surface-2:#231D13;
+    --ink:#F3E9D2;
+    --ink-soft:#C6B694;
+    --ink-faint:#948464;
+    --green:#4FBF85;
+    --green-deep:#2E8F5E;
+    --green-bright:#5FD695;
+    --gold:#EDBF4A;
+    --gold-bright:#FFC400;
+    --red:#E8697A;
+    --line:#3A3020;
+    --line-strong:#4E4029;
+    --shadow: 0 1px 2px rgba(0,0,0,.35), 0 14px 32px -16px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+
+  body{
+    margin:0;
+    background:var(--sand);
+    color:var(--ink);
+    font-family:"Work Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:"Fraunces", Georgia, "Times New Roman", serif;
+    font-weight:700; letter-spacing:-0.01em; text-wrap:balance;
+    color:var(--ink); margin:0;
+  }
+  a{color:inherit}
+  img{max-width:100%; display:block}
+
+  .wrap{max-width:var(--wrap); margin:0 auto; padding:0 28px}
+  @media (max-width:640px){ .wrap{padding:0 20px} }
+  .mono{font-family:"IBM Plex Mono", ui-monospace, monospace; font-variant-numeric:tabular-nums}
+
+  /* ---- bande drapeau : motif structurant récurrent ---- */
+  .flagrule{display:flex; height:4px; width:64px; border-radius:2px; overflow:hidden; flex:none}
+  .flagrule i{display:block; height:100%}
+  .flagrule i:nth-child(1){width:22%; background:var(--red)}
+  .flagrule i:nth-child(2){width:56%; background:var(--green)}
+  .flagrule i:nth-child(3){width:22%; background:var(--gold-bright)}
+
+  /* ============ NAV ============ */
+  header.site{
+    position:sticky; top:0; z-index:600;
+    background:color-mix(in srgb, var(--sand) 90%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{display:flex; align-items:center; justify-content:space-between; height:64px}
+  .brand{
+    display:flex; align-items:center; gap:11px;
+    font-family:"Fraunces", serif; font-weight:700; font-size:1.05rem;
+    text-decoration:none; color:var(--ink);
+  }
+  .brand svg{width:26px; height:auto; border-radius:2px; flex:none; box-shadow:0 0 0 1px var(--line)}
+  nav.links{display:flex; gap:2px; align-items:center}
+  nav.links a{
+    font-size:.86rem; font-weight:600; letter-spacing:.02em;
+    text-decoration:none; color:var(--ink-soft);
+    padding:8px 12px; border-radius:8px;
+    transition:color .15s ease, background .15s ease;
+  }
+  nav.links a:hover{color:var(--green); background:var(--surface-2)}
+  #navToggle{display:none}
+  .burger{display:none; background:none; border:1px solid var(--line-strong); border-radius:8px; width:40px;height:36px; cursor:pointer; color:var(--ink)}
+  @media (max-width: 860px){
+    nav.links{
+      position:absolute; top:64px; left:0; right:0;
+      background:var(--surface); border-bottom:1px solid var(--line);
+      flex-direction:column; align-items:stretch; padding:8px; display:none;
+    }
+    nav.links a{padding:12px 14px}
+    #navToggle:checked ~ nav.links{display:flex}
+    .burger{display:inline-flex; align-items:center; justify-content:center}
+  }
+
+  /* ============ FIGURES / PHOTOS ============ */
+  figure{margin:0; position:relative}
+  .ph{
+    position:relative; overflow:hidden; background:var(--sand-2);
+    border-radius:var(--radius);
+  }
+  .ph img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    transition:transform .8s cubic-bezier(.2,.7,.3,1);
+  }
+  .ph.zoom:hover img{transform:scale(1.04)}
+  @media (prefers-reduced-motion:reduce){ .ph img{transition:none} .ph.zoom:hover img{transform:none} }
+
+  /* repli élégant si une photo ne charge pas */
+  .ph.failed img{display:none}
+  .ph.failed::after{
+    content:attr(data-fallback);
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:24px; font-size:.86rem; color:var(--ink-faint);
+    font-family:"IBM Plex Mono",monospace; line-height:1.5;
+    background:
+      repeating-linear-gradient(115deg, transparent 0 22px, color-mix(in srgb, var(--gold-bright) 8%, transparent) 22px 24px),
+      linear-gradient(160deg, var(--sand-2), var(--surface-2));
+  }
+  figcaption{
+    font-size:.78rem; color:var(--ink-faint); margin-top:8px; line-height:1.45;
+  }
+  figcaption a{color:var(--ink-faint); text-decoration:underline; text-decoration-color:var(--line-strong)}
+  figcaption a:hover{color:var(--green)}
+
+  /* ============ HERO ============ */
+  .hero{position:relative; min-height:92vh; display:flex; align-items:flex-end; overflow:hidden; background:var(--green-deep)}
+  .hero-bg{position:absolute; inset:0; z-index:0; border-radius:0}
+  .hero-bg img{width:100%; height:100%; object-fit:cover}
+  .hero-bg::after{
+    content:""; position:absolute; inset:0;
+    background:
+      linear-gradient(to top, rgba(10,20,12,.94) 0%, rgba(10,20,12,.72) 38%, rgba(10,20,12,.30) 70%, rgba(10,20,12,.45) 100%),
+      radial-gradient(90% 60% at 15% 100%, rgba(4,106,56,.45), transparent 70%);
+  }
+  .hero-inner{position:relative; z-index:2; width:100%; padding:120px 0 0}
+  .hero .eyebrow{
+    display:inline-flex; align-items:center; gap:12px;
+    font-family:"IBM Plex Mono",monospace; font-size:.74rem; letter-spacing:.09em;
+    text-transform:uppercase; color:#F0DCA8; margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(2.9rem, 8.6vw, 6.2rem); line-height:.95; font-weight:900; color:#FFFDF6;
+    text-shadow:0 2px 30px rgba(0,0,0,.35);
+  }
+  .hero h1 em{font-style:italic; font-weight:600; color:var(--gold-bright)}
+  .hero-sub{
+    max-width:640px; margin-top:24px; font-size:1.16rem; color:#EADFC6;
+  }
+  .hero-stats{
+    display:flex; flex-wrap:wrap; margin-top:48px;
+    border-top:1px solid rgba(240,220,168,.28);
+  }
+  .hero-stats .hs{
+    flex:1 1 170px; padding:20px 26px 30px 0;
+    border-right:1px solid rgba(240,220,168,.28);
+  }
+  .hero-stats .hs:last-child{border-right:none}
+  .hs .num{font-family:"IBM Plex Mono",monospace; font-size:1.6rem; font-weight:600; color:var(--gold-bright); display:block; white-space:nowrap}
+  .hs .lab{font-size:.79rem; color:#D9CCAF; margin-top:5px; display:block}
+  @media (max-width:560px){
+    .hero-inner{padding-bottom:26px}
+    .hero-stats .hs{flex-basis:50%; padding:16px 14px 20px 0}
+    .hs .num{font-size:1.05rem}
+    .hs .lab{font-size:.72rem}
+  }
+  .hero-credit{
+    position:absolute; right:14px; bottom:8px; z-index:3;
+    font-size:.66rem; color:rgba(255,253,246,.5); font-family:"IBM Plex Mono",monospace;
+  }
+  .hero-credit a{color:inherit}
+
+  /* ============ SECTIONS ============ */
+  section.chapter{
+    padding:104px 0; border-top:1px solid var(--line);
+    opacity:0; transform:translateY(18px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  section.chapter.in-view{opacity:1; transform:translateY(0)}
+  @media (prefers-reduced-motion:reduce){ section.chapter{opacity:1; transform:none; transition:none} }
+
+  .chapter-head{max-width:700px; margin-bottom:52px}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:12px;
+    font-family:"IBM Plex Mono",monospace; font-size:.73rem; letter-spacing:.09em;
+    text-transform:uppercase; color:var(--green); margin-bottom:16px;
+  }
+  .chapter-head h2{font-size:clamp(2rem, 4.2vw, 2.8rem)}
+  .chapter-head p.lede{margin-top:16px; font-size:1.08rem; color:var(--ink-soft); max-width:62ch}
+
+  .grid{display:grid; gap:16px}
+  .grid.cols-4{grid-template-columns:repeat(4,1fr)}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+  @media (max-width:880px){
+    .grid.cols-4{grid-template-columns:repeat(2,1fr)}
+    .grid.cols-3{grid-template-columns:1fr}
+    .grid.cols-2{grid-template-columns:1fr}
+  }
+  @media (max-width:520px){ .grid.cols-4{grid-template-columns:1fr} }
+
+  .stat-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px 20px; box-shadow:var(--shadow);
+  }
+  .stat-card .num{font-family:"IBM Plex Mono",monospace; font-size:1.8rem; font-weight:600; color:var(--green); display:block}
+  .stat-card .num small{font-size:.95rem; font-weight:500; color:var(--ink-faint)}
+  .stat-card .lab{margin-top:6px; font-size:.87rem; color:var(--ink-soft); line-height:1.45}
+
+  .panel{
+    background:var(--surface); border:1px solid var(--line); border-radius:20px;
+    padding:32px; box-shadow:var(--shadow);
+  }
+  .prose p{color:var(--ink-soft); font-size:1.02rem; max-width:64ch}
+  .prose p + p{margin-top:14px}
+  .prose strong{color:var(--ink); font-weight:600}
+
+  /* deux colonnes texte + photo */
+  .duo{display:grid; grid-template-columns:1fr 1fr; gap:34px; align-items:center}
+  @media (max-width:880px){ .duo{grid-template-columns:1fr; gap:24px} }
+  .duo .ph{aspect-ratio:4/3}
+
+  /* bandeau photo pleine largeur */
+  .band{position:relative; margin:56px 0 0; border-radius:20px; overflow:hidden; min-height:340px; display:flex; align-items:flex-end}
+  .band .ph{position:absolute; inset:0; border-radius:0}
+  .band .ph::after{content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(12,22,14,.9), rgba(12,22,14,.15) 65%)}
+  .band-txt{position:relative; z-index:2; padding:32px; color:#FFFDF6; max-width:60ch}
+  .band-txt h3{color:#fff; font-size:1.5rem}
+  .band-txt p{color:#E4D9C0; font-size:.96rem; margin:8px 0 0}
+  .band-credit{position:absolute; right:12px; top:10px; z-index:3; font-size:.66rem; font-family:"IBM Plex Mono",monospace; color:rgba(255,253,246,.55)}
+  .band-credit a{color:inherit}
+
+  /* ============ TRAIN ============ */
+  .train-wrap{margin-top:40px; border:1px solid var(--line); border-radius:20px; overflow:hidden; background:linear-gradient(180deg, var(--surface-2), var(--surface))}
+  .train-caption{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; padding:20px 24px 0}
+  .train-caption h3{font-size:1.2rem}
+  .train-caption span{font-size:.8rem; color:var(--ink-faint); font-family:"IBM Plex Mono",monospace}
+  .track{position:relative; margin-top:16px; padding:24px 0 30px; overflow:hidden}
+  .track::before{content:""; position:absolute; left:0; right:0; bottom:14px; height:3px; background:repeating-linear-gradient(to right, var(--line-strong) 0 14px, transparent 14px 26px)}
+  .wagons{display:flex; align-items:flex-end; gap:5px; width:max-content; animation:roll 34s linear infinite; padding-left:2%}
+  @media (prefers-reduced-motion:reduce){ .wagons{animation:none} }
+  .wagons .loco,.wagons .wagon{flex:none; height:32px; border-radius:5px 5px 3px 3px; box-shadow:inset 0 -4px 0 rgba(0,0,0,.16)}
+  .wagons .loco{width:52px; height:40px; background:var(--green); border-radius:6px 10px 3px 3px}
+  .wagons .wagon{width:26px; background:#8A4A22}
+  .wagons .wagon:nth-child(3n){background:var(--gold)}
+  .wagons .wagon:nth-child(7n){background:var(--red)}
+  @keyframes roll{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+  .train-stats{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border-top:1px solid var(--line)}
+  @media (max-width:700px){ .train-stats{grid-template-columns:repeat(2,1fr)} }
+  .train-stats div{background:var(--surface); padding:18px 20px}
+  .train-stats .num{font-family:"IBM Plex Mono",monospace; font-weight:600; color:var(--ink); font-size:1.22rem; display:block}
+  .train-stats .lab{font-size:.77rem; color:var(--ink-faint); margin-top:3px}
+
+  /* ============ CARTES RESSOURCES ============ */
+  .res-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:16px;
+    box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+  }
+  .res-card .ph{border-radius:0; aspect-ratio:16/10}
+  .res-card .rc-body{padding:22px; display:flex; flex-direction:column; gap:9px}
+  .res-card .tag{font-family:"IBM Plex Mono",monospace; font-size:.71rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); font-weight:600}
+  .res-card h3{font-size:1.14rem}
+  .res-card p{color:var(--ink-soft); font-size:.92rem; margin:0}
+
+  /* ============ PARCS ============ */
+  .park{
+    display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--line);
+    border-radius:20px; overflow:hidden; box-shadow:var(--shadow); background:var(--surface);
+  }
+  .park + .park{margin-top:24px}
+  @media (max-width:880px){ .park{grid-template-columns:1fr} }
+  .park-visual{position:relative; min-height:300px}
+  .park-visual .ph{position:absolute; inset:0; border-radius:0}
+  .park-visual .ph::after{content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(8,26,16,.88), rgba(8,26,16,.05) 60%)}
+  .park-label{position:absolute; left:0; bottom:0; z-index:2; padding:26px}
+  .park-label .park-tag{font-family:"IBM Plex Mono",monospace; font-size:.74rem; color:var(--gold-bright); margin:0 0 6px}
+  .park-label .park-name{font-family:"Fraunces",serif; font-size:1.6rem; font-weight:700; color:#fff; margin:0}
+  .park-body{padding:28px}
+  .park-body p{color:var(--ink-soft); font-size:.95rem; margin:0}
+  .park-body p + p{margin-top:12px}
+  .mini-stats{display:flex; flex-wrap:wrap; gap:9px; margin-top:16px}
+  .mini-stats span{
+    font-family:"IBM Plex Mono",monospace; font-size:.75rem; background:var(--surface-2);
+    border:1px solid var(--line); border-radius:999px; padding:6px 12px; color:var(--ink-soft);
+  }
+
+  /* ============ ÉCONOMIE ============ */
+  .econ-layout{display:grid; grid-template-columns:1.05fr 1fr; gap:24px; align-items:start}
+  @media (max-width:900px){ .econ-layout{grid-template-columns:1fr} }
+  .bars{display:flex; align-items:flex-end; gap:22px; height:200px; margin-top:26px}
+  .bar-col{display:flex; flex-direction:column; align-items:center; gap:9px; flex:1; justify-content:flex-end}
+  .bar-col .bar{width:100%; max-width:52px; border-radius:6px 6px 3px 3px; background:linear-gradient(180deg, var(--green-bright), var(--green))}
+  .bar-col.proj .bar{background:linear-gradient(180deg, var(--gold-bright), var(--gold))}
+  .bar-col .val{font-family:"IBM Plex Mono",monospace; font-size:.9rem; font-weight:600}
+  .bar-col .yr{font-size:.75rem; color:var(--ink-faint)}
+  .legend-dot{display:inline-block; width:8px;height:8px;border-radius:50%; margin-right:6px}
+  .econ-notes{font-size:.81rem; color:var(--ink-faint); margin-top:14px}
+  .kpi-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:16px}
+  .kpi .k-num{font-family:"IBM Plex Mono",monospace; font-size:1.28rem; font-weight:600; color:var(--green); display:block}
+  .kpi .k-lab{font-size:.81rem; color:var(--ink-soft); margin-top:2px}
+  .split-bar{height:14px; border-radius:999px; overflow:hidden; display:flex; margin-top:10px; border:1px solid var(--line)}
+  .split-bar span{height:100%}
+  .split-legend{display:flex; gap:14px; flex-wrap:wrap; margin-top:10px; font-size:.81rem; color:var(--ink-soft)}
+  .split-legend .k{display:flex; align-items:center}
+
+  /* ============ KSOUR ============ */
+  .ksour{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+  @media (max-width:940px){ .ksour{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:540px){ .ksour{grid-template-columns:1fr} }
+  .ksour-card{
+    border:1px solid var(--line); border-radius:16px; background:var(--surface);
+    box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+  }
+  .ksour-card .ph{border-radius:0; aspect-ratio:3/2}
+  .ksour-card .kc-body{padding:20px}
+  .ksour-card .region{font-family:"IBM Plex Mono",monospace; font-size:.7rem; color:var(--gold); text-transform:uppercase; letter-spacing:.05em}
+  .ksour-card h3{margin-top:7px; font-size:1.2rem}
+  .ksour-card p{color:var(--ink-soft); font-size:.88rem; margin-top:8px}
+
+  /* ============ CARTE SATELLITE ============ */
+  .map-layout{display:grid; grid-template-columns:1.45fr 1fr; gap:24px; align-items:start}
+  @media (max-width:940px){ .map-layout{grid-template-columns:1fr} }
+  #map{
+    height:600px; border-radius:20px; border:1px solid var(--line);
+    box-shadow:var(--shadow); background:var(--sand-2); z-index:1;
+  }
+  @media (max-width:640px){ #map{height:440px} }
+  #mapFallback{
+    display:none; padding:28px; text-align:center; color:var(--ink-soft); font-size:.92rem;
+  }
+  .leaflet-container{font-family:"Work Sans", sans-serif; border-radius:20px}
+  .leaflet-popup-content-wrapper{
+    background:var(--surface); color:var(--ink);
+    border-radius:12px; box-shadow:0 8px 30px -8px rgba(0,0,0,.4);
+  }
+  .leaflet-popup-tip{background:var(--surface)}
+  .leaflet-popup-content{margin:14px 16px; font-size:.88rem; line-height:1.5}
+  .leaflet-popup-content b{font-family:"Fraunces",serif; font-size:1.05rem; display:block; margin-bottom:2px}
+  .leaflet-popup-content .pc{font-family:"IBM Plex Mono",monospace; font-size:.74rem; color:var(--ink-faint); display:block; margin-bottom:7px}
+  .leaflet-popup-content-wrapper a.leaflet-popup-close-button{color:var(--ink-faint)}
+  .mk{
+    width:16px; height:16px; border-radius:50%;
+    background:var(--gold-bright); border:2.5px solid #fff;
+    box-shadow:0 0 0 1.5px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.5);
+    transition:transform .15s ease, background .15s ease;
+  }
+  .mk.park{background:var(--green-bright)}
+  .mk.active{transform:scale(1.45); background:var(--red)}
+
+  .site-list{display:flex; flex-direction:column; gap:2px; max-height:600px; overflow-y:auto; padding-right:4px}
+  @media (max-width:940px){ .site-list{max-height:none} }
+  .site-item{
+    display:flex; justify-content:space-between; gap:10px; align-items:center;
+    padding:13px 15px; border-radius:10px; cursor:pointer; border:1px solid transparent;
+    transition:background .15s ease, border-color .15s ease; text-align:left; width:100%;
+    background:none; font-family:inherit; font-size:1rem; color:inherit;
+  }
+  .site-item:hover,.site-item.active{background:var(--surface-2); border-color:var(--line)}
+  .site-item.active{border-color:var(--green)}
+  .site-item .nm{font-weight:600; font-size:.94rem}
+  .site-item .nm small{font-weight:400; color:var(--ink-faint)}
+  .site-item .co{font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--ink-faint); flex:none}
+
+  /* ============ FOOTER ============ */
+  footer{border-top:1px solid var(--line); padding:56px 0 40px; background:var(--sand-2)}
+  .foot-grid{display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap}
+  footer h4{font-family:"Fraunces",serif; font-size:1rem; margin-bottom:12px}
+  .sources{font-size:.81rem; color:var(--ink-soft); columns:2; column-gap:28px; padding-left:18px}
+  @media (max-width:640px){ .sources{columns:1} }
+  .sources li{margin-bottom:6px; break-inside:avoid}
+  .sources a{color:var(--green); text-decoration:none; border-bottom:1px dotted var(--line-strong)}
+  .fine{margin-top:34px; font-size:.77rem; color:var(--ink-faint); border-top:1px solid var(--line); padding-top:20px}
+
+  ::selection{background:var(--gold-bright); color:#231C10}
+  a:focus-visible, button:focus-visible, .site-item:focus-visible, label:focus-visible{
+    outline:2px solid var(--green); outline-offset:2px; border-radius:4px;
+  }
+
+</style>
+</head>
+<body>
+<noscript><style>section.chapter{opacity:1!important; transform:none!important}</style></noscript>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a href="Mauritanie.html" class="brand">
+      <svg viewBox="0 0 90 60" aria-hidden="true">
+        <rect width="90" height="60" fill="#046A38"/>
+        <rect width="90" height="10" fill="#CD2A3E"/>
+        <rect y="50" width="90" height="10" fill="#CD2A3E"/>
+        <mask id="bm"><rect width="90" height="60" fill="#000"/>
+          <circle cx="45" cy="38" r="17" fill="#fff"/><circle cx="45" cy="27" r="17" fill="#000"/>
+        </mask>
+        <rect width="90" height="60" fill="#FFC400" mask="url(#bm)"/>
+        <path d="M45 16 47.2 22.4 54 22.4 48.5 26.4 50.6 32.8 45 28.8 39.4 32.8 41.5 26.4 36 22.4 42.8 22.4Z" fill="#FFC400"/>
+      </svg>
+      Mauritanie
+    </a>
+    <input type="checkbox" id="navToggle">
+    <label for="navToggle" class="burger" tabindex="0" aria-label="Ouvrir le menu">☰</label>
+    <nav class="links">
+      <a href="histoire.html">Histoire</a>
+      <a href="geographie.html">Géographie</a>
+      <a href="ressources.html">Ressources</a>
+      <a href="parcs.html">Parcs</a>
+      <a href="economie.html" aria-current="page">Économie</a>
+      <a href="culture.html">Culture</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-bg ph" data-fallback="Photo indisponible">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mauritania%2C_shopping_mall_in_Nouakchott.jpg?width=1800"
+         alt="Centre commercial à Nouakchott, illustrant l'économie urbaine mauritanienne" fetchpriority="high" decoding="async">
+  </div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Économie de la Mauritanie</p>
+    <h1>Une économie<br>en <em>transformation</em></h1>
+    <p class="hero-sub">D'une monnaie créée en 1973 aux crises d'endettement des années 1990, jusqu'à l'arrivée du gaz offshore aujourd'hui&nbsp;: le parcours heurté d'une économie qui cherche encore à transformer ses richesses naturelles en développement durable.</p>
+    <div class="hero-stats">
+      <div class="hs"><span class="num">1973</span><span class="lab">Création de l'ouguiya, sortie de la zone franc</span></div>
+      <div class="hs"><span class="num">2002</span><span class="lab">1,1&nbsp;milliard $ d'allègement de dette (PPTE)</span></div>
+      <div class="hs"><span class="num">2017–2018</span><span class="lab">Redénomination de l'ouguiya (MRO → MRU)</span></div>
+      <div class="hs"><span class="num">6,3&nbsp;%</span><span class="lab">Croissance du PIB réel en 2024</span></div>
+    </div>
+  </div>
+  <p class="hero-credit">Photo : <a href="https://commons.wikimedia.org/wiki/File:Mauritania%2C_shopping_mall_in_Nouakchott.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></p>
+</section>
+
+<!-- ============ MONNAIE ============ -->
+<section id="monnaie" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Depuis 1973</p>
+      <h2>L'ouguiya, une monnaie née avec l'indépendance économique</h2>
+      <p class="lede">Treize ans après l'indépendance politique, la Mauritanie prend sa distance monétaire&nbsp;: en 1973, elle quitte la zone du franc CFA ouest-africain et crée sa propre monnaie, l'<strong>ouguiya</strong>, au taux d'une ouguiya pour cinq francs.</p>
+    </div>
+
+    <div class="panel">
+      <div class="prose">
+        <p>Le nom de la monnaie vient de « uqiyyah », l'once romaine en arabe hassaniya. Pendant plus de quarante ans, l'ouguiya (code MRO) circule sous cette forme, avec des billets modernisés en 2004 puis en 2009-2010. Fait rare pour une monnaie moderne&nbsp;: sa plus petite subdivision, le khoums, valait un cinquième d'ouguiya — un système décimal atypique hérité de l'ancienne once.</p>
+        <p>Le <strong>5&nbsp;décembre 2017</strong>, la Banque centrale de Mauritanie annonce une redénomination au taux de 1 pour 10&nbsp;: l'ouguiya devient le MRU, avec de nouveaux billets en polymère et des pièces bimétalliques, en circulation depuis 2018 — une manière de simplifier une monnaie dont les prix s'étaient beaucoup érodés avec le temps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CRISES & DETTE ============ -->
+<section id="crises-dette" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Années 1980–2000</p>
+      <h2>Décennies d'ajustement, puis allègement de la dette</h2>
+      <p class="lede">Comme beaucoup de pays africains, la Mauritanie traverse dans les années 1980 et 1990 des programmes d'ajustement structurel imposés par le FMI et la Banque mondiale en contrepartie de prêts&nbsp;: réduction des dépenses publiques, privatisations, dévaluations — au prix d'un endettement extérieur devenu difficilement soutenable.</p>
+    </div>
+
+    <div class="grid cols-4">
+      <div class="stat-card"><span class="num">1&nbsp;an</span><p class="lab">Programmes successifs d'ajustement structurel négociés avec le FMI dans les années 1980–1990.</p></div>
+      <div class="stat-card"><span class="num">2002</span><p class="lab">La Mauritanie atteint le point d'achèvement de l'initiative PPTE (pays pauvres très endettés).</p></div>
+      <div class="stat-card"><span class="num">1,1&nbsp;Md&nbsp;$</span><p class="lab">Montant de l'allègement de dette accordé par le FMI et la Banque mondiale en 2002.</p></div>
+      <div class="stat-card"><span class="num">39,9&nbsp;%</span><p class="lab">Dette publique rapportée au PIB en 2025 — bien maîtrisée depuis.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ L'ÉCONOMIE AUJOURD'HUI ============ -->
+<section id="aujourdhui" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> 18°04′N 15°58′O · Nouakchott</p>
+      <h2>Une croissance portée par les mines, la pêche et le gaz</h2>
+      <p class="lede">Aujourd'hui, la croissance mauritanienne reste largement dépendante des mêmes moteurs qu'à l'indépendance — le sous-sol et l'océan — mais le gaz de Grand Tortue Ahmeyim ouvre une nouvelle page, détaillée dans la section <a href="ressources.html">Ressources</a> du site.</p>
+    </div>
+
+    <div class="econ-layout">
+      <div class="panel">
+        <h3 style="font-size:1.1rem">Croissance du PIB réel</h3>
+        <div class="bars">
+          <div class="bar-col"><span class="val">6,3%</span><div class="bar" style="height:140px"></div><span class="yr">2024</span></div>
+          <div class="bar-col"><span class="val">4,0%</span><div class="bar" style="height:89px"></div><span class="yr">2025</span></div>
+          <div class="bar-col proj"><span class="val">4,4%</span><div class="bar" style="height:98px"></div><span class="yr">2026p</span></div>
+          <div class="bar-col proj"><span class="val">4,7%</span><div class="bar" style="height:104px"></div><span class="yr">2027p</span></div>
+        </div>
+        <p class="econ-notes"><span class="legend-dot" style="background:var(--green)"></span>Réalisé &nbsp; <span class="legend-dot" style="background:var(--gold-bright)"></span>Projection (Banque africaine de développement)</p>
+        <p class="econ-notes">Le ralentissement de 2025 reflète une contraction temporaire du secteur extractif ; le redémarrage attendu en 2026–2027 est porté par l'agriculture et la montée en puissance du gaz de Grand Tortue Ahmeyim.</p>
+      </div>
+
+      <div class="panel">
+        <h3 style="font-size:1.1rem">Population active par secteur</h3>
+        <div class="split-bar">
+          <span style="width:40.3%; background:var(--green)"></span>
+          <span style="width:9.5%; background:var(--red)"></span>
+          <span style="width:50.2%; background:var(--gold)"></span>
+        </div>
+        <div class="split-legend">
+          <span class="k"><span class="legend-dot" style="background:var(--green)"></span>Agriculture &amp; pêche — 40,3%</span>
+          <span class="k"><span class="legend-dot" style="background:var(--red)"></span>Mines &amp; industrie — 9,5%</span>
+          <span class="k"><span class="legend-dot" style="background:var(--gold)"></span>Services — 50,2%</span>
+        </div>
+        <h3 style="font-size:1rem; margin-top:26px">Indicateurs clés</h3>
+        <div class="kpi-grid">
+          <div class="kpi"><span class="k-num">1,6%</span><div class="k-lab">Inflation (2025)</div></div>
+          <div class="kpi"><span class="k-num">13,2%</span><div class="k-lab">IDE / PIB (2024)</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="duo" style="margin-top:34px">
+      <figure>
+        <div class="ph zoom" data-fallback="Marché de Nouakchott — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/March%C3%A9_Capitale.jpg?width=1200"
+               alt="Le Marché Capitale, l'un des grands marchés de Nouakchott">
+        </div>
+        <figcaption>Le Marché Capitale, l'un des grands marchés de Nouakchott. <a href="https://commons.wikimedia.org/wiki/File:March%C3%A9_Capitale.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+      </figure>
+      <div class="prose">
+        <h3 style="font-size:1.4rem; margin-bottom:14px">Le poids du secteur informel</h3>
+        <p>Au-delà des mines et du gaz, une bonne partie de l'économie mauritanienne échappe aux statistiques officielles&nbsp;: petit commerce, transport artisanal, élevage vivrier — un secteur informel qui emploie une large part de la population active, en particulier dans les grandes villes comme Nouakchott et Nouadhibou.</p>
+        <p>Diversifier au-delà des matières premières, formaliser cette économie de proximité et transformer la rente du gaz en infrastructures durables restent les principaux chantiers des prochaines années.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOURSE DE NOUAKCHOTT ============ -->
+<section id="bourse" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Un chantier en cours · depuis 2023</p>
+      <h2>Vers une Bourse des valeurs de Nouakchott</h2>
+      <p class="lede">Après une première loi restée sans suite en 2014, la Mauritanie a relancé depuis 2023 son projet de marché financier national&nbsp;: une future <strong>Bourse des valeurs mobilières de Nouakchott (BVMN)</strong>, pensée pour donner aux entreprises et à l'État un canal de financement autre que le seul crédit bancaire.</p>
+    </div>
+
+    <div class="grid cols-4">
+      <div class="stat-card"><span class="num">2014</span><p class="lab">Première loi adoptée par le Parlement pour créer un marché financier — projet resté sans suite pendant près d'une décennie.</p></div>
+      <div class="stat-card"><span class="num">2023</span><p class="lab">Accord avec le London Stock Exchange Group (LSEG) pour moderniser les infrastructures de marché de la Banque centrale.</p></div>
+      <div class="stat-card"><span class="num">2024</span><p class="lab">Nouvelle loi sur le marché financier, posant les bases légales de quatre institutions&nbsp;: Bourse, régulateur, dépositaire central et fonds de garantie.</p></div>
+      <div class="stat-card"><span class="num">2025</span><p class="lab">Accord stratégique avec la Bourse de Casablanca, qui accompagnera la Mauritanie sur l'architecture et la supervision du futur marché.</p></div>
+    </div>
+
+    <div class="panel" style="margin-top:34px">
+      <div class="prose">
+        <p>Porté par la <strong>Banque centrale de Mauritanie (BCM)</strong>, ce chantier vise à donner aux entreprises mauritaniennes — au-delà des grandes sociétés minières et gazières déjà présentées dans la section <a href="ressources.html">Ressources</a> — un accès direct à l'épargne nationale et aux investisseurs, sans dépendre uniquement des prêts bancaires&nbsp;; l'État y verrait aussi un nouveau canal de financement de sa dette publique.</p>
+        <p>À ce jour, aucune date d'ouverture n'a été annoncée&nbsp;: le pays construit encore le cadre réglementaire et les institutions nécessaires avant qu'une seule action ne s'échange à Nouakchott. Contrairement à ses voisins de la zone franc CFA, la Mauritanie — qui a sa propre monnaie, l'ouguiya — n'appartient pas à la Bourse régionale des valeurs mobilières (BRVM) d'Abidjan&nbsp;; son projet de bourse nationale, appuyé par la Bourse de Casablanca, part donc presque de zéro.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div style="max-width:400px">
+        <h4>Mauritanie</h4>
+        <p style="font-size:.89rem; color:var(--ink-soft)">De la création de l'ouguiya en 1973 aux crises d'endettement, jusqu'à la croissance portée aujourd'hui par les mines, la pêche et le gaz.</p>
+        <span class="flagrule" style="width:90px; height:5px; margin-top:14px"><i></i><i></i><i></i></span>
+      </div>
+      <div style="flex:1; min-width:280px">
+        <h4>Sources &amp; crédits</h4>
+        <ul class="sources">
+          <li><a href="https://fr.wikipedia.org/wiki/Ouguiya" target="_blank" rel="noopener">Wikipédia — Ouguiya</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/%C3%89conomie_de_la_Mauritanie" target="_blank" rel="noopener">Wikipédia — Économie de la Mauritanie</a></li>
+          <li><a href="https://www.imf.org/en/Countries/MRT" target="_blank" rel="noopener">FMI — Mauritanie</a></li>
+          <li><a href="https://www.banquemondiale.org/fr/country/mauritania" target="_blank" rel="noopener">Banque mondiale — Mauritanie</a></li>
+          <li><a href="https://www.afdb.org/fr/countries/north-africa/mauritania" target="_blank" rel="noopener">Banque africaine de développement — Mauritanie</a></li>
+          <li><a href="https://www.agenceecofin.com/actualites-finance/1804-127684-la-mauritanie-relance-son-projet-de-creation-d-un-marche-boursier" target="_blank" rel="noopener">Agence Ecofin — Projet de marché boursier</a></li>
+          <li><a href="https://www.financialafrik.com/2024/11/17/mauritanie-la-bourse-des-valeurs-mobilieres-de-nouakchott-bvmn-en-voie-de-concretisation/" target="_blank" rel="noopener">Financial Afrik — BVMN en voie de concrétisation</a></li>
+          <li><a href="https://www.lseg.com/en/media-centre/press-releases/2023/lseg-empowers-modernization-of-mauritanias-financial-markets-with-bcm" target="_blank" rel="noopener">LSEG — Partenariat avec la Banque centrale de Mauritanie</a></li>
+          <li><a href="https://www.casablanca-bourse.com/en/insights-institutionnels/signature-strategic-agreement-central-bank-mauritania" target="_blank" rel="noopener">Bourse de Casablanca — Accord stratégique</a></li>
+          <li><a href="https://commons.wikimedia.org/wiki/Category:Mauritania" target="_blank" rel="noopener">Photos — Wikimedia Commons</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine">Photographies issues de Wikimedia Commons, sous licences libres — chaque image renvoie vers sa page d'origine où figurent l'auteur et la licence exacte ; vérifiez-les avant tout usage commercial. Chiffres économiques donnés à titre indicatif, à partir des données les plus récentes disponibles ; ils évoluent d'une année sur l'autre.</p>
+  </div>
+</footer>
+<script>
+(function(){
+  "use strict";
+
+  /* ---- repli si une photo ne charge pas ---- */
+  document.querySelectorAll('.ph img').forEach(function(img){
+    function fail(){ if(img.parentElement) img.parentElement.classList.add('failed'); }
+    img.addEventListener('error', fail);
+    if(img.complete && img.naturalWidth === 0) fail();
+  });
+
+  /* ---- apparition au défilement ---- */
+  var chapters = document.querySelectorAll('section.chapter');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } });
+    }, {threshold:0.08});
+    chapters.forEach(function(c){ io.observe(c); });
+  } else {
+    chapters.forEach(function(c){ c.classList.add('in-view'); });
+  }
+
+  /* ---- menu mobile ---- */
+  var navToggle = document.getElementById('navToggle');
+  document.querySelectorAll('nav.links a').forEach(function(a){
+    a.addEventListener('click', function(){ if(navToggle) navToggle.checked = false; });
+  });
+  var burger = document.querySelector('label.burger');
+  if(burger){
+    burger.addEventListener('keydown', function(e){
+      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); navToggle.checked = !navToggle.checked; }
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

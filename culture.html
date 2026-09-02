@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Culture de la Mauritanie — Langues, musique et traditions</title>
+<meta name="description" content="Culture mauritanienne : Maures (Beidanes et Haratines), Wolof, Peuhl et Soninké, musique des griots (tidinit, ardîn), cérémonie du thé (atay) et cuisine traditionnelle." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+
+<style>
+  /* =========================================================
+     PALETTE — drapeau mauritanien (vert, or, rouge) + désert
+     Vert  #006233  ·  Or #FFC400  ·  Rouge #CD2A3E
+     ========================================================= */
+  :root{
+    /* sables du désert : le sol de la page */
+    --sand:#F7F0E0;
+    --sand-2:#EFE3C7;
+    --surface:#FFFDF6;
+    --surface-2:#FAF3E2;
+
+    /* encres, teintées chaud (sable), jamais du gris pur */
+    --ink:#231C10;
+    --ink-soft:#5A4E38;
+    --ink-faint:#8B7C5E;
+
+    /* drapeau */
+    --green:#046A38;
+    --green-deep:#0A4A2B;
+    --green-bright:#00874A;
+    --gold:#B5820E;
+    --gold-bright:#FFC400;
+    --red:#B32639;
+
+    --line:#E0CFA6;
+    --line-strong:#CBB37F;
+
+    --shadow: 0 1px 2px rgba(35,28,16,.06), 0 10px 30px -14px rgba(35,28,16,.22);
+    --radius: 14px;
+    --wrap: 1150px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --sand:#12100A;
+      --sand-2:#1A160E;
+      --surface:#1D1810;
+      --surface-2:#231D13;
+
+      --ink:#F3E9D2;
+      --ink-soft:#C6B694;
+      --ink-faint:#948464;
+
+      --green:#4FBF85;
+      --green-deep:#2E8F5E;
+      --green-bright:#5FD695;
+      --gold:#EDBF4A;
+      --gold-bright:#FFC400;
+      --red:#E8697A;
+
+      --line:#3A3020;
+      --line-strong:#4E4029;
+
+      --shadow: 0 1px 2px rgba(0,0,0,.35), 0 14px 32px -16px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --sand:#12100A;
+    --sand-2:#1A160E;
+    --surface:#1D1810;
+    --surface-2:#231D13;
+    --ink:#F3E9D2;
+    --ink-soft:#C6B694;
+    --ink-faint:#948464;
+    --green:#4FBF85;
+    --green-deep:#2E8F5E;
+    --green-bright:#5FD695;
+    --gold:#EDBF4A;
+    --gold-bright:#FFC400;
+    --red:#E8697A;
+    --line:#3A3020;
+    --line-strong:#4E4029;
+    --shadow: 0 1px 2px rgba(0,0,0,.35), 0 14px 32px -16px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+
+  body{
+    margin:0;
+    background:var(--sand);
+    color:var(--ink);
+    font-family:"Work Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:"Fraunces", Georgia, "Times New Roman", serif;
+    font-weight:700; letter-spacing:-0.01em; text-wrap:balance;
+    color:var(--ink); margin:0;
+  }
+  a{color:inherit}
+  img{max-width:100%; display:block}
+
+  .wrap{max-width:var(--wrap); margin:0 auto; padding:0 28px}
+  @media (max-width:640px){ .wrap{padding:0 20px} }
+  .mono{font-family:"IBM Plex Mono", ui-monospace, monospace; font-variant-numeric:tabular-nums}
+
+  /* ---- bande drapeau : motif structurant récurrent ---- */
+  .flagrule{display:flex; height:4px; width:64px; border-radius:2px; overflow:hidden; flex:none}
+  .flagrule i{display:block; height:100%}
+  .flagrule i:nth-child(1){width:22%; background:var(--red)}
+  .flagrule i:nth-child(2){width:56%; background:var(--green)}
+  .flagrule i:nth-child(3){width:22%; background:var(--gold-bright)}
+
+  /* ============ NAV ============ */
+  header.site{
+    position:sticky; top:0; z-index:600;
+    background:color-mix(in srgb, var(--sand) 90%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{display:flex; align-items:center; justify-content:space-between; height:64px}
+  .brand{
+    display:flex; align-items:center; gap:11px;
+    font-family:"Fraunces", serif; font-weight:700; font-size:1.05rem;
+    text-decoration:none; color:var(--ink);
+  }
+  .brand svg{width:26px; height:auto; border-radius:2px; flex:none; box-shadow:0 0 0 1px var(--line)}
+  nav.links{display:flex; gap:2px; align-items:center}
+  nav.links a{
+    font-size:.86rem; font-weight:600; letter-spacing:.02em;
+    text-decoration:none; color:var(--ink-soft);
+    padding:8px 12px; border-radius:8px;
+    transition:color .15s ease, background .15s ease;
+  }
+  nav.links a:hover{color:var(--green); background:var(--surface-2)}
+  #navToggle{display:none}
+  .burger{display:none; background:none; border:1px solid var(--line-strong); border-radius:8px; width:40px;height:36px; cursor:pointer; color:var(--ink)}
+  @media (max-width: 860px){
+    nav.links{
+      position:absolute; top:64px; left:0; right:0;
+      background:var(--surface); border-bottom:1px solid var(--line);
+      flex-direction:column; align-items:stretch; padding:8px; display:none;
+    }
+    nav.links a{padding:12px 14px}
+    #navToggle:checked ~ nav.links{display:flex}
+    .burger{display:inline-flex; align-items:center; justify-content:center}
+  }
+
+  /* ============ FIGURES / PHOTOS ============ */
+  figure{margin:0; position:relative}
+  .ph{
+    position:relative; overflow:hidden; background:var(--sand-2);
+    border-radius:var(--radius);
+  }
+  .ph img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    transition:transform .8s cubic-bezier(.2,.7,.3,1);
+  }
+  .ph.zoom:hover img{transform:scale(1.04)}
+  @media (prefers-reduced-motion:reduce){ .ph img{transition:none} .ph.zoom:hover img{transform:none} }
+
+  /* repli élégant si une photo ne charge pas */
+  .ph.failed img{display:none}
+  .ph.failed::after{
+    content:attr(data-fallback);
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:24px; font-size:.86rem; color:var(--ink-faint);
+    font-family:"IBM Plex Mono",monospace; line-height:1.5;
+    background:
+      repeating-linear-gradient(115deg, transparent 0 22px, color-mix(in srgb, var(--gold-bright) 8%, transparent) 22px 24px),
+      linear-gradient(160deg, var(--sand-2), var(--surface-2));
+  }
+  figcaption{
+    font-size:.78rem; color:var(--ink-faint); margin-top:8px; line-height:1.45;
+  }
+  figcaption a{color:var(--ink-faint); text-decoration:underline; text-decoration-color:var(--line-strong)}
+  figcaption a:hover{color:var(--green)}
+
+  /* ============ HERO ============ */
+  .hero{position:relative; min-height:92vh; display:flex; align-items:flex-end; overflow:hidden; background:var(--green-deep)}
+  .hero-bg{position:absolute; inset:0; z-index:0; border-radius:0}
+  .hero-bg img{width:100%; height:100%; object-fit:cover}
+  .hero-bg::after{
+    content:""; position:absolute; inset:0;
+    background:
+      linear-gradient(to top, rgba(10,20,12,.94) 0%, rgba(10,20,12,.72) 38%, rgba(10,20,12,.30) 70%, rgba(10,20,12,.45) 100%),
+      radial-gradient(90% 60% at 15% 100%, rgba(4,106,56,.45), transparent 70%);
+  }
+  .hero-inner{position:relative; z-index:2; width:100%; padding:120px 0 0}
+  .hero .eyebrow{
+    display:inline-flex; align-items:center; gap:12px;
+    font-family:"IBM Plex Mono",monospace; font-size:.74rem; letter-spacing:.09em;
+    text-transform:uppercase; color:#F0DCA8; margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(2.9rem, 8.6vw, 6.2rem); line-height:.95; font-weight:900; color:#FFFDF6;
+    text-shadow:0 2px 30px rgba(0,0,0,.35);
+  }
+  .hero h1 em{font-style:italic; font-weight:600; color:var(--gold-bright)}
+  .hero-sub{
+    max-width:640px; margin-top:24px; font-size:1.16rem; color:#EADFC6;
+  }
+  .hero-stats{
+    display:flex; flex-wrap:wrap; margin-top:48px;
+    border-top:1px solid rgba(240,220,168,.28);
+  }
+  .hero-stats .hs{
+    flex:1 1 170px; padding:20px 26px 30px 0;
+    border-right:1px solid rgba(240,220,168,.28);
+  }
+  .hero-stats .hs:last-child{border-right:none}
+  .hs .num{font-family:"IBM Plex Mono",monospace; font-size:1.6rem; font-weight:600; color:var(--gold-bright); display:block; white-space:nowrap}
+  .hs .lab{font-size:.79rem; color:#D9CCAF; margin-top:5px; display:block}
+  @media (max-width:560px){
+    .hero-inner{padding-bottom:26px}
+    .hero-stats .hs{flex-basis:50%; padding:16px 14px 20px 0}
+    .hs .num{font-size:1.05rem}
+    .hs .lab{font-size:.72rem}
+  }
+  .hero-credit{
+    position:absolute; right:14px; bottom:8px; z-index:3;
+    font-size:.66rem; color:rgba(255,253,246,.5); font-family:"IBM Plex Mono",monospace;
+  }
+  .hero-credit a{color:inherit}
+
+  /* ============ SECTIONS ============ */
+  section.chapter{
+    padding:104px 0; border-top:1px solid var(--line);
+    opacity:0; transform:translateY(18px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  section.chapter.in-view{opacity:1; transform:translateY(0)}
+  @media (prefers-reduced-motion:reduce){ section.chapter{opacity:1; transform:none; transition:none} }
+
+  .chapter-head{max-width:700px; margin-bottom:52px}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:12px;
+    font-family:"IBM Plex Mono",monospace; font-size:.73rem; letter-spacing:.09em;
+    text-transform:uppercase; color:var(--green); margin-bottom:16px;
+  }
+  .chapter-head h2{font-size:clamp(2rem, 4.2vw, 2.8rem)}
+  .chapter-head p.lede{margin-top:16px; font-size:1.08rem; color:var(--ink-soft); max-width:62ch}
+
+  .grid{display:grid; gap:16px}
+  .grid.cols-4{grid-template-columns:repeat(4,1fr)}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+  @media (max-width:880px){
+    .grid.cols-4{grid-template-columns:repeat(2,1fr)}
+    .grid.cols-3{grid-template-columns:1fr}
+    .grid.cols-2{grid-template-columns:1fr}
+  }
+  @media (max-width:520px){ .grid.cols-4{grid-template-columns:1fr} }
+
+  .stat-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px 20px; box-shadow:var(--shadow);
+  }
+  .stat-card .num{font-family:"IBM Plex Mono",monospace; font-size:1.8rem; font-weight:600; color:var(--green); display:block}
+  .stat-card .num small{font-size:.95rem; font-weight:500; color:var(--ink-faint)}
+  .stat-card .lab{margin-top:6px; font-size:.87rem; color:var(--ink-soft); line-height:1.45}
+
+  .panel{
+    background:var(--surface); border:1px solid var(--line); border-radius:20px;
+    padding:32px; box-shadow:var(--shadow);
+  }
+  .prose p{color:var(--ink-soft); font-size:1.02rem; max-width:64ch}
+  .prose p + p{margin-top:14px}
+  .prose strong{color:var(--ink); font-weight:600}
+
+  /* deux colonnes texte + photo */
+  .duo{display:grid; grid-template-columns:1fr 1fr; gap:34px; align-items:center}
+  @media (max-width:880px){ .duo{grid-template-columns:1fr; gap:24px} }
+  .duo .ph{aspect-ratio:4/3}
+
+  /* bandeau photo pleine largeur */
+  .band{position:relative; margin:56px 0 0; border-radius:20px; overflow:hidden; min-height:340px; display:flex; align-items:flex-end}
+  .band .ph{position:absolute; inset:0; border-radius:0}
+  .band .ph::after{content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(12,22,14,.9), rgba(12,22,14,.15) 65%)}
+  .band-txt{position:relative; z-index:2; padding:32px; color:#FFFDF6; max-width:60ch}
+  .band-txt h3{color:#fff; font-size:1.5rem}
+  .band-txt p{color:#E4D9C0; font-size:.96rem; margin:8px 0 0}
+  .band-credit{position:absolute; right:12px; top:10px; z-index:3; font-size:.66rem; font-family:"IBM Plex Mono",monospace; color:rgba(255,253,246,.55)}
+  .band-credit a{color:inherit}
+
+  /* ============ TRAIN ============ */
+  .train-wrap{margin-top:40px; border:1px solid var(--line); border-radius:20px; overflow:hidden; background:linear-gradient(180deg, var(--surface-2), var(--surface))}
+  .train-caption{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; padding:20px 24px 0}
+  .train-caption h3{font-size:1.2rem}
+  .train-caption span{font-size:.8rem; color:var(--ink-faint); font-family:"IBM Plex Mono",monospace}
+  .track{position:relative; margin-top:16px; padding:24px 0 30px; overflow:hidden}
+  .track::before{content:""; position:absolute; left:0; right:0; bottom:14px; height:3px; background:repeating-linear-gradient(to right, var(--line-strong) 0 14px, transparent 14px 26px)}
+  .wagons{display:flex; align-items:flex-end; gap:5px; width:max-content; animation:roll 34s linear infinite; padding-left:2%}
+  @media (prefers-reduced-motion:reduce){ .wagons{animation:none} }
+  .wagons .loco,.wagons .wagon{flex:none; height:32px; border-radius:5px 5px 3px 3px; box-shadow:inset 0 -4px 0 rgba(0,0,0,.16)}
+  .wagons .loco{width:52px; height:40px; background:var(--green); border-radius:6px 10px 3px 3px}
+  .wagons .wagon{width:26px; background:#8A4A22}
+  .wagons .wagon:nth-child(3n){background:var(--gold)}
+  .wagons .wagon:nth-child(7n){background:var(--red)}
+  @keyframes roll{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+  .train-stats{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border-top:1px solid var(--line)}
+  @media (max-width:700px){ .train-stats{grid-template-columns:repeat(2,1fr)} }
+  .train-stats div{background:var(--surface); padding:18px 20px}
+  .train-stats .num{font-family:"IBM Plex Mono",monospace; font-weight:600; color:var(--ink); font-size:1.22rem; display:block}
+  .train-stats .lab{font-size:.77rem; color:var(--ink-faint); margin-top:3px}
+
+  /* ============ CARTES RESSOURCES ============ */
+  .res-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:16px;
+    box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+  }
+  .res-card .ph{border-radius:0; aspect-ratio:16/10}
+  .res-card .rc-body{padding:22px; display:flex; flex-direction:column; gap:9px}
+  .res-card .tag{font-family:"IBM Plex Mono",monospace; font-size:.71rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); font-weight:600}
+  .res-card h3{font-size:1.14rem}
+  .res-card p{color:var(--ink-soft); font-size:.92rem; margin:0}
+
+  /* ============ PARCS ============ */
+  .park{
+    display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--line);
+    border-radius:20px; overflow:hidden; box-shadow:var(--shadow); background:var(--surface);
+  }
+  .park + .park{margin-top:24px}
+  @media (max-width:880px){ .park{grid-template-columns:1fr} }
+  .park-visual{position:relative; min-height:300px}
+  .park-visual .ph{position:absolute; inset:0; border-radius:0}
+  .park-visual .ph::after{content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(8,26,16,.88), rgba(8,26,16,.05) 60%)}
+  .park-label{position:absolute; left:0; bottom:0; z-index:2; padding:26px}
+  .park-label .park-tag{font-family:"IBM Plex Mono",monospace; font-size:.74rem; color:var(--gold-bright); margin:0 0 6px}
+  .park-label .park-name{font-family:"Fraunces",serif; font-size:1.6rem; font-weight:700; color:#fff; margin:0}
+  .park-body{padding:28px}
+  .park-body p{color:var(--ink-soft); font-size:.95rem; margin:0}
+  .park-body p + p{margin-top:12px}
+  .mini-stats{display:flex; flex-wrap:wrap; gap:9px; margin-top:16px}
+  .mini-stats span{
+    font-family:"IBM Plex Mono",monospace; font-size:.75rem; background:var(--surface-2);
+    border:1px solid var(--line); border-radius:999px; padding:6px 12px; color:var(--ink-soft);
+  }
+
+  /* ============ ÉCONOMIE ============ */
+  .econ-layout{display:grid; grid-template-columns:1.05fr 1fr; gap:24px; align-items:start}
+  @media (max-width:900px){ .econ-layout{grid-template-columns:1fr} }
+  .bars{display:flex; align-items:flex-end; gap:22px; height:200px; margin-top:26px}
+  .bar-col{display:flex; flex-direction:column; align-items:center; gap:9px; flex:1; justify-content:flex-end}
+  .bar-col .bar{width:100%; max-width:52px; border-radius:6px 6px 3px 3px; background:linear-gradient(180deg, var(--green-bright), var(--green))}
+  .bar-col.proj .bar{background:linear-gradient(180deg, var(--gold-bright), var(--gold))}
+  .bar-col .val{font-family:"IBM Plex Mono",monospace; font-size:.9rem; font-weight:600}
+  .bar-col .yr{font-size:.75rem; color:var(--ink-faint)}
+  .legend-dot{display:inline-block; width:8px;height:8px;border-radius:50%; margin-right:6px}
+  .econ-notes{font-size:.81rem; color:var(--ink-faint); margin-top:14px}
+  .kpi-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:16px}
+  .kpi .k-num{font-family:"IBM Plex Mono",monospace; font-size:1.28rem; font-weight:600; color:var(--green); display:block}
+  .kpi .k-lab{font-size:.81rem; color:var(--ink-soft); margin-top:2px}
+  .split-bar{height:14px; border-radius:999px; overflow:hidden; display:flex; margin-top:10px; border:1px solid var(--line)}
+  .split-bar span{height:100%}
+  .split-legend{display:flex; gap:14px; flex-wrap:wrap; margin-top:10px; font-size:.81rem; color:var(--ink-soft)}
+  .split-legend .k{display:flex; align-items:center}
+
+  /* ============ KSOUR ============ */
+  .ksour{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+  @media (max-width:940px){ .ksour{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:540px){ .ksour{grid-template-columns:1fr} }
+  .ksour-card{
+    border:1px solid var(--line); border-radius:16px; background:var(--surface);
+    box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+  }
+  .ksour-card .ph{border-radius:0; aspect-ratio:3/2}
+  .ksour-card .kc-body{padding:20px}
+  .ksour-card .region{font-family:"IBM Plex Mono",monospace; font-size:.7rem; color:var(--gold); text-transform:uppercase; letter-spacing:.05em}
+  .ksour-card h3{margin-top:7px; font-size:1.2rem}
+  .ksour-card p{color:var(--ink-soft); font-size:.88rem; margin-top:8px}
+
+  /* ============ CARTE SATELLITE ============ */
+  .map-layout{display:grid; grid-template-columns:1.45fr 1fr; gap:24px; align-items:start}
+  @media (max-width:940px){ .map-layout{grid-template-columns:1fr} }
+  #map{
+    height:600px; border-radius:20px; border:1px solid var(--line);
+    box-shadow:var(--shadow); background:var(--sand-2); z-index:1;
+  }
+  @media (max-width:640px){ #map{height:440px} }
+  #mapFallback{
+    display:none; padding:28px; text-align:center; color:var(--ink-soft); font-size:.92rem;
+  }
+  .leaflet-container{font-family:"Work Sans", sans-serif; border-radius:20px}
+  .leaflet-popup-content-wrapper{
+    background:var(--surface); color:var(--ink);
+    border-radius:12px; box-shadow:0 8px 30px -8px rgba(0,0,0,.4);
+  }
+  .leaflet-popup-tip{background:var(--surface)}
+  .leaflet-popup-content{margin:14px 16px; font-size:.88rem; line-height:1.5}
+  .leaflet-popup-content b{font-family:"Fraunces",serif; font-size:1.05rem; display:block; margin-bottom:2px}
+  .leaflet-popup-content .pc{font-family:"IBM Plex Mono",monospace; font-size:.74rem; color:var(--ink-faint); display:block; margin-bottom:7px}
+  .leaflet-popup-content-wrapper a.leaflet-popup-close-button{color:var(--ink-faint)}
+  .mk{
+    width:16px; height:16px; border-radius:50%;
+    background:var(--gold-bright); border:2.5px solid #fff;
+    box-shadow:0 0 0 1.5px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.5);
+    transition:transform .15s ease, background .15s ease;
+  }
+  .mk.park{background:var(--green-bright)}
+  .mk.active{transform:scale(1.45); background:var(--red)}
+
+  .site-list{display:flex; flex-direction:column; gap:2px; max-height:600px; overflow-y:auto; padding-right:4px}
+  @media (max-width:940px){ .site-list{max-height:none} }
+  .site-item{
+    display:flex; justify-content:space-between; gap:10px; align-items:center;
+    padding:13px 15px; border-radius:10px; cursor:pointer; border:1px solid transparent;
+    transition:background .15s ease, border-color .15s ease; text-align:left; width:100%;
+    background:none; font-family:inherit; font-size:1rem; color:inherit;
+  }
+  .site-item:hover,.site-item.active{background:var(--surface-2); border-color:var(--line)}
+  .site-item.active{border-color:var(--green)}
+  .site-item .nm{font-weight:600; font-size:.94rem}
+  .site-item .nm small{font-weight:400; color:var(--ink-faint)}
+  .site-item .co{font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--ink-faint); flex:none}
+
+  /* ============ FOOTER ============ */
+  footer{border-top:1px solid var(--line); padding:56px 0 40px; background:var(--sand-2)}
+  .foot-grid{display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap}
+  footer h4{font-family:"Fraunces",serif; font-size:1rem; margin-bottom:12px}
+  .sources{font-size:.81rem; color:var(--ink-soft); columns:2; column-gap:28px; padding-left:18px}
+  @media (max-width:640px){ .sources{columns:1} }
+  .sources li{margin-bottom:6px; break-inside:avoid}
+  .sources a{color:var(--green); text-decoration:none; border-bottom:1px dotted var(--line-strong)}
+  .fine{margin-top:34px; font-size:.77rem; color:var(--ink-faint); border-top:1px solid var(--line); padding-top:20px}
+
+  ::selection{background:var(--gold-bright); color:#231C10}
+  a:focus-visible, button:focus-visible, .site-item:focus-visible, label:focus-visible{
+    outline:2px solid var(--green); outline-offset:2px; border-radius:4px;
+  }
+
+</style>
+</head>
+<body>
+<noscript><style>section.chapter{opacity:1!important; transform:none!important}</style></noscript>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a href="Mauritanie.html" class="brand">
+      <svg viewBox="0 0 90 60" aria-hidden="true">
+        <rect width="90" height="60" fill="#046A38"/>
+        <rect width="90" height="10" fill="#CD2A3E"/>
+        <rect y="50" width="90" height="10" fill="#CD2A3E"/>
+        <mask id="bm"><rect width="90" height="60" fill="#000"/>
+          <circle cx="45" cy="38" r="17" fill="#fff"/><circle cx="45" cy="27" r="17" fill="#000"/>
+        </mask>
+        <rect width="90" height="60" fill="#FFC400" mask="url(#bm)"/>
+        <path d="M45 16 47.2 22.4 54 22.4 48.5 26.4 50.6 32.8 45 28.8 39.4 32.8 41.5 26.4 36 22.4 42.8 22.4Z" fill="#FFC400"/>
+      </svg>
+      Mauritanie
+    </a>
+    <input type="checkbox" id="navToggle">
+    <label for="navToggle" class="burger" tabindex="0" aria-label="Ouvrir le menu">☰</label>
+    <nav class="links">
+      <a href="histoire.html">Histoire</a>
+      <a href="geographie.html">Géographie</a>
+      <a href="ressources.html">Ressources</a>
+      <a href="parcs.html">Parcs</a>
+      <a href="economie.html">Économie</a>
+      <a href="culture.html" aria-current="page">Culture</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-bg ph" data-fallback="Photo indisponible">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mauritanian_with_Saharan_blue_daraa.jpg?width=1800"
+         alt="Homme mauritanien vêtu du daraa bleu saharien traditionnel" fetchpriority="high" decoding="async">
+  </div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Culture de la Mauritanie</p>
+    <h1>Griots, thé<br>et <em>manuscrits</em> du désert</h1>
+    <p class="hero-sub">Entre héritage arabo-berbère, traditions ouest-africaines et rites nomades du désert&nbsp;: quatre langues, une musique codifiée transmise par caste depuis des générations, et un rituel du thé qui rythme chaque journée mauritanienne.</p>
+    <div class="hero-stats">
+      <div class="hs"><span class="num">4+</span><span class="lab">Langues parlées&nbsp;: hassaniya, pulaar, soninké, wolof</span></div>
+      <div class="hs"><span class="num">2</span><span class="lab">Instruments classiques&nbsp;: tidinit (homme), ardîn (femme)</span></div>
+      <div class="hs"><span class="num">3</span><span class="lab">Verres de thé, du plus amer au plus sucré</span></div>
+      <div class="hs"><span class="num">1996</span><span class="lab">Inscription des cités-ksour à l'UNESCO</span></div>
+    </div>
+  </div>
+  <p class="hero-credit">Photo : <a href="https://commons.wikimedia.org/wiki/File:Mauritanian_with_Saharan_blue_daraa.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></p>
+</section>
+
+<!-- ============ LANGUES & SOCIÉTÉ ============ -->
+<section id="langues-societe" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Un carrefour linguistique</p>
+      <h2>Quatre langues pour un même pays</h2>
+      <p class="lede">L'arabe est la langue officielle de la République, mais c'est surtout le <strong>hassaniya</strong> — un dialecte arabe teinté de berbère — qui domine la vie quotidienne. Trois autres langues nationales, le <strong>pulaar</strong>, le <strong>soninké</strong> et le <strong>wolof</strong>, sont parlées dans le sud du pays, le long du fleuve Sénégal ; le français reste très présent dans l'administration et les affaires, héritage de la colonisation.</p>
+    </div>
+
+    <div class="panel">
+      <div class="prose">
+        <p>Le vêtement le plus emblématique reste le <strong>daraa</strong>, une tunique ample et longue, bleue ou blanche, portée par les hommes sur l'ensemble du territoire — un habit pensé pour circuler dans la chaleur saharienne tout en marquant le statut social par la qualité du tissu et la finesse de la broderie au col.</p>
+        <p>La société mauritanienne traditionnelle s'organise en groupes de statut aux rôles distincts, hérités de l'histoire nomade du pays — une structure qui a notamment façonné la transmission de la musique savante, réservée à une caste de musiciens professionnels, les <strong>Iggawin</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MAURES ============ -->
+<section id="maures" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Beidanes et Haratines</p>
+      <h2>Les Maures, du Sahara berbère à l'Arabie</h2>
+      <p class="lede">Le socle démographique et culturel le plus large du pays reste celui des <strong>Maures</strong>, arabophones de tradition nomade&nbsp;: les <strong>Beidanes</strong> (« Maures blancs »), d'ascendance arabo-berbère, et les <strong>Haratines</strong> (« Maures noirs »), descendants d'esclaves de la société beidane mais pleinement arabophones et hassaniyophones. Là encore, faute de recensement ethnique, leurs poids respectifs restent estimés plutôt que comptés.</p>
+    </div>
+
+    <div class="duo">
+      <figure>
+        <div class="ph zoom" data-fallback="Adrar mauritanien — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Mauritanie%20-%20Adrar2.jpg?width=1200"
+               alt="Paysage désertique de l'Adrar mauritanien">
+        </div>
+        <figcaption>L'Adrar, berceau du mouvement almoravide au XI<sup>e</sup>&nbsp;siècle. <a href="https://commons.wikimedia.org/wiki/File:Mauritanie_-_Adrar2.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+      </figure>
+      <div class="prose">
+        <h3 style="font-size:1.4rem; margin-bottom:14px">Des Berbères sanhadja aux tribus arabes</h3>
+        <p>Avant l'arrivée des Arabes, le Sahara occidental est peuplé de confédérations berbères <strong>sanhadja</strong> — c'est parmi elles, dans l'Adrar, qu'émerge au XI<sup>e</sup>&nbsp;siècle le mouvement almoravide, déjà évoqué dans la section <a href="histoire.html">Histoire</a> du site. Du XII<sup>e</sup> au XVII<sup>e</sup>&nbsp;siècle, les tribus arabes des <strong>Beni Hassan</strong> s'imposent progressivement sur ces populations berbères, leur transmettant leur langue&nbsp;: le <strong>hassaniya</strong>, un arabe qui conserve un important substrat berbère zénaga tout en abandonnant certains traits du golfe arabique.</p>
+        <p>Ce métissage arabo-berbère, achevé vers le XVII<sup>e</sup>&nbsp;siècle, façonne encore aujourd'hui l'identité beidane&nbsp;: un socle berbère saharien recouvert d'une culture, d'une langue et d'une généalogie arabes revendiquées.</p>
+      </div>
+    </div>
+
+    <div class="duo" style="margin-top:44px">
+      <figure>
+        <div class="ph zoom" data-fallback="Khaïma — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Int%C3%A9rieur%20de%20kha%C3%AFma%20avec%20ventilateur.jpg?width=1200"
+               alt="Intérieur d'une khaïma, tente traditionnelle mauritanienne">
+        </div>
+        <figcaption>Intérieur d'une khaïma, la tente traditionnelle en poil de chèvre des nomades beidanes. <a href="https://commons.wikimedia.org/wiki/File:Int%C3%A9rieur_de_kha%C3%AFma_avec_ventilateur.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+      </figure>
+      <div class="prose">
+        <h3 style="font-size:1.4rem; margin-bottom:14px">Hassane, zawaya, znaga&nbsp;: l'ordre des tribus</h3>
+        <p>La <strong>guerre de Chaar Bouba</strong> (vers 1644-1677) fixe durablement l'organisation sociale beidane&nbsp;: les tribus guerrières <strong>hassane</strong>, qui l'emportent militairement, conservent le pouvoir politique et lèvent tribut&nbsp;; les tribus <strong>zawaya</strong>, qui avaient porté la réforme religieuse, renoncent aux armes mais gagnent un rôle respecté de clercs, d'enseignants et de commerçants&nbsp;; les tribus <strong>znaga</strong>, d'origine berbère tributaire, complètent cet ordre aux côtés des castes d'artisans et de griots.</p>
+        <p>De cette organisation naissent, du XVII<sup>e</sup>&nbsp;siècle jusqu'à la colonisation française, quatre <strong>émirats</strong>&nbsp;: le Trarza et le Brakna le long du fleuve Sénégal, le Tagant autour de Tidjikja, et l'Adrar autour d'Atar — des pouvoirs nomades vivant de razzias, de tributs et, dès le XIX<sup>e</sup>&nbsp;siècle, du commerce de la gomme arabique avec les comptoirs français de Saint-Louis, avant que la « pacification » coloniale n'y mette fin entre 1903 et 1932.</p>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:44px">
+      <div class="prose">
+        <h3 style="font-size:1.4rem; margin-bottom:14px">Les Haratines, une histoire mauritanienne à part entière</h3>
+        <p>Les Haratines partagent la langue hassaniya et la culture islamique et tribale beidane, mais descendent pour beaucoup des populations réduites en esclavage au sein de cette même société — ils formeraient aujourd'hui, selon des estimations données à titre indicatif, le groupe le plus nombreux du pays. L'esclavage y a été aboli à plusieurs reprises&nbsp;: par décret colonial en 1905, par ordonnance présidentielle en 1981 — la Mauritanie fut alors le dernier pays au monde à le faire —, puis pénalisé par une loi en 2007, renforcée en 2015. Des organisations de défense des droits humains continuent cependant de documenter des formes de servitude fondée sur l'ascendance dans certaines régions, malgré ce cadre légal&nbsp;: un sujet toujours activement débattu en Mauritanie aujourd'hui.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WOLOF, PEUHL, SONINKÉ ============ -->
+<section id="wolof-peuhl-soninke" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Le long du fleuve Sénégal</p>
+      <h2>Wolof, Peuhl et Soninké&nbsp;: trois peuples, trois royaumes</h2>
+      <p class="lede">Dans le sud du pays, trois communautés composent, aux côtés des Maures, la mosaïque mauritanienne — chacune héritière d'un royaume ou d'un empire dont l'histoire a marqué toute l'Afrique de l'Ouest. Faute de recensement ethnique depuis l'indépendance, leur poids démographique exact reste débattu ; on les regroupe souvent, avec les Bambaras, sous le terme de communautés <strong>afro-mauritaniennes</strong>.</p>
+    </div>
+
+    <div class="duo">
+      <figure>
+        <div class="ph zoom" data-fallback="Danse sabar — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Dancing%20Sabar%20in%20Dakar%2C%20Senegal.jpg?width=1200"
+               alt="Danse traditionnelle au son du tambour sabar, tradition wolof">
+        </div>
+        <figcaption>Danse sabar à Dakar — une tradition commune aux Wolof des deux rives de la frontière sénégalo-mauritanienne. <a href="https://commons.wikimedia.org/wiki/File:Dancing_Sabar_in_Dakar,_Senegal.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+      </figure>
+      <div class="prose">
+        <h3 style="font-size:1.4rem; margin-bottom:14px">Wolof — le littoral et le royaume du Waalo</h3>
+        <p>Installés sur la façade atlantique et le long du bas fleuve Sénégal, dans le Trarza, autour de Rosso, les Wolof descendent des communautés du royaume du <strong>Waalo</strong> et de l'empire du Djolof, qui contrôlèrent la rive nord du fleuve du XIV<sup>e</sup> au XIX<sup>e</sup>&nbsp;siècle. Leur langue, le wolof, appartient à la branche atlantique des langues nigéro-congolaises.</p>
+        <p>La société wolof traditionnelle distingue les nobles (<em>géer</em>), les castes d'artisans et de griots (<em>ñeeño</em>) et les descendants d'esclaves (<em>jaam</em>) — une hiérarchie encore présente dans les mémoires. Les griots (<em>géwël</em>), gardiens de la généalogie et de l'histoire orale, s'expriment notamment par le tambour <strong>sabar</strong>, dont le rythme accompagne encore aujourd'hui danses, mariages et fêtes.</p>
+      </div>
+    </div>
+
+    <div class="duo" style="margin-top:44px">
+      <figure>
+        <div class="ph zoom" data-fallback="Peuhl — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Fille%20en%20habit%20tradtionel%20Peul%20du%20Mali.jpg?width=1200"
+               alt="Jeune fille en habit traditionnel peul">
+        </div>
+        <figcaption>Habit traditionnel peul (photo prise au Mali voisin) — l'aire culturelle peule s'étend du Sénégal au Tchad, à travers tout le Sahel. <a href="https://commons.wikimedia.org/wiki/File:Fille_en_habit_tradtionel_Peul_du_Mali.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+      </figure>
+      <div class="prose">
+        <h3 style="font-size:1.4rem; margin-bottom:14px">Peuhl (Halpulaar)&nbsp;— l'éthique du <em>pulaaku</em></h3>
+        <p>Dans le Gorgol, le Brakna et le Guidimakha, les <strong>Halpulaar'en</strong> — locuteurs du pulaar, qui regroupent aussi bien des lignées peules pastorales que des communautés sédentaires — se réclament d'un code moral, le <strong>pulaaku</strong>&nbsp;: retenue, dignité, sens de l'hospitalité. Leur histoire régionale est celle du <strong>Fouta-Toro</strong>, royaume de la vallée du fleuve Sénégal gouverné à partir du XVI<sup>e</sup>&nbsp;siècle par la dynastie <strong>Denanke</strong>, renversée en 1776 par une révolution islamique qui fonda l'<strong>Almamiat du Fouta-Toro</strong>, un État théocratique électif.</p>
+        <p>Cette société connaît elle aussi une hiérarchie ancienne&nbsp;: lignées nobles et lettrées (<em>Toorobbe</em>), castes d'artisans et de griots (<em>ñeeñɓe</em>), et descendants d'esclaves (<em>maccuɓe</em>). Au XIX<sup>e</sup>&nbsp;siècle, le Fouta-Toro donna aussi naissance à El Hadj Oumar Tall, fondateur d'un vaste empire toucouleur s'étendant jusqu'au Mali actuel.</p>
+      </div>
+    </div>
+
+    <div class="duo" style="margin-top:44px">
+      <figure>
+        <div class="ph zoom" data-fallback="Koumbi Saleh — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Archaeological%20site%20of%20Koumbi%20Saleh.jpg?width=1200"
+               alt="Site archéologique de Koumbi Saleh, ancienne capitale de l'empire du Ghana, en Mauritanie">
+        </div>
+        <figcaption>Koumbi Saleh, dans le sud-est mauritanien&nbsp;: les ruines de l'ancienne capitale de l'empire du Ghana. <a href="https://commons.wikimedia.org/wiki/File:Archaeological_site_of_Koumbi_Saleh.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+      </figure>
+      <div class="prose">
+        <h3 style="font-size:1.4rem; margin-bottom:14px">Soninké — les héritiers du Wagadou</h3>
+        <p>Dans le Guidimakha, à l'extrême sud-est du pays, les Soninké parlent une langue de la famille mandée, bien distincte du wolof et du pulaar. Leur tradition orale les rattache à l'<strong>empire du Ghana</strong> (ou <strong>Wagadou</strong>), l'un des plus anciens grands États d'Afrique de l'Ouest, qui prospéra du commerce transsaharien de l'or et du sel avant son déclin au XIII<sup>e</sup>&nbsp;siècle. Sa capitale, <strong>Koumbi Saleh</strong> — aujourd'hui un champ de ruines dans le sud-est mauritanien — comptait un quartier royal et un quartier marchand musulman distincts, peuplés selon les estimations de près de 20&nbsp;000&nbsp;habitants à son apogée.</p>
+        <p>Comme chez leurs voisins, la société soninké distingue nobles (<em>horro</em>), castes d'artisans et de griots (<em>nyaxamalo</em>, dont les <em>gésséré</em>) et descendants d'esclaves (<em>komo</em>). Les griots soninké perpétuent notamment l'épopée du Wagadou, récit fondateur transmis de génération en génération.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MUSIQUE ============ -->
+<section id="musique" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Un art savant et codifié</p>
+      <h2>La musique des griots maures</h2>
+      <p class="lede">Loin d'être un simple divertissement, la musique classique mauritanienne obéit à un système aussi rigoureux qu'un répertoire de musique savante occidentale — transmis oralement, de génération en génération, au sein d'une caste de musiciens professionnels.</p>
+    </div>
+
+    <div class="grid cols-4">
+      <div class="stat-card"><span class="num">Tidinit</span><p class="lab">Luth à quatre cordes réservé aux hommes, joué aux ongles, agrémenté de bruiteurs métalliques.</p></div>
+      <div class="stat-card"><span class="num">Ardîn</span><p class="lab">Harpe à une dizaine de cordes réservée aux femmes, montée sur une calebasse en guise de résonateur.</p></div>
+      <div class="stat-card"><span class="num">4</span><p class="lab">Modes émotionnels codifiés — karr, faghou, siguim, beigi.</p></div>
+      <div class="stat-card"><span class="num">Iggawin</span><p class="lab">Caste de musiciens professionnels de l'ethnie beidane, dépositaires du répertoire classique.</p></div>
+    </div>
+
+    <div class="panel" style="margin-top:34px">
+      <div class="prose">
+        <p>Le t'bol (tambour des sables) et le rbab (petite vielle) complètent cette palette instrumentale. Cette musique fusionne des influences berbères, arabo-orientales et ouest-africaines — les chants religieux des Haratins, appelés <em>medh</em>, y ajoutent une dimension spirituelle. Ces dernières décennies, des artistes mauritaniens modernes ont fait connaître ce répertoire bien au-delà des frontières du pays, en l'adaptant aux scènes internationales tout en conservant l'ardîn et la tidinit en son cœur.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THÉ & CUISINE ============ -->
+<section id="the-cuisine" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Un rituel quotidien</p>
+      <h2>L'atay, le thé des trois verres</h2>
+      <p class="lede">Impossible de comprendre la sociabilité mauritanienne sans son thé&nbsp;: préparé et servi selon un rituel précis, l'<strong>atay</strong> rythme les visites, les négociations et les longues pauses à l'ombre, dans les villes comme dans le désert.</p>
+    </div>
+
+    <div class="duo">
+      <figure>
+        <div class="ph zoom" data-fallback="Cérémonie du thé — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Tea_ceremony%2C_Mauritania.jpg?width=1200"
+               alt="Préparation traditionnelle du thé mauritanien, l'atay">
+        </div>
+        <figcaption>Préparation traditionnelle du thé, servi en trois verres successifs. <a href="https://commons.wikimedia.org/wiki/File:Tea_ceremony%2C_Mauritania.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+      </figure>
+      <div class="prose">
+        <h3 style="font-size:1.4rem; margin-bottom:14px">Trois verres, trois saveurs</h3>
+        <p>Le thé vert à la menthe est versé de haut, pour le faire mousser, puis servi en trois tournées bien distinctes&nbsp;: le premier verre, très amer, le deuxième, aromatisé et plus équilibré, le troisième, sucré — un dicton local résume la progression&nbsp;: fort comme la mort, doux comme la vie, sucré comme l'amour.</p>
+        <p>Côté cuisine, le méchoui (viande rôtie) et le couscous de blé ou de mil restent les bases du repas, aux côtés du <strong>zrig</strong> — du lait de chamelle sucré et parfois caillé, boisson historique des nomades. Sur la côte, la <em>thiéboudienne</em> (riz au poisson), d'influence sénégalaise, gagne du terrain à Nouakchott. À la saison des dattes, la fête de la <strong>Guetna</strong> rassemble les familles autour de la récolte dans les palmeraies de l'Adrar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PATRIMOINE ============ -->
+<section id="patrimoine" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> UNESCO 1996</p>
+      <h2>Les ksour, patrimoine vivant</h2>
+      <p class="lede">Chinguetti, Ouadane, Tichitt et Oualata — les quatre cités caravanières inscrites au patrimoine mondial de l'UNESCO restent le symbole le plus visible de la culture mauritanienne, entre bibliothèques de manuscrits anciens et architecture de pierre ocre. Leur histoire complète est racontée dans la section <a href="histoire.html">Histoire</a> du site.</p>
+    </div>
+
+    <div class="panel">
+      <div class="prose">
+        <p>Au-delà des ksour, l'artisanat mauritanien se transmet surtout par les femmes&nbsp;: bijoux d'argent finement ciselés, tissages et teintures de tentures nomades (la khaïma), travail du cuir pour les selles et coussins — un savoir-faire directement hérité de la vie nomade, où chaque objet devait être à la fois beau, léger et transportable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div style="max-width:400px">
+        <h4>Mauritanie</h4>
+        <p style="font-size:.89rem; color:var(--ink-soft)">Maures, Wolof, Peuhl et Soninké&nbsp;: langues, musique des griots, rituel du thé et patrimoine des cités-ksour — la mosaïque culturelle de la République Islamique de Mauritanie.</p>
+        <span class="flagrule" style="width:90px; height:5px; margin-top:14px"><i></i><i></i><i></i></span>
+      </div>
+      <div style="flex:1; min-width:280px">
+        <h4>Sources &amp; crédits</h4>
+        <ul class="sources">
+          <li><a href="https://fr.wikipedia.org/wiki/Langues_en_Mauritanie" target="_blank" rel="noopener">Wikipédia — Langues en Mauritanie</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/Musique_mauritanienne" target="_blank" rel="noopener">Wikipédia — Musique mauritanienne</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Tidinit" target="_blank" rel="noopener">Wikipedia — Tidinit</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/Th%C3%A9_%C3%A0_la_menthe" target="_blank" rel="noopener">Wikipédia — Thé à la menthe</a></li>
+          <li><a href="https://whc.unesco.org/en/list/750/" target="_blank" rel="noopener">UNESCO — Villes anciennes de Ouadane, Chinguetti, Tichitt et Oualata</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/Maures" target="_blank" rel="noopener">Wikipédia — Maures</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Hassaniya_Arabic" target="_blank" rel="noopener">Wikipedia — Hassaniya Arabic</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Char_Bouba_war" target="_blank" rel="noopener">Wikipedia — Char Bouba war</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/%C3%89mirats_(Mauritanie)" target="_blank" rel="noopener">Wikipédia — Émirats de Mauritanie</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Haratin" target="_blank" rel="noopener">Wikipedia — Haratin</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Slavery_in_Mauritania" target="_blank" rel="noopener">Wikipedia — Slavery in Mauritania</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/Wolofs" target="_blank" rel="noopener">Wikipédia — Wolofs</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/Peuls" target="_blank" rel="noopener">Wikipédia — Peuls</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/Sonink%C3%A9s" target="_blank" rel="noopener">Wikipédia — Soninkés</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/Empire_du_Ghana" target="_blank" rel="noopener">Wikipédia — Empire du Ghana</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/Imamat_de_Fouta-Toro" target="_blank" rel="noopener">Wikipédia — Imamat de Fouta-Toro</a></li>
+          <li><a href="https://commons.wikimedia.org/wiki/Category:Mauritania" target="_blank" rel="noopener">Photos — Wikimedia Commons</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine">Photographies issues de Wikimedia Commons, sous licences libres — chaque image renvoie vers sa page d'origine où figurent l'auteur et la licence exacte ; vérifiez-les avant tout usage commercial.</p>
+  </div>
+</footer>
+<script>
+(function(){
+  "use strict";
+
+  /* ---- repli si une photo ne charge pas ---- */
+  document.querySelectorAll('.ph img').forEach(function(img){
+    function fail(){ if(img.parentElement) img.parentElement.classList.add('failed'); }
+    img.addEventListener('error', fail);
+    if(img.complete && img.naturalWidth === 0) fail();
+  });
+
+  /* ---- apparition au défilement ---- */
+  var chapters = document.querySelectorAll('section.chapter');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } });
+    }, {threshold:0.08});
+    chapters.forEach(function(c){ io.observe(c); });
+  } else {
+    chapters.forEach(function(c){ c.classList.add('in-view'); });
+  }
+
+  /* ---- menu mobile ---- */
+  var navToggle = document.getElementById('navToggle');
+  document.querySelectorAll('nav.links a').forEach(function(a){
+    a.addEventListener('click', function(){ if(navToggle) navToggle.checked = false; });
+  });
+  var burger = document.querySelector('label.burger');
+  if(burger){
+    burger.addEventListener('keydown', function(e){
+      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); navToggle.checked = !navToggle.checked; }
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
