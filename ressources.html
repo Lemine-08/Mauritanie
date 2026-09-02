@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ressources de la Mauritanie — Découverte et exploitation</title>
+<meta name="description" content="Ressources naturelles de la Mauritanie : histoire de la découverte et de l'exploitation du fer, de l'or, du cuivre, du pétrole, du gaz et de la pêche." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+
+<style>
+  /* =========================================================
+     PALETTE — drapeau mauritanien (vert, or, rouge) + désert
+     Vert  #006233  ·  Or #FFC400  ·  Rouge #CD2A3E
+     ========================================================= */
+  :root{
+    /* sables du désert : le sol de la page */
+    --sand:#F7F0E0;
+    --sand-2:#EFE3C7;
+    --surface:#FFFDF6;
+    --surface-2:#FAF3E2;
+
+    /* encres, teintées chaud (sable), jamais du gris pur */
+    --ink:#231C10;
+    --ink-soft:#5A4E38;
+    --ink-faint:#8B7C5E;
+
+    /* drapeau */
+    --green:#046A38;
+    --green-deep:#0A4A2B;
+    --green-bright:#00874A;
+    --gold:#B5820E;
+    --gold-bright:#FFC400;
+    --red:#B32639;
+
+    --line:#E0CFA6;
+    --line-strong:#CBB37F;
+
+    --shadow: 0 1px 2px rgba(35,28,16,.06), 0 10px 30px -14px rgba(35,28,16,.22);
+    --radius: 14px;
+    --wrap: 1150px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --sand:#12100A;
+      --sand-2:#1A160E;
+      --surface:#1D1810;
+      --surface-2:#231D13;
+
+      --ink:#F3E9D2;
+      --ink-soft:#C6B694;
+      --ink-faint:#948464;
+
+      --green:#4FBF85;
+      --green-deep:#2E8F5E;
+      --green-bright:#5FD695;
+      --gold:#EDBF4A;
+      --gold-bright:#FFC400;
+      --red:#E8697A;
+
+      --line:#3A3020;
+      --line-strong:#4E4029;
+
+      --shadow: 0 1px 2px rgba(0,0,0,.35), 0 14px 32px -16px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --sand:#12100A;
+    --sand-2:#1A160E;
+    --surface:#1D1810;
+    --surface-2:#231D13;
+    --ink:#F3E9D2;
+    --ink-soft:#C6B694;
+    --ink-faint:#948464;
+    --green:#4FBF85;
+    --green-deep:#2E8F5E;
+    --green-bright:#5FD695;
+    --gold:#EDBF4A;
+    --gold-bright:#FFC400;
+    --red:#E8697A;
+    --line:#3A3020;
+    --line-strong:#4E4029;
+    --shadow: 0 1px 2px rgba(0,0,0,.35), 0 14px 32px -16px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+
+  body{
+    margin:0;
+    background:var(--sand);
+    color:var(--ink);
+    font-family:"Work Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:"Fraunces", Georgia, "Times New Roman", serif;
+    font-weight:700; letter-spacing:-0.01em; text-wrap:balance;
+    color:var(--ink); margin:0;
+  }
+  a{color:inherit}
+  img{max-width:100%; display:block}
+
+  .wrap{max-width:var(--wrap); margin:0 auto; padding:0 28px}
+  @media (max-width:640px){ .wrap{padding:0 20px} }
+  .mono{font-family:"IBM Plex Mono", ui-monospace, monospace; font-variant-numeric:tabular-nums}
+
+  /* ---- bande drapeau : motif structurant récurrent ---- */
+  .flagrule{display:flex; height:4px; width:64px; border-radius:2px; overflow:hidden; flex:none}
+  .flagrule i{display:block; height:100%}
+  .flagrule i:nth-child(1){width:22%; background:var(--red)}
+  .flagrule i:nth-child(2){width:56%; background:var(--green)}
+  .flagrule i:nth-child(3){width:22%; background:var(--gold-bright)}
+
+  /* ============ NAV ============ */
+  header.site{
+    position:sticky; top:0; z-index:600;
+    background:color-mix(in srgb, var(--sand) 90%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{display:flex; align-items:center; justify-content:space-between; height:64px}
+  .brand{
+    display:flex; align-items:center; gap:11px;
+    font-family:"Fraunces", serif; font-weight:700; font-size:1.05rem;
+    text-decoration:none; color:var(--ink);
+  }
+  .brand svg{width:26px; height:auto; border-radius:2px; flex:none; box-shadow:0 0 0 1px var(--line)}
+  nav.links{display:flex; gap:2px; align-items:center}
+  nav.links a{
+    font-size:.86rem; font-weight:600; letter-spacing:.02em;
+    text-decoration:none; color:var(--ink-soft);
+    padding:8px 12px; border-radius:8px;
+    transition:color .15s ease, background .15s ease;
+  }
+  nav.links a:hover{color:var(--green); background:var(--surface-2)}
+  #navToggle{display:none}
+  .burger{display:none; background:none; border:1px solid var(--line-strong); border-radius:8px; width:40px;height:36px; cursor:pointer; color:var(--ink)}
+  @media (max-width: 860px){
+    nav.links{
+      position:absolute; top:64px; left:0; right:0;
+      background:var(--surface); border-bottom:1px solid var(--line);
+      flex-direction:column; align-items:stretch; padding:8px; display:none;
+    }
+    nav.links a{padding:12px 14px}
+    #navToggle:checked ~ nav.links{display:flex}
+    .burger{display:inline-flex; align-items:center; justify-content:center}
+  }
+
+  /* ============ FIGURES / PHOTOS ============ */
+  figure{margin:0; position:relative}
+  .ph{
+    position:relative; overflow:hidden; background:var(--sand-2);
+    border-radius:var(--radius);
+  }
+  .ph img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    transition:transform .8s cubic-bezier(.2,.7,.3,1);
+  }
+  .ph.zoom:hover img{transform:scale(1.04)}
+  @media (prefers-reduced-motion:reduce){ .ph img{transition:none} .ph.zoom:hover img{transform:none} }
+
+  /* repli élégant si une photo ne charge pas */
+  .ph.failed img{display:none}
+  .ph.failed::after{
+    content:attr(data-fallback);
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:24px; font-size:.86rem; color:var(--ink-faint);
+    font-family:"IBM Plex Mono",monospace; line-height:1.5;
+    background:
+      repeating-linear-gradient(115deg, transparent 0 22px, color-mix(in srgb, var(--gold-bright) 8%, transparent) 22px 24px),
+      linear-gradient(160deg, var(--sand-2), var(--surface-2));
+  }
+  figcaption{
+    font-size:.78rem; color:var(--ink-faint); margin-top:8px; line-height:1.45;
+  }
+  figcaption a{color:var(--ink-faint); text-decoration:underline; text-decoration-color:var(--line-strong)}
+  figcaption a:hover{color:var(--green)}
+
+  /* ============ HERO ============ */
+  .hero{position:relative; min-height:92vh; display:flex; align-items:flex-end; overflow:hidden; background:var(--green-deep)}
+  .hero-bg{position:absolute; inset:0; z-index:0; border-radius:0}
+  .hero-bg img{width:100%; height:100%; object-fit:cover}
+  .hero-bg::after{
+    content:""; position:absolute; inset:0;
+    background:
+      linear-gradient(to top, rgba(10,20,12,.94) 0%, rgba(10,20,12,.72) 38%, rgba(10,20,12,.30) 70%, rgba(10,20,12,.45) 100%),
+      radial-gradient(90% 60% at 15% 100%, rgba(4,106,56,.45), transparent 70%);
+  }
+  .hero-inner{position:relative; z-index:2; width:100%; padding:120px 0 0}
+  .hero .eyebrow{
+    display:inline-flex; align-items:center; gap:12px;
+    font-family:"IBM Plex Mono",monospace; font-size:.74rem; letter-spacing:.09em;
+    text-transform:uppercase; color:#F0DCA8; margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(2.9rem, 8.6vw, 6.2rem); line-height:.95; font-weight:900; color:#FFFDF6;
+    text-shadow:0 2px 30px rgba(0,0,0,.35);
+  }
+  .hero h1 em{font-style:italic; font-weight:600; color:var(--gold-bright)}
+  .hero-sub{
+    max-width:640px; margin-top:24px; font-size:1.16rem; color:#EADFC6;
+  }
+  .hero-stats{
+    display:flex; flex-wrap:wrap; margin-top:48px;
+    border-top:1px solid rgba(240,220,168,.28);
+  }
+  .hero-stats .hs{
+    flex:1 1 170px; padding:20px 26px 30px 0;
+    border-right:1px solid rgba(240,220,168,.28);
+  }
+  .hero-stats .hs:last-child{border-right:none}
+  .hs .num{font-family:"IBM Plex Mono",monospace; font-size:1.6rem; font-weight:600; color:var(--gold-bright); display:block; white-space:nowrap}
+  .hs .lab{font-size:.79rem; color:#D9CCAF; margin-top:5px; display:block}
+  @media (max-width:560px){
+    .hero-inner{padding-bottom:26px}
+    .hero-stats .hs{flex-basis:50%; padding:16px 14px 20px 0}
+    .hs .num{font-size:1.05rem}
+    .hs .lab{font-size:.72rem}
+  }
+  .hero-credit{
+    position:absolute; right:14px; bottom:8px; z-index:3;
+    font-size:.66rem; color:rgba(255,253,246,.5); font-family:"IBM Plex Mono",monospace;
+  }
+  .hero-credit a{color:inherit}
+
+  /* ============ SECTIONS ============ */
+  section.chapter{
+    padding:104px 0; border-top:1px solid var(--line);
+    opacity:0; transform:translateY(18px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  section.chapter.in-view{opacity:1; transform:translateY(0)}
+  @media (prefers-reduced-motion:reduce){ section.chapter{opacity:1; transform:none; transition:none} }
+
+  .chapter-head{max-width:700px; margin-bottom:52px}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:12px;
+    font-family:"IBM Plex Mono",monospace; font-size:.73rem; letter-spacing:.09em;
+    text-transform:uppercase; color:var(--green); margin-bottom:16px;
+  }
+  .chapter-head h2{font-size:clamp(2rem, 4.2vw, 2.8rem)}
+  .chapter-head p.lede{margin-top:16px; font-size:1.08rem; color:var(--ink-soft); max-width:62ch}
+
+  .grid{display:grid; gap:16px}
+  .grid.cols-4{grid-template-columns:repeat(4,1fr)}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+  @media (max-width:880px){
+    .grid.cols-4{grid-template-columns:repeat(2,1fr)}
+    .grid.cols-3{grid-template-columns:1fr}
+    .grid.cols-2{grid-template-columns:1fr}
+  }
+  @media (max-width:520px){ .grid.cols-4{grid-template-columns:1fr} }
+
+  .stat-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px 20px; box-shadow:var(--shadow);
+  }
+  .stat-card .num{font-family:"IBM Plex Mono",monospace; font-size:1.8rem; font-weight:600; color:var(--green); display:block}
+  .stat-card .num small{font-size:.95rem; font-weight:500; color:var(--ink-faint)}
+  .stat-card .lab{margin-top:6px; font-size:.87rem; color:var(--ink-soft); line-height:1.45}
+
+  .panel{
+    background:var(--surface); border:1px solid var(--line); border-radius:20px;
+    padding:32px; box-shadow:var(--shadow);
+  }
+  .prose p{color:var(--ink-soft); font-size:1.02rem; max-width:64ch}
+  .prose p + p{margin-top:14px}
+  .prose strong{color:var(--ink); font-weight:600}
+
+  /* deux colonnes texte + photo */
+  .duo{display:grid; grid-template-columns:1fr 1fr; gap:34px; align-items:center}
+  @media (max-width:880px){ .duo{grid-template-columns:1fr; gap:24px} }
+  .duo .ph{aspect-ratio:4/3}
+
+  /* bandeau photo pleine largeur */
+  .band{position:relative; margin:56px 0 0; border-radius:20px; overflow:hidden; min-height:340px; display:flex; align-items:flex-end}
+  .band .ph{position:absolute; inset:0; border-radius:0}
+  .band .ph::after{content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(12,22,14,.9), rgba(12,22,14,.15) 65%)}
+  .band-txt{position:relative; z-index:2; padding:32px; color:#FFFDF6; max-width:60ch}
+  .band-txt h3{color:#fff; font-size:1.5rem}
+  .band-txt p{color:#E4D9C0; font-size:.96rem; margin:8px 0 0}
+  .band-credit{position:absolute; right:12px; top:10px; z-index:3; font-size:.66rem; font-family:"IBM Plex Mono",monospace; color:rgba(255,253,246,.55)}
+  .band-credit a{color:inherit}
+
+  /* ============ TRAIN ============ */
+  .train-wrap{margin-top:40px; border:1px solid var(--line); border-radius:20px; overflow:hidden; background:linear-gradient(180deg, var(--surface-2), var(--surface))}
+  .train-caption{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; padding:20px 24px 0}
+  .train-caption h3{font-size:1.2rem}
+  .train-caption span{font-size:.8rem; color:var(--ink-faint); font-family:"IBM Plex Mono",monospace}
+  .track{position:relative; margin-top:16px; padding:24px 0 30px; overflow:hidden}
+  .track::before{content:""; position:absolute; left:0; right:0; bottom:14px; height:3px; background:repeating-linear-gradient(to right, var(--line-strong) 0 14px, transparent 14px 26px)}
+  .wagons{display:flex; align-items:flex-end; gap:5px; width:max-content; animation:roll 34s linear infinite; padding-left:2%}
+  @media (prefers-reduced-motion:reduce){ .wagons{animation:none} }
+  .wagons .loco,.wagons .wagon{flex:none; height:32px; border-radius:5px 5px 3px 3px; box-shadow:inset 0 -4px 0 rgba(0,0,0,.16)}
+  .wagons .loco{width:52px; height:40px; background:var(--green); border-radius:6px 10px 3px 3px}
+  .wagons .wagon{width:26px; background:#8A4A22}
+  .wagons .wagon:nth-child(3n){background:var(--gold)}
+  .wagons .wagon:nth-child(7n){background:var(--red)}
+  @keyframes roll{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+  .train-stats{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border-top:1px solid var(--line)}
+  @media (max-width:700px){ .train-stats{grid-template-columns:repeat(2,1fr)} }
+  .train-stats div{background:var(--surface); padding:18px 20px}
+  .train-stats .num{font-family:"IBM Plex Mono",monospace; font-weight:600; color:var(--ink); font-size:1.22rem; display:block}
+  .train-stats .lab{font-size:.77rem; color:var(--ink-faint); margin-top:3px}
+
+  /* ============ CARTES RESSOURCES ============ */
+  .res-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:16px;
+    box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+  }
+  .res-card .ph{border-radius:0; aspect-ratio:16/10}
+  .res-card .rc-body{padding:22px; display:flex; flex-direction:column; gap:9px}
+  .res-card .tag{font-family:"IBM Plex Mono",monospace; font-size:.71rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); font-weight:600}
+  .res-card h3{font-size:1.14rem}
+  .res-card p{color:var(--ink-soft); font-size:.92rem; margin:0}
+
+  /* ============ PARCS ============ */
+  .park{
+    display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--line);
+    border-radius:20px; overflow:hidden; box-shadow:var(--shadow); background:var(--surface);
+  }
+  .park + .park{margin-top:24px}
+  @media (max-width:880px){ .park{grid-template-columns:1fr} }
+  .park-visual{position:relative; min-height:300px}
+  .park-visual .ph{position:absolute; inset:0; border-radius:0}
+  .park-visual .ph::after{content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(8,26,16,.88), rgba(8,26,16,.05) 60%)}
+  .park-label{position:absolute; left:0; bottom:0; z-index:2; padding:26px}
+  .park-label .park-tag{font-family:"IBM Plex Mono",monospace; font-size:.74rem; color:var(--gold-bright); margin:0 0 6px}
+  .park-label .park-name{font-family:"Fraunces",serif; font-size:1.6rem; font-weight:700; color:#fff; margin:0}
+  .park-body{padding:28px}
+  .park-body p{color:var(--ink-soft); font-size:.95rem; margin:0}
+  .park-body p + p{margin-top:12px}
+  .mini-stats{display:flex; flex-wrap:wrap; gap:9px; margin-top:16px}
+  .mini-stats span{
+    font-family:"IBM Plex Mono",monospace; font-size:.75rem; background:var(--surface-2);
+    border:1px solid var(--line); border-radius:999px; padding:6px 12px; color:var(--ink-soft);
+  }
+
+  /* ============ ÉCONOMIE ============ */
+  .econ-layout{display:grid; grid-template-columns:1.05fr 1fr; gap:24px; align-items:start}
+  @media (max-width:900px){ .econ-layout{grid-template-columns:1fr} }
+  .bars{display:flex; align-items:flex-end; gap:22px; height:200px; margin-top:26px}
+  .bar-col{display:flex; flex-direction:column; align-items:center; gap:9px; flex:1; justify-content:flex-end}
+  .bar-col .bar{width:100%; max-width:52px; border-radius:6px 6px 3px 3px; background:linear-gradient(180deg, var(--green-bright), var(--green))}
+  .bar-col.proj .bar{background:linear-gradient(180deg, var(--gold-bright), var(--gold))}
+  .bar-col .val{font-family:"IBM Plex Mono",monospace; font-size:.9rem; font-weight:600}
+  .bar-col .yr{font-size:.75rem; color:var(--ink-faint)}
+  .legend-dot{display:inline-block; width:8px;height:8px;border-radius:50%; margin-right:6px}
+  .econ-notes{font-size:.81rem; color:var(--ink-faint); margin-top:14px}
+  .kpi-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:16px}
+  .kpi .k-num{font-family:"IBM Plex Mono",monospace; font-size:1.28rem; font-weight:600; color:var(--green); display:block}
+  .kpi .k-lab{font-size:.81rem; color:var(--ink-soft); margin-top:2px}
+  .split-bar{height:14px; border-radius:999px; overflow:hidden; display:flex; margin-top:10px; border:1px solid var(--line)}
+  .split-bar span{height:100%}
+  .split-legend{display:flex; gap:14px; flex-wrap:wrap; margin-top:10px; font-size:.81rem; color:var(--ink-soft)}
+  .split-legend .k{display:flex; align-items:center}
+
+  /* ============ KSOUR ============ */
+  .ksour{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+  @media (max-width:940px){ .ksour{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:540px){ .ksour{grid-template-columns:1fr} }
+  .ksour-card{
+    border:1px solid var(--line); border-radius:16px; background:var(--surface);
+    box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+  }
+  .ksour-card .ph{border-radius:0; aspect-ratio:3/2}
+  .ksour-card .kc-body{padding:20px}
+  .ksour-card .region{font-family:"IBM Plex Mono",monospace; font-size:.7rem; color:var(--gold); text-transform:uppercase; letter-spacing:.05em}
+  .ksour-card h3{margin-top:7px; font-size:1.2rem}
+  .ksour-card p{color:var(--ink-soft); font-size:.88rem; margin-top:8px}
+
+  /* ============ CARTE SATELLITE ============ */
+  .map-layout{display:grid; grid-template-columns:1.45fr 1fr; gap:24px; align-items:start}
+  @media (max-width:940px){ .map-layout{grid-template-columns:1fr} }
+  #map{
+    height:600px; border-radius:20px; border:1px solid var(--line);
+    box-shadow:var(--shadow); background:var(--sand-2); z-index:1;
+  }
+  @media (max-width:640px){ #map{height:440px} }
+  #mapFallback{
+    display:none; padding:28px; text-align:center; color:var(--ink-soft); font-size:.92rem;
+  }
+  .leaflet-container{font-family:"Work Sans", sans-serif; border-radius:20px}
+  .leaflet-popup-content-wrapper{
+    background:var(--surface); color:var(--ink);
+    border-radius:12px; box-shadow:0 8px 30px -8px rgba(0,0,0,.4);
+  }
+  .leaflet-popup-tip{background:var(--surface)}
+  .leaflet-popup-content{margin:14px 16px; font-size:.88rem; line-height:1.5}
+  .leaflet-popup-content b{font-family:"Fraunces",serif; font-size:1.05rem; display:block; margin-bottom:2px}
+  .leaflet-popup-content .pc{font-family:"IBM Plex Mono",monospace; font-size:.74rem; color:var(--ink-faint); display:block; margin-bottom:7px}
+  .leaflet-popup-content-wrapper a.leaflet-popup-close-button{color:var(--ink-faint)}
+  .mk{
+    width:16px; height:16px; border-radius:50%;
+    background:var(--gold-bright); border:2.5px solid #fff;
+    box-shadow:0 0 0 1.5px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.5);
+    transition:transform .15s ease, background .15s ease;
+  }
+  .mk.park{background:var(--green-bright)}
+  .mk.active{transform:scale(1.45); background:var(--red)}
+
+  .site-list{display:flex; flex-direction:column; gap:2px; max-height:600px; overflow-y:auto; padding-right:4px}
+  @media (max-width:940px){ .site-list{max-height:none} }
+  .site-item{
+    display:flex; justify-content:space-between; gap:10px; align-items:center;
+    padding:13px 15px; border-radius:10px; cursor:pointer; border:1px solid transparent;
+    transition:background .15s ease, border-color .15s ease; text-align:left; width:100%;
+    background:none; font-family:inherit; font-size:1rem; color:inherit;
+  }
+  .site-item:hover,.site-item.active{background:var(--surface-2); border-color:var(--line)}
+  .site-item.active{border-color:var(--green)}
+  .site-item .nm{font-weight:600; font-size:.94rem}
+  .site-item .nm small{font-weight:400; color:var(--ink-faint)}
+  .site-item .co{font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--ink-faint); flex:none}
+
+  /* ============ FOOTER ============ */
+  footer{border-top:1px solid var(--line); padding:56px 0 40px; background:var(--sand-2)}
+  .foot-grid{display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap}
+  footer h4{font-family:"Fraunces",serif; font-size:1rem; margin-bottom:12px}
+  .sources{font-size:.81rem; color:var(--ink-soft); columns:2; column-gap:28px; padding-left:18px}
+  @media (max-width:640px){ .sources{columns:1} }
+  .sources li{margin-bottom:6px; break-inside:avoid}
+  .sources a{color:var(--green); text-decoration:none; border-bottom:1px dotted var(--line-strong)}
+  .fine{margin-top:34px; font-size:.77rem; color:var(--ink-faint); border-top:1px solid var(--line); padding-top:20px}
+
+  ::selection{background:var(--gold-bright); color:#231C10}
+  a:focus-visible, button:focus-visible, .site-item:focus-visible, label:focus-visible{
+    outline:2px solid var(--green); outline-offset:2px; border-radius:4px;
+  }
+
+</style>
+</head>
+<body>
+<noscript><style>section.chapter{opacity:1!important; transform:none!important}</style></noscript>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a href="Mauritanie.html" class="brand">
+      <svg viewBox="0 0 90 60" aria-hidden="true">
+        <rect width="90" height="60" fill="#046A38"/>
+        <rect width="90" height="10" fill="#CD2A3E"/>
+        <rect y="50" width="90" height="10" fill="#CD2A3E"/>
+        <mask id="bm"><rect width="90" height="60" fill="#000"/>
+          <circle cx="45" cy="38" r="17" fill="#fff"/><circle cx="45" cy="27" r="17" fill="#000"/>
+        </mask>
+        <rect width="90" height="60" fill="#FFC400" mask="url(#bm)"/>
+        <path d="M45 16 47.2 22.4 54 22.4 48.5 26.4 50.6 32.8 45 28.8 39.4 32.8 41.5 26.4 36 22.4 42.8 22.4Z" fill="#FFC400"/>
+      </svg>
+      Mauritanie
+    </a>
+    <input type="checkbox" id="navToggle">
+    <label for="navToggle" class="burger" tabindex="0" aria-label="Ouvrir le menu">☰</label>
+    <nav class="links">
+      <a href="histoire.html">Histoire</a>
+      <a href="geographie.html">Géographie</a>
+      <a href="ressources.html" aria-current="page">Ressources</a>
+      <a href="parcs.html">Parcs</a>
+      <a href="economie.html">Économie</a>
+      <a href="culture.html">Culture</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-bg ph" data-fallback="Photo indisponible">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/SNIM_ore_train_Nouadhibou.jpg?width=1800"
+         alt="Train minéralier de la SNIM arrivant à Nouadhibou, Mauritanie" fetchpriority="high" decoding="async">
+  </div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Ressources de la Mauritanie</p>
+    <h1>Du sous-sol<br>à l'<em>exportation</em></h1>
+    <p class="hero-sub">Un savoir-faire minier vieux de plusieurs millénaires, une industrie du fer née dans les années 1950, une ruée vers l'or récente, et une aventure pétrolière et gazière commencée en 2001&nbsp;: comment la Mauritanie a découvert, puis appris à exploiter, les richesses de son sous-sol et de ses eaux.</p>
+    <div class="hero-stats">
+      <div class="hs"><span class="num">30&nbsp;%</span><span class="lab">Des recettes budgétaires issues des mines</span></div>
+      <div class="hs"><span class="num">1963</span><span class="lab">Premier chargement de fer exporté par la Miferma</span></div>
+      <div class="hs"><span class="num">2006</span><span class="lab">Début de la production d'or à Tasiast</span></div>
+      <div class="hs"><span class="num">31 déc. 2024</span><span class="lab">Premier gaz du champ Grand Tortue Ahmeyim</span></div>
+    </div>
+  </div>
+  <p class="hero-credit">Photo : <a href="https://commons.wikimedia.org/wiki/File:SNIM_ore_train_Nouadhibou.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></p>
+</section>
+
+<!-- ============ FER ============ -->
+<section id="fer" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Depuis le Moyen Âge</p>
+      <h2>Le fer, du « Guelb Lehdid » à la SNIM</h2>
+      <p class="lede">Les gisements de fer du Tiris, près de l'actuelle Zouérate, étaient connus bien avant l'ère industrielle&nbsp;: dès le XIIᵉ siècle, le géographe andalou El Bekri les mentionne, et les populations locales appelaient déjà l'un d'eux « Guelb Lehdid » — littéralement « la colline de fer ».</p>
+    </div>
+
+    <div class="duo">
+      <figure>
+        <div class="ph zoom" data-fallback="Train minéralier de la SNIM — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/SNIM_ore_train_Nouadhibou.jpg?width=1200"
+               alt="Train minéralier de la SNIM à l'arrivée à Nouadhibou">
+        </div>
+        <figcaption>Le train minéralier de la SNIM, à l'arrivée à Nouadhibou. <a href="https://commons.wikimedia.org/wiki/File:SNIM_ore_train_Nouadhibou.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+      </figure>
+      <div class="prose">
+        <h3 style="font-size:1.4rem; margin-bottom:14px">De la Miferma à la SNIM</h3>
+        <p>L'exploitation industrielle démarre sous administration coloniale&nbsp;: la <strong>Miferma</strong> (Mines de Fer de Mauritanie) est créée en <strong>1952</strong> pour exploiter le massif de la Kedia d'Idjil, et le premier chargement de minerai quitte le pays par bateau en <strong>1963</strong>. À l'indépendance, le fer devient immédiatement le pilier de l'économie naissante.</p>
+        <p>En <strong>1974</strong>, l'État mauritanien nationalise la société, qui devient la <strong>SNIM</strong> (Société Nationale Industrielle et Minière) — il en détient aujourd'hui 78&nbsp;%. Avec une capacité de 12&nbsp;millions de tonnes par an, elle est le deuxième producteur de fer d'Afrique, pèse 15&nbsp;% du PIB et emploie environ 5&nbsp;000 personnes, entre Zouérate et Nouadhibou.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OR & CUIVRE ============ -->
+<section id="or-cuivre" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Un sous-sol redécouvert</p>
+      <h2>L'or et le cuivre, entre passé antique et industrie moderne</h2>
+      <p class="lede">Bien avant les compagnies minières internationales, la région d'Akjoujt pratiquait déjà la métallurgie du cuivre il y a environ <strong>2&nbsp;500&nbsp;ans</strong> — l'un des foyers de travail du métal les plus anciens d'Afrique de l'Ouest, mis au jour par les archéologues sur le site d'Imbich.</p>
+    </div>
+
+    <div class="grid cols-4">
+      <div class="stat-card"><span class="num">~2 500 ans</span><p class="lab">Ancienneté de la métallurgie du cuivre attestée près d'Akjoujt.</p></div>
+      <div class="stat-card"><span class="num">2006</span><p class="lab">Début de la production moderne de cuivre-or à Guelb Moghrein (Akjoujt).</p></div>
+      <div class="stat-card"><span class="num">2007 → 2010</span><p class="lab">Ouverture de Tasiast par Red Back Mining, puis rachat par Kinross Gold.</p></div>
+      <div class="stat-card"><span class="num">×3</span><p class="lab">Production d'or triplée entre 2015 (6,2&nbsp;t) et 2022 (15,2&nbsp;t) à Tasiast.</p></div>
+    </div>
+
+    <div class="duo" style="margin-top:34px">
+      <figure>
+        <div class="ph zoom" data-fallback="Minerai de cuivre — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Natural_Copper_Ore_Macro_1.JPG?width=1000"
+               alt="Échantillon de minerai de cuivre natif">
+        </div>
+        <figcaption>Minerai de cuivre natif, comme celui extrait à Guelb Moghrein (photo d'illustration). <a href="https://commons.wikimedia.org/wiki/File:Natural_Copper_Ore_Macro_1.JPG" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+      </figure>
+      <div class="prose">
+        <p>La mine de <strong>Guelb Moghrein</strong>, près d'Akjoujt, est exploitée depuis octobre 2006 par Mauritanian Copper Mines, filiale de la canadienne First Quantum Minerals — sur un gisement de cuivre et d'or connu de longue date mais resté hors d'atteinte industrielle jusque-là.</p>
+        <p>Plus au nord-ouest, la mine d'or de <strong>Tasiast</strong> a été ouverte en 2007 par la société canadienne Red Back Mining, avant d'être rachetée en 2010 par <strong>Kinross Gold</strong> pour 7,1&nbsp;milliards de dollars — une acquisition qui a suscité des contentieux judiciaires.</p>
+      </div>
+    </div>
+
+    <div class="band" style="margin-top:28px">
+      <div class="ph" data-fallback="Or natif — photo indisponible">
+        <img loading="lazy" decoding="async"
+             src="https://commons.wikimedia.org/wiki/Special:FilePath/Native_gold_nuggets.jpg?width=1800"
+             alt="Pépites d'or natif">
+      </div>
+      <div class="band-txt">
+        <h3>Tasiast, géant aurifère</h3>
+        <p>Un projet d'agrandissement lancé en 2018 (environ un milliard de dollars investis) a fait de Tasiast l'une des plus grandes mines d'or d'Afrique de l'Ouest, employant plus de 4&nbsp;000 personnes et alimentée en partie par une centrale solaire — la production a triplé entre 2015 et 2022.</p>
+      </div>
+      <p class="band-credit">Photo d'illustration — <a href="https://commons.wikimedia.org/wiki/File:Native_gold_nuggets.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PÉTROLE & GAZ ============ -->
+<section id="hydrocarbures" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> 2001 – aujourd'hui</p>
+      <h2>Pétrole et gaz&nbsp;: une aventure plus récente</h2>
+      <p class="lede">Contrairement au fer ou au cuivre, les hydrocarbures mauritaniens n'ont été découverts qu'au tournant des années 2000 — avec d'abord une désillusion pétrolière, puis l'une des plus grandes découvertes gazières offshore de la décennie 2010.</p>
+    </div>
+
+    <div class="panel">
+      <div class="prose">
+        <p>Un premier gisement pétrolier, <strong>Chinguetti</strong>, est découvert en mer en <strong>2001</strong>. Exploité par l'australien Woodside, il entre en production en 2005&nbsp;: le premier pétrolier quitte le pays en mars 2005, à destination de la Chine. Mais la production décline rapidement, bien en dessous des 75&nbsp;000 à 100&nbsp;000&nbsp;barils/jour espérés au départ, et le champ finit par être mis à l'arrêt — une leçon de prudence pour la suite.</p>
+      </div>
+    </div>
+
+    <div class="duo" style="margin-top:28px">
+      <div class="prose">
+        <p>Le vrai tournant vient du <strong>gaz</strong>&nbsp;: en 2015, la société américaine Kosmos Energy annonce la découverte du champ <strong>Grand Tortue Ahmeyim (GTA)</strong>, à cheval sur la frontière maritime avec le Sénégal — l'une des plus importantes découvertes gazières mondiales de la décennie, aux côtés du Mozambique et de l'égyptien Zohr, avec des réserves estimées à 25&nbsp;billions de pieds cubes (environ 450&nbsp;milliards de m³).</p>
+        <p>Développé par le groupe britannique <strong>BP</strong> aux côtés de Kosmos Energy et des États mauritanien et sénégalais, le champ a livré son <strong>premier gaz le 31&nbsp;décembre 2024</strong>, ouvrant une nouvelle ère économique pour les deux pays.</p>
+      </div>
+      <figure>
+        <div class="ph zoom" data-fallback="Méthanier — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/LNG_tanker_Christophe_de_Margerie.jpg?width=1200"
+               alt="Méthanier transportant du gaz naturel liquéfié">
+        </div>
+        <figcaption>Un méthanier de transport de GNL (photo d'illustration, sans lien avec le projet GTA). <a href="https://commons.wikimedia.org/wiki/File:LNG_tanker_Christophe_de_Margerie.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PÊCHE ============ -->
+<section id="peche" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Un pilier plus discret</p>
+      <h2>La pêche, richesse invisible de l'Atlantique</h2>
+      <p class="lede">Moins spectaculaires que les mines ou le gaz, les eaux mauritaniennes comptent pourtant parmi les plus poissonneuses au monde — un phénomène d'upwelling qui fait remonter des eaux froides riches en nutriments le long de la côte, et fait vivre la ville de Nouadhibou depuis des décennies.</p>
+    </div>
+
+    <div class="duo">
+      <figure>
+        <div class="ph zoom" data-fallback="Nouadhibou — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Ships_graveyard%2C_Nouadhibou%2C_Mauritania-5.jpg?width=1200"
+               alt="Cimetière de navires dans la baie de Nouadhibou, symbole de la tradition maritime de la ville">
+        </div>
+        <figcaption>La baie de Nouadhibou, cœur historique de la pêche mauritanienne. <a href="https://commons.wikimedia.org/wiki/File:Ships_graveyard%2C_Nouadhibou%2C_Mauritania-5.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+      </figure>
+      <div class="prose">
+        <h3 style="font-size:1.4rem; margin-bottom:14px">Des accords disputés</h3>
+        <p>L'exploitation de cette ressource passe surtout par des accords avec des flottes étrangères. Le protocole de pêche avec l'Union européenne signé en 2012 mobilise 110&nbsp;millions d'euros sur trois ans, réserve la pêche au poulpe aux pêcheurs artisanaux mauritaniens, et impose un minimum de 60&nbsp;% de marins mauritaniens à bord des navires européens. Des accords avec des flottes chinoises ont, eux, suscité des critiques d'ONG locales et internationales sur la pression exercée sur les stocks.</p>
+        <p>Au total, le secteur emploierait environ <strong>40&nbsp;000&nbsp;personnes</strong> et fournirait jusqu'à <strong>25&nbsp;%</strong> des recettes budgétaires de l'État, tout en restant l'un des postes les plus discutés de la gestion des ressources du pays.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ENJEUX ============ -->
+<section id="enjeux" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Et maintenant&nbsp;?</p>
+      <h2>Diversifier et mieux partager la rente</h2>
+      <p class="lede">Avec l'arrivée du gaz, la Mauritanie cherche à éviter les écueils classiques des économies minières et pétrolières&nbsp;: dépendance à quelques matières premières, faibles retombées locales, et manque de transparence sur l'usage des revenus.</p>
+    </div>
+
+    <div class="panel">
+      <div class="prose">
+        <p>Le pays est membre de l'<strong>Initiative pour la Transparence dans les Industries Extractives (ITIE)</strong> et publie chaque année un rapport détaillant les revenus tirés du fer, de l'or, du cuivre et des hydrocarbures — une démarche saluée à plusieurs reprises comme exemplaire dans la région. Les autorités mauritaniennes misent sur les revenus du gaz de GTA pour financer des infrastructures et diversifier une économie encore très dépendante des cours mondiaux du fer et de l'or.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div style="max-width:400px">
+        <h4>Mauritanie</h4>
+        <p style="font-size:.89rem; color:var(--ink-soft)">Histoire de la découverte et de l'exploitation des ressources naturelles de la République Islamique de Mauritanie&nbsp;: fer, or, cuivre, pétrole, gaz et pêche.</p>
+        <span class="flagrule" style="width:90px; height:5px; margin-top:14px"><i></i><i></i><i></i></span>
+      </div>
+      <div style="flex:1; min-width:280px">
+        <h4>Sources &amp; crédits</h4>
+        <ul class="sources">
+          <li><a href="https://fr.wikipedia.org/wiki/Soci%C3%A9t%C3%A9_nationale_industrielle_et_mini%C3%A8re" target="_blank" rel="noopener">Wikipédia — SNIM</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/Mine_de_Tasiast" target="_blank" rel="noopener">Wikipédia — Mine de Tasiast</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Guelb_Moghrein_Mine" target="_blank" rel="noopener">Wikipedia — Guelb Moghrein Mine</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/%C3%89conomie_du_p%C3%A9trole_de_la_Mauritanie" target="_blank" rel="noopener">Wikipédia — Économie du pétrole</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/Gisement_gazier_de_Tortue" target="_blank" rel="noopener">Wikipédia — Gisement gazier de Tortue</a></li>
+          <li><a href="https://www.jeuneafrique.com/14608/economie/l-accord-de-p-che-avec-l-ue-r-jouit-les-mauritaniens/" target="_blank" rel="noopener">Jeune Afrique — Accord de pêche UE</a></li>
+          <li><a href="http://cnitie.gov.mr/itie-en-mauritanie/" target="_blank" rel="noopener">ITIE Mauritanie</a></li>
+          <li><a href="https://commons.wikimedia.org/wiki/Category:Mauritania" target="_blank" rel="noopener">Photos — Wikimedia Commons</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine">Photographies issues de Wikimedia Commons, sous licences libres — chaque image renvoie vers sa page d'origine où figurent l'auteur et la licence exacte ; vérifiez-les avant tout usage commercial. Chiffres de production et de réserves donnés à titre indicatif, à partir des données les plus récentes disponibles ; ils évoluent d'une année sur l'autre.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- repli si une photo ne charge pas ---- */
+  document.querySelectorAll('.ph img').forEach(function(img){
+    function fail(){ if(img.parentElement) img.parentElement.classList.add('failed'); }
+    img.addEventListener('error', fail);
+    if(img.complete && img.naturalWidth === 0) fail();
+  });
+
+  /* ---- apparition au défilement ---- */
+  var chapters = document.querySelectorAll('section.chapter');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } });
+    }, {threshold:0.08});
+    chapters.forEach(function(c){ io.observe(c); });
+  } else {
+    chapters.forEach(function(c){ c.classList.add('in-view'); });
+  }
+
+  /* ---- menu mobile ---- */
+  var navToggle = document.getElementById('navToggle');
+  document.querySelectorAll('nav.links a').forEach(function(a){
+    a.addEventListener('click', function(){ if(navToggle) navToggle.checked = false; });
+  });
+  var burger = document.querySelector('label.burger');
+  if(burger){
+    burger.addEventListener('keydown', function(e){
+      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); navToggle.checked = !navToggle.checked; }
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

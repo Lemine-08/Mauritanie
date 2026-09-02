@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Géographie de la Mauritanie — Relief, climat et écologie</title>
+<meta name="description" content="Géographie de la Mauritanie : relief et grandes zones physiques, climat, hydrographie, écosystèmes et lutte contre la désertification." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+
+<style>
+  /* =========================================================
+     PALETTE — drapeau mauritanien (vert, or, rouge) + désert
+     Vert  #006233  ·  Or #FFC400  ·  Rouge #CD2A3E
+     ========================================================= */
+  :root{
+    /* sables du désert : le sol de la page */
+    --sand:#F7F0E0;
+    --sand-2:#EFE3C7;
+    --surface:#FFFDF6;
+    --surface-2:#FAF3E2;
+
+    /* encres, teintées chaud (sable), jamais du gris pur */
+    --ink:#231C10;
+    --ink-soft:#5A4E38;
+    --ink-faint:#8B7C5E;
+
+    /* drapeau */
+    --green:#046A38;
+    --green-deep:#0A4A2B;
+    --green-bright:#00874A;
+    --gold:#B5820E;
+    --gold-bright:#FFC400;
+    --red:#B32639;
+
+    --line:#E0CFA6;
+    --line-strong:#CBB37F;
+
+    --shadow: 0 1px 2px rgba(35,28,16,.06), 0 10px 30px -14px rgba(35,28,16,.22);
+    --radius: 14px;
+    --wrap: 1150px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --sand:#12100A;
+      --sand-2:#1A160E;
+      --surface:#1D1810;
+      --surface-2:#231D13;
+
+      --ink:#F3E9D2;
+      --ink-soft:#C6B694;
+      --ink-faint:#948464;
+
+      --green:#4FBF85;
+      --green-deep:#2E8F5E;
+      --green-bright:#5FD695;
+      --gold:#EDBF4A;
+      --gold-bright:#FFC400;
+      --red:#E8697A;
+
+      --line:#3A3020;
+      --line-strong:#4E4029;
+
+      --shadow: 0 1px 2px rgba(0,0,0,.35), 0 14px 32px -16px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --sand:#12100A;
+    --sand-2:#1A160E;
+    --surface:#1D1810;
+    --surface-2:#231D13;
+    --ink:#F3E9D2;
+    --ink-soft:#C6B694;
+    --ink-faint:#948464;
+    --green:#4FBF85;
+    --green-deep:#2E8F5E;
+    --green-bright:#5FD695;
+    --gold:#EDBF4A;
+    --gold-bright:#FFC400;
+    --red:#E8697A;
+    --line:#3A3020;
+    --line-strong:#4E4029;
+    --shadow: 0 1px 2px rgba(0,0,0,.35), 0 14px 32px -16px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+
+  body{
+    margin:0;
+    background:var(--sand);
+    color:var(--ink);
+    font-family:"Work Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:"Fraunces", Georgia, "Times New Roman", serif;
+    font-weight:700; letter-spacing:-0.01em; text-wrap:balance;
+    color:var(--ink); margin:0;
+  }
+  a{color:inherit}
+  img{max-width:100%; display:block}
+
+  .wrap{max-width:var(--wrap); margin:0 auto; padding:0 28px}
+  @media (max-width:640px){ .wrap{padding:0 20px} }
+  .mono{font-family:"IBM Plex Mono", ui-monospace, monospace; font-variant-numeric:tabular-nums}
+
+  /* ---- bande drapeau : motif structurant récurrent ---- */
+  .flagrule{display:flex; height:4px; width:64px; border-radius:2px; overflow:hidden; flex:none}
+  .flagrule i{display:block; height:100%}
+  .flagrule i:nth-child(1){width:22%; background:var(--red)}
+  .flagrule i:nth-child(2){width:56%; background:var(--green)}
+  .flagrule i:nth-child(3){width:22%; background:var(--gold-bright)}
+
+  /* ============ NAV ============ */
+  header.site{
+    position:sticky; top:0; z-index:600;
+    background:color-mix(in srgb, var(--sand) 90%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{display:flex; align-items:center; justify-content:space-between; height:64px}
+  .brand{
+    display:flex; align-items:center; gap:11px;
+    font-family:"Fraunces", serif; font-weight:700; font-size:1.05rem;
+    text-decoration:none; color:var(--ink);
+  }
+  .brand svg{width:26px; height:auto; border-radius:2px; flex:none; box-shadow:0 0 0 1px var(--line)}
+  nav.links{display:flex; gap:2px; align-items:center}
+  nav.links a{
+    font-size:.86rem; font-weight:600; letter-spacing:.02em;
+    text-decoration:none; color:var(--ink-soft);
+    padding:8px 12px; border-radius:8px;
+    transition:color .15s ease, background .15s ease;
+  }
+  nav.links a:hover{color:var(--green); background:var(--surface-2)}
+  #navToggle{display:none}
+  .burger{display:none; background:none; border:1px solid var(--line-strong); border-radius:8px; width:40px;height:36px; cursor:pointer; color:var(--ink)}
+  @media (max-width: 860px){
+    nav.links{
+      position:absolute; top:64px; left:0; right:0;
+      background:var(--surface); border-bottom:1px solid var(--line);
+      flex-direction:column; align-items:stretch; padding:8px; display:none;
+    }
+    nav.links a{padding:12px 14px}
+    #navToggle:checked ~ nav.links{display:flex}
+    .burger{display:inline-flex; align-items:center; justify-content:center}
+  }
+
+  /* ============ FIGURES / PHOTOS ============ */
+  figure{margin:0; position:relative}
+  .ph{
+    position:relative; overflow:hidden; background:var(--sand-2);
+    border-radius:var(--radius);
+  }
+  .ph img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    transition:transform .8s cubic-bezier(.2,.7,.3,1);
+  }
+  .ph.zoom:hover img{transform:scale(1.04)}
+  @media (prefers-reduced-motion:reduce){ .ph img{transition:none} .ph.zoom:hover img{transform:none} }
+
+  /* repli élégant si une photo ne charge pas */
+  .ph.failed img{display:none}
+  .ph.failed::after{
+    content:attr(data-fallback);
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:24px; font-size:.86rem; color:var(--ink-faint);
+    font-family:"IBM Plex Mono",monospace; line-height:1.5;
+    background:
+      repeating-linear-gradient(115deg, transparent 0 22px, color-mix(in srgb, var(--gold-bright) 8%, transparent) 22px 24px),
+      linear-gradient(160deg, var(--sand-2), var(--surface-2));
+  }
+  figcaption{
+    font-size:.78rem; color:var(--ink-faint); margin-top:8px; line-height:1.45;
+  }
+  figcaption a{color:var(--ink-faint); text-decoration:underline; text-decoration-color:var(--line-strong)}
+  figcaption a:hover{color:var(--green)}
+
+  /* ============ HERO ============ */
+  .hero{position:relative; min-height:92vh; display:flex; align-items:flex-end; overflow:hidden; background:var(--green-deep)}
+  .hero-bg{position:absolute; inset:0; z-index:0; border-radius:0}
+  .hero-bg img{width:100%; height:100%; object-fit:cover}
+  .hero-bg::after{
+    content:""; position:absolute; inset:0;
+    background:
+      linear-gradient(to top, rgba(10,20,12,.94) 0%, rgba(10,20,12,.72) 38%, rgba(10,20,12,.30) 70%, rgba(10,20,12,.45) 100%),
+      radial-gradient(90% 60% at 15% 100%, rgba(4,106,56,.45), transparent 70%);
+  }
+  .hero-inner{position:relative; z-index:2; width:100%; padding:120px 0 0}
+  .hero .eyebrow{
+    display:inline-flex; align-items:center; gap:12px;
+    font-family:"IBM Plex Mono",monospace; font-size:.74rem; letter-spacing:.09em;
+    text-transform:uppercase; color:#F0DCA8; margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(2.9rem, 8.6vw, 6.2rem); line-height:.95; font-weight:900; color:#FFFDF6;
+    text-shadow:0 2px 30px rgba(0,0,0,.35);
+  }
+  .hero h1 em{font-style:italic; font-weight:600; color:var(--gold-bright)}
+  .hero-sub{
+    max-width:640px; margin-top:24px; font-size:1.16rem; color:#EADFC6;
+  }
+  .hero-stats{
+    display:flex; flex-wrap:wrap; margin-top:48px;
+    border-top:1px solid rgba(240,220,168,.28);
+  }
+  .hero-stats .hs{
+    flex:1 1 170px; padding:20px 26px 30px 0;
+    border-right:1px solid rgba(240,220,168,.28);
+  }
+  .hero-stats .hs:last-child{border-right:none}
+  .hs .num{font-family:"IBM Plex Mono",monospace; font-size:1.6rem; font-weight:600; color:var(--gold-bright); display:block; white-space:nowrap}
+  .hs .lab{font-size:.79rem; color:#D9CCAF; margin-top:5px; display:block}
+  @media (max-width:560px){
+    .hero-inner{padding-bottom:26px}
+    .hero-stats .hs{flex-basis:50%; padding:16px 14px 20px 0}
+    .hs .num{font-size:1.05rem}
+    .hs .lab{font-size:.72rem}
+  }
+  .hero-credit{
+    position:absolute; right:14px; bottom:8px; z-index:3;
+    font-size:.66rem; color:rgba(255,253,246,.5); font-family:"IBM Plex Mono",monospace;
+  }
+  .hero-credit a{color:inherit}
+
+  /* ============ SECTIONS ============ */
+  section.chapter{
+    padding:104px 0; border-top:1px solid var(--line);
+    opacity:0; transform:translateY(18px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  section.chapter.in-view{opacity:1; transform:translateY(0)}
+  @media (prefers-reduced-motion:reduce){ section.chapter{opacity:1; transform:none; transition:none} }
+
+  .chapter-head{max-width:700px; margin-bottom:52px}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:12px;
+    font-family:"IBM Plex Mono",monospace; font-size:.73rem; letter-spacing:.09em;
+    text-transform:uppercase; color:var(--green); margin-bottom:16px;
+  }
+  .chapter-head h2{font-size:clamp(2rem, 4.2vw, 2.8rem)}
+  .chapter-head p.lede{margin-top:16px; font-size:1.08rem; color:var(--ink-soft); max-width:62ch}
+
+  .grid{display:grid; gap:16px}
+  .grid.cols-4{grid-template-columns:repeat(4,1fr)}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+  @media (max-width:880px){
+    .grid.cols-4{grid-template-columns:repeat(2,1fr)}
+    .grid.cols-3{grid-template-columns:1fr}
+    .grid.cols-2{grid-template-columns:1fr}
+  }
+  @media (max-width:520px){ .grid.cols-4{grid-template-columns:1fr} }
+
+  .stat-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px 20px; box-shadow:var(--shadow);
+  }
+  .stat-card .num{font-family:"IBM Plex Mono",monospace; font-size:1.8rem; font-weight:600; color:var(--green); display:block}
+  .stat-card .num small{font-size:.95rem; font-weight:500; color:var(--ink-faint)}
+  .stat-card .lab{margin-top:6px; font-size:.87rem; color:var(--ink-soft); line-height:1.45}
+
+  .panel{
+    background:var(--surface); border:1px solid var(--line); border-radius:20px;
+    padding:32px; box-shadow:var(--shadow);
+  }
+  .prose p{color:var(--ink-soft); font-size:1.02rem; max-width:64ch}
+  .prose p + p{margin-top:14px}
+  .prose strong{color:var(--ink); font-weight:600}
+
+  /* deux colonnes texte + photo */
+  .duo{display:grid; grid-template-columns:1fr 1fr; gap:34px; align-items:center}
+  @media (max-width:880px){ .duo{grid-template-columns:1fr; gap:24px} }
+  .duo .ph{aspect-ratio:4/3}
+
+  /* bandeau photo pleine largeur */
+  .band{position:relative; margin:56px 0 0; border-radius:20px; overflow:hidden; min-height:340px; display:flex; align-items:flex-end}
+  .band .ph{position:absolute; inset:0; border-radius:0}
+  .band .ph::after{content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(12,22,14,.9), rgba(12,22,14,.15) 65%)}
+  .band-txt{position:relative; z-index:2; padding:32px; color:#FFFDF6; max-width:60ch}
+  .band-txt h3{color:#fff; font-size:1.5rem}
+  .band-txt p{color:#E4D9C0; font-size:.96rem; margin:8px 0 0}
+  .band-credit{position:absolute; right:12px; top:10px; z-index:3; font-size:.66rem; font-family:"IBM Plex Mono",monospace; color:rgba(255,253,246,.55)}
+  .band-credit a{color:inherit}
+
+  /* ============ TRAIN ============ */
+  .train-wrap{margin-top:40px; border:1px solid var(--line); border-radius:20px; overflow:hidden; background:linear-gradient(180deg, var(--surface-2), var(--surface))}
+  .train-caption{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; padding:20px 24px 0}
+  .train-caption h3{font-size:1.2rem}
+  .train-caption span{font-size:.8rem; color:var(--ink-faint); font-family:"IBM Plex Mono",monospace}
+  .track{position:relative; margin-top:16px; padding:24px 0 30px; overflow:hidden}
+  .track::before{content:""; position:absolute; left:0; right:0; bottom:14px; height:3px; background:repeating-linear-gradient(to right, var(--line-strong) 0 14px, transparent 14px 26px)}
+  .wagons{display:flex; align-items:flex-end; gap:5px; width:max-content; animation:roll 34s linear infinite; padding-left:2%}
+  @media (prefers-reduced-motion:reduce){ .wagons{animation:none} }
+  .wagons .loco,.wagons .wagon{flex:none; height:32px; border-radius:5px 5px 3px 3px; box-shadow:inset 0 -4px 0 rgba(0,0,0,.16)}
+  .wagons .loco{width:52px; height:40px; background:var(--green); border-radius:6px 10px 3px 3px}
+  .wagons .wagon{width:26px; background:#8A4A22}
+  .wagons .wagon:nth-child(3n){background:var(--gold)}
+  .wagons .wagon:nth-child(7n){background:var(--red)}
+  @keyframes roll{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+  .train-stats{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border-top:1px solid var(--line)}
+  @media (max-width:700px){ .train-stats{grid-template-columns:repeat(2,1fr)} }
+  .train-stats div{background:var(--surface); padding:18px 20px}
+  .train-stats .num{font-family:"IBM Plex Mono",monospace; font-weight:600; color:var(--ink); font-size:1.22rem; display:block}
+  .train-stats .lab{font-size:.77rem; color:var(--ink-faint); margin-top:3px}
+
+  /* ============ CARTES RESSOURCES ============ */
+  .res-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:16px;
+    box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+  }
+  .res-card .ph{border-radius:0; aspect-ratio:16/10}
+  .res-card .rc-body{padding:22px; display:flex; flex-direction:column; gap:9px}
+  .res-card .tag{font-family:"IBM Plex Mono",monospace; font-size:.71rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); font-weight:600}
+  .res-card h3{font-size:1.14rem}
+  .res-card p{color:var(--ink-soft); font-size:.92rem; margin:0}
+
+  /* ============ PARCS ============ */
+  .park{
+    display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--line);
+    border-radius:20px; overflow:hidden; box-shadow:var(--shadow); background:var(--surface);
+  }
+  .park + .park{margin-top:24px}
+  @media (max-width:880px){ .park{grid-template-columns:1fr} }
+  .park-visual{position:relative; min-height:300px}
+  .park-visual .ph{position:absolute; inset:0; border-radius:0}
+  .park-visual .ph::after{content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(8,26,16,.88), rgba(8,26,16,.05) 60%)}
+  .park-label{position:absolute; left:0; bottom:0; z-index:2; padding:26px}
+  .park-label .park-tag{font-family:"IBM Plex Mono",monospace; font-size:.74rem; color:var(--gold-bright); margin:0 0 6px}
+  .park-label .park-name{font-family:"Fraunces",serif; font-size:1.6rem; font-weight:700; color:#fff; margin:0}
+  .park-body{padding:28px}
+  .park-body p{color:var(--ink-soft); font-size:.95rem; margin:0}
+  .park-body p + p{margin-top:12px}
+  .mini-stats{display:flex; flex-wrap:wrap; gap:9px; margin-top:16px}
+  .mini-stats span{
+    font-family:"IBM Plex Mono",monospace; font-size:.75rem; background:var(--surface-2);
+    border:1px solid var(--line); border-radius:999px; padding:6px 12px; color:var(--ink-soft);
+  }
+
+  /* ============ ÉCONOMIE ============ */
+  .econ-layout{display:grid; grid-template-columns:1.05fr 1fr; gap:24px; align-items:start}
+  @media (max-width:900px){ .econ-layout{grid-template-columns:1fr} }
+  .bars{display:flex; align-items:flex-end; gap:22px; height:200px; margin-top:26px}
+  .bar-col{display:flex; flex-direction:column; align-items:center; gap:9px; flex:1; justify-content:flex-end}
+  .bar-col .bar{width:100%; max-width:52px; border-radius:6px 6px 3px 3px; background:linear-gradient(180deg, var(--green-bright), var(--green))}
+  .bar-col.proj .bar{background:linear-gradient(180deg, var(--gold-bright), var(--gold))}
+  .bar-col .val{font-family:"IBM Plex Mono",monospace; font-size:.9rem; font-weight:600}
+  .bar-col .yr{font-size:.75rem; color:var(--ink-faint)}
+  .legend-dot{display:inline-block; width:8px;height:8px;border-radius:50%; margin-right:6px}
+  .econ-notes{font-size:.81rem; color:var(--ink-faint); margin-top:14px}
+  .kpi-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:16px}
+  .kpi .k-num{font-family:"IBM Plex Mono",monospace; font-size:1.28rem; font-weight:600; color:var(--green); display:block}
+  .kpi .k-lab{font-size:.81rem; color:var(--ink-soft); margin-top:2px}
+  .split-bar{height:14px; border-radius:999px; overflow:hidden; display:flex; margin-top:10px; border:1px solid var(--line)}
+  .split-bar span{height:100%}
+  .split-legend{display:flex; gap:14px; flex-wrap:wrap; margin-top:10px; font-size:.81rem; color:var(--ink-soft)}
+  .split-legend .k{display:flex; align-items:center}
+
+  /* ============ KSOUR ============ */
+  .ksour{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+  @media (max-width:940px){ .ksour{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:540px){ .ksour{grid-template-columns:1fr} }
+  .ksour-card{
+    border:1px solid var(--line); border-radius:16px; background:var(--surface);
+    box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+  }
+  .ksour-card .ph{border-radius:0; aspect-ratio:3/2}
+  .ksour-card .kc-body{padding:20px}
+  .ksour-card .region{font-family:"IBM Plex Mono",monospace; font-size:.7rem; color:var(--gold); text-transform:uppercase; letter-spacing:.05em}
+  .ksour-card h3{margin-top:7px; font-size:1.2rem}
+  .ksour-card p{color:var(--ink-soft); font-size:.88rem; margin-top:8px}
+
+  /* ============ CARTE SATELLITE ============ */
+  .map-layout{display:grid; grid-template-columns:1.45fr 1fr; gap:24px; align-items:start}
+  @media (max-width:940px){ .map-layout{grid-template-columns:1fr} }
+  #map{
+    height:600px; border-radius:20px; border:1px solid var(--line);
+    box-shadow:var(--shadow); background:var(--sand-2); z-index:1;
+  }
+  @media (max-width:640px){ #map{height:440px} }
+  #mapFallback{
+    display:none; padding:28px; text-align:center; color:var(--ink-soft); font-size:.92rem;
+  }
+  .leaflet-container{font-family:"Work Sans", sans-serif; border-radius:20px}
+  .leaflet-popup-content-wrapper{
+    background:var(--surface); color:var(--ink);
+    border-radius:12px; box-shadow:0 8px 30px -8px rgba(0,0,0,.4);
+  }
+  .leaflet-popup-tip{background:var(--surface)}
+  .leaflet-popup-content{margin:14px 16px; font-size:.88rem; line-height:1.5}
+  .leaflet-popup-content b{font-family:"Fraunces",serif; font-size:1.05rem; display:block; margin-bottom:2px}
+  .leaflet-popup-content .pc{font-family:"IBM Plex Mono",monospace; font-size:.74rem; color:var(--ink-faint); display:block; margin-bottom:7px}
+  .leaflet-popup-content-wrapper a.leaflet-popup-close-button{color:var(--ink-faint)}
+  .mk{
+    width:16px; height:16px; border-radius:50%;
+    background:var(--gold-bright); border:2.5px solid #fff;
+    box-shadow:0 0 0 1.5px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.5);
+    transition:transform .15s ease, background .15s ease;
+  }
+  .mk.park{background:var(--green-bright)}
+  .mk.active{transform:scale(1.45); background:var(--red)}
+
+  .site-list{display:flex; flex-direction:column; gap:2px; max-height:600px; overflow-y:auto; padding-right:4px}
+  @media (max-width:940px){ .site-list{max-height:none} }
+  .site-item{
+    display:flex; justify-content:space-between; gap:10px; align-items:center;
+    padding:13px 15px; border-radius:10px; cursor:pointer; border:1px solid transparent;
+    transition:background .15s ease, border-color .15s ease; text-align:left; width:100%;
+    background:none; font-family:inherit; font-size:1rem; color:inherit;
+  }
+  .site-item:hover,.site-item.active{background:var(--surface-2); border-color:var(--line)}
+  .site-item.active{border-color:var(--green)}
+  .site-item .nm{font-weight:600; font-size:.94rem}
+  .site-item .nm small{font-weight:400; color:var(--ink-faint)}
+  .site-item .co{font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--ink-faint); flex:none}
+
+  /* ============ FOOTER ============ */
+  footer{border-top:1px solid var(--line); padding:56px 0 40px; background:var(--sand-2)}
+  .foot-grid{display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap}
+  footer h4{font-family:"Fraunces",serif; font-size:1rem; margin-bottom:12px}
+  .sources{font-size:.81rem; color:var(--ink-soft); columns:2; column-gap:28px; padding-left:18px}
+  @media (max-width:640px){ .sources{columns:1} }
+  .sources li{margin-bottom:6px; break-inside:avoid}
+  .sources a{color:var(--green); text-decoration:none; border-bottom:1px dotted var(--line-strong)}
+  .fine{margin-top:34px; font-size:.77rem; color:var(--ink-faint); border-top:1px solid var(--line); padding-top:20px}
+
+  ::selection{background:var(--gold-bright); color:#231C10}
+  a:focus-visible, button:focus-visible, .site-item:focus-visible, label:focus-visible{
+    outline:2px solid var(--green); outline-offset:2px; border-radius:4px;
+  }
+
+  /* ============ GALERIE D'ESPÈCES (défilement horizontal) ============ */
+  .species-scroll{
+    display:flex; gap:16px; overflow-x:auto; padding:6px 4px 18px;
+    scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch;
+  }
+  .species-scroll:focus-visible{ outline:2px solid var(--green); outline-offset:4px; border-radius:8px }
+  .species-scroll::-webkit-scrollbar{ height:9px }
+  .species-scroll::-webkit-scrollbar-track{ background:var(--sand-2); border-radius:5px }
+  .species-scroll::-webkit-scrollbar-thumb{ background:var(--line-strong); border-radius:5px }
+  .species-card{ flex:0 0 168px; scroll-snap-align:start }
+  .species-card .ph{ aspect-ratio:4/5 }
+  .species-card h4{
+    font-family:"Fraunces", serif; font-size:.92rem; font-weight:600;
+    margin-top:8px; color:var(--ink);
+  }
+  .species-card .tag{
+    display:inline-block; margin-top:10px; font-size:.68rem; font-weight:600;
+    letter-spacing:.03em; text-transform:uppercase;
+    padding:3px 8px; border-radius:99px; line-height:1.4;
+  }
+  .species-card .tag.present{ background:color-mix(in srgb, var(--green) 14%, transparent); color:var(--green) }
+  .species-card .tag.gone{ background:color-mix(in srgb, var(--red) 14%, transparent); color:var(--red) }
+  @media (max-width:640px){ .species-card{ flex-basis:140px } }
+</style>
+</head>
+<body>
+<noscript><style>section.chapter{opacity:1!important; transform:none!important}</style></noscript>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a href="Mauritanie.html" class="brand">
+      <svg viewBox="0 0 90 60" aria-hidden="true">
+        <rect width="90" height="60" fill="#046A38"/>
+        <rect width="90" height="10" fill="#CD2A3E"/>
+        <rect y="50" width="90" height="10" fill="#CD2A3E"/>
+        <mask id="bm"><rect width="90" height="60" fill="#000"/>
+          <circle cx="45" cy="38" r="17" fill="#fff"/><circle cx="45" cy="27" r="17" fill="#000"/>
+        </mask>
+        <rect width="90" height="60" fill="#FFC400" mask="url(#bm)"/>
+        <path d="M45 16 47.2 22.4 54 22.4 48.5 26.4 50.6 32.8 45 28.8 39.4 32.8 41.5 26.4 36 22.4 42.8 22.4Z" fill="#FFC400"/>
+      </svg>
+      Mauritanie
+    </a>
+    <input type="checkbox" id="navToggle">
+    <label for="navToggle" class="burger" tabindex="0" aria-label="Ouvrir le menu">☰</label>
+    <nav class="links">
+      <a href="histoire.html">Histoire</a>
+      <a href="geographie.html" aria-current="page">Géographie</a>
+      <a href="ressources.html">Ressources</a>
+      <a href="parcs.html">Parcs</a>
+      <a href="economie.html">Économie</a>
+      <a href="culture.html">Culture</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-bg ph" data-fallback="Photo indisponible">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/The_Adrar_Plateau_%2814980145940%29.jpg?width=1800"
+         alt="Le plateau de l'Adrar, relief rocheux du centre de la Mauritanie" fetchpriority="high" decoding="async">
+  </div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Géographie de la Mauritanie</p>
+    <h1>Un relief sculpté<br>entre <em>désert</em> et fleuve</h1>
+    <p class="hero-sub">Du grand erg atlantique aux plateaux rocheux de l'Adrar, des cuvettes dunaires de l'est à la vallée fertile du fleuve Sénégal&nbsp;: la Mauritanie concentre en un seul pays presque tous les visages du Sahara — et une écologie fragile qui lutte pied à pied contre l'avancée des sables.</p>
+    <div class="hero-stats">
+      <div class="hs"><span class="num">1 030 700 km²</span><span class="lab">Superficie — quatre grandes zones physiques</span></div>
+      <div class="hs"><span class="num">400–500 m</span><span class="lab">Altitude des plateaux de l'Adrar et du Tagant</span></div>
+      <div class="hs"><span class="num">&lt;250 mm/an</span><span class="lab">Précipitations sur la quasi-totalité du territoire</span></div>
+      <div class="hs"><span class="num">3</span><span class="lab">Écorégions, du désert saharien à la savane soudanienne</span></div>
+    </div>
+  </div>
+  <p class="hero-credit">Photo : <a href="https://commons.wikimedia.org/wiki/File:The_Adrar_Plateau_%2814980145940%29.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></p>
+</section>
+
+<!-- ============ RELIEF ============ -->
+<section id="relief" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Le territoire</p>
+      <h2>Quatre visages du Sahara</h2>
+      <p class="lede">Du nord au sud, le pays enchaîne quatre paysages très distincts&nbsp;: un grand désert sablonneux le long de l'Atlantique, une région centrale de plateaux rocheux escarpés, de vastes cuvettes dunaires à l'est, et au sud la vallée alluviale du fleuve Sénégal — la seule bande vraiment fertile du pays.</p>
+    </div>
+
+    <div class="grid cols-4">
+      <div class="stat-card"><span class="num">Ouest</span><p class="lab">Le grand désert côtier, bordé par l'océan Atlantique sur 754&nbsp;km.</p></div>
+      <div class="stat-card"><span class="num">Centre</span><p class="lab">Plateaux gréseux de l'Adrar, du Tagant et des Mauritanides, jusqu'à 500&nbsp;m d'altitude.</p></div>
+      <div class="stat-card"><span class="num">Est</span><p class="lab">Larges cuvettes et alignements de dunes, aux portes du grand désert malien.</p></div>
+      <div class="stat-card"><span class="num">Sud</span><p class="lab">La vallée du fleuve Sénégal, seule véritable zone agricole du pays.</p></div>
+    </div>
+
+    <div class="duo" style="margin-top:44px">
+      <div class="prose">
+        <h3 style="font-size:1.4rem; margin-bottom:14px">Kediet Ijill et l'Œil du Sahara</h3>
+        <p>Le point culminant du pays, le <strong>Kediet Ijill</strong> (915&nbsp;m), est aussi l'un des plus importants gisements de fer au monde — c'est lui qui alimente le train minéralier de la SNIM. Plus au nord, dans l'Adrar, la <strong>structure de Richat</strong> forme une série d'anneaux concentriques de 40&nbsp;km de diamètre, invisible depuis le sol et longtemps restée un mystère géologique.</p>
+        <p>Ces plateaux abritent aussi les célèbres cités-ksour (Chinguetti, Ouadane) — leur histoire est racontée dans la section <a href="histoire.html">Histoire</a> du site.</p>
+      </div>
+      <figure>
+        <div class="ph zoom" data-fallback="Structure de Richat — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/ISS-42_Richat_Structure%2C_Eye_of_the_Sahara.jpg?width=1200"
+               alt="La structure de Richat, ou Œil du Sahara, vue depuis la Station spatiale internationale">
+        </div>
+        <figcaption>La structure de Richat vue depuis l'ISS. <a href="https://commons.wikimedia.org/wiki/File:ISS-42_Richat_Structure%2C_Eye_of_the_Sahara.jpg" target="_blank" rel="noopener">NASA / Wikimedia Commons</a></figcaption>
+      </figure>
+    </div>
+
+    <div class="band">
+      <div class="ph" data-fallback="Kediet Ijill — photo indisponible">
+        <img loading="lazy" decoding="async"
+             src="https://commons.wikimedia.org/wiki/Special:FilePath/Kediet-ej-jill.jpg?width=1800"
+             alt="Le Kediet Ijill, point culminant de la Mauritanie et important gisement de fer">
+      </div>
+      <div class="band-txt">
+        <h3>Le Kediet Ijill</h3>
+        <p>Avec ses 915&nbsp;mètres, ce massif isolé près de Zouérate est à la fois le sommet du pays et le cœur de son industrie minière&nbsp;: son minerai de fer, parmi les plus riches au monde, part chaque jour vers Nouadhibou par le train de la SNIM.</p>
+      </div>
+      <p class="band-credit"><a href="https://commons.wikimedia.org/wiki/File:Kediet-ej-jill.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLIMAT ============ -->
+<section id="climat" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Aridité et contrastes</p>
+      <h2>Un climat parmi les plus arides du monde</h2>
+      <p class="lede">Chaud et sec sur presque tout le territoire, le climat mauritanien varie tout de même sensiblement entre le nord saharien, le littoral atlantique plus tempéré, et le sud sahélien, plus humide et plus vert.</p>
+    </div>
+
+    <div class="duo">
+      <figure>
+        <div class="ph zoom" data-fallback="Désert saharien — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/Sahara_Desert_between_Akjoujt_and_Atar%2C_Mauritania_1967_%282833322907%29.jpg?width=1200"
+               alt="Paysage désertique aride entre Akjoujt et Atar, en plein Sahara mauritanien">
+        </div>
+        <figcaption>Le Sahara mauritanien, entre Akjoujt et Atar. <a href="https://commons.wikimedia.org/wiki/File:Sahara_Desert_between_Akjoujt_and_Atar%2C_Mauritania_1967_%282833322907%29.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+      </figure>
+      <div class="prose">
+        <p>Les températures moyennes annuelles oscillent entre <strong>26 et 32&nbsp;°C</strong>, avec des pointes proches de <strong>50&nbsp;°C</strong> l'été dans le nord-est saharien. Les précipitations restent inférieures à <strong>250&nbsp;mm par an</strong> sur la quasi-totalité du pays — souvent 100 à 150&nbsp;mm — et quasi nulles dans l'extrême nord-est.</p>
+        <p>Le Sahara mauritanien connaît en réalité deux saisons (une période chaude et sèche de novembre à avril, une période caniculaire et sèche de mai à octobre), tandis que le Sahel du sud en connaît trois, avec une saison des pluies de juin à septembre qui verdit brièvement la vallée du fleuve Sénégal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HYDROGRAPHIE ============ -->
+<section id="hydrographie" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Une rareté vitale</p>
+      <h2>Le fleuve Sénégal, artère du sud</h2>
+      <p class="lede">Dans un pays presque entièrement dépourvu d'eau de surface, le fleuve Sénégal fait figure d'exception&nbsp;: il trace toute la frontière méridionale du pays et rend possible l'essentiel de l'agriculture mauritanienne.</p>
+    </div>
+
+    <div class="duo">
+      <figure>
+        <div class="ph zoom" data-fallback="Fleuve Sénégal — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/WL-S%C3%A9n%C3%A9gal-Rosso-Travers%C3%A9e_du_fleuve_S%C3%A9n%C3%A9gal.jpg?width=1200"
+               alt="Traversée du fleuve Sénégal, frontière entre la Mauritanie et le Sénégal">
+        </div>
+        <figcaption>Le fleuve Sénégal, frontière naturelle et ressource vitale. <a href="https://commons.wikimedia.org/wiki/File:WL-S%C3%A9n%C3%A9gal-Rosso-Travers%C3%A9e_du_fleuve_S%C3%A9n%C3%A9gal.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+      </figure>
+      <div class="prose">
+        <h3 style="font-size:1.4rem; margin-bottom:14px">Le Chemama, grenier du pays</h3>
+        <p>Le fleuve a creusé une plaine alluviale, le <strong>Chemama</strong>, large de 10 à 25&nbsp;km, où se concentre l'essentiel des cultures (riz, sorgho, maraîchage). Le barrage de Diama, en aval, régule la remontée d'eau salée et permet l'irrigation toute l'année.</p>
+        <p>Ailleurs dans le pays, l'eau ne coule qu'exceptionnellement, dans des lits d'oueds asséchés la majeure partie de l'année ; les populations dépendent alors des nappes phréatiques souterraines, parfois profondes de plusieurs dizaines de mètres.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ÉCOLOGIE ============ -->
+<section id="ecologie" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Trois écorégions</p>
+      <h2>Une vie sauvage entre désert et savane</h2>
+      <p class="lede">Désert saharien au nord, steppe et savane sahélienne au centre-sud, savane soudanienne à l'extrême sud&nbsp;: ce dégradé d'écosystèmes abrite une faune adaptée à l'aridité, aujourd'hui fragilisée par la chasse passée et le recul de son habitat.</p>
+    </div>
+
+    <div class="prose" style="max-width:74ch">
+      <h3 style="font-size:1.4rem; margin-bottom:14px">Des espèces disparues, d'autres qui résistent</h3>
+      <p>Le dernier lion du pays a été abattu en 1970, dans ce qui est aujourd'hui le parc national du Diawling ; l'oryx algazelle, l'addax et la gazelle dama ont eux aussi disparu à l'état sauvage. Mais le <strong>fennec</strong>, le loup doré d'Afrique, le phacochère, le chat sauvage africain et le singe patas se maintiennent encore dans le désert et le Sahel mauritaniens.</p>
+      <p>Au large de Nouadhibou, le <strong>phoque moine de Méditerranée</strong> — l'un des mammifères marins les plus menacés au monde — conserve l'un de ses derniers bastions.</p>
+    </div>
+
+    <div class="species-scroll" style="margin-top:28px" tabindex="0" role="region" aria-label="Galerie des espèces animales — faites défiler horizontalement">
+      <div class="species-card">
+        <div class="ph zoom" data-fallback="Fennec — photo indisponible">
+          <img loading="lazy" decoding="async" src="https://commons.wikimedia.org/wiki/Special:FilePath/Fennec_fox.jpg?width=500" alt="Fennec, petit renard du désert">
+        </div>
+        <p class="tag present">Présent aujourd'hui</p>
+        <h4>Fennec</h4>
+      </div>
+      <div class="species-card">
+        <div class="ph zoom" data-fallback="Loup doré d'Afrique — photo indisponible">
+          <img loading="lazy" decoding="async" src="https://commons.wikimedia.org/wiki/Special:FilePath/African_golden_wolf_(16431530509).jpg?width=500" alt="Loup doré d'Afrique">
+        </div>
+        <p class="tag present">Présent aujourd'hui</p>
+        <h4>Loup doré d'Afrique</h4>
+      </div>
+      <div class="species-card">
+        <div class="ph zoom" data-fallback="Phacochère — photo indisponible">
+          <img loading="lazy" decoding="async" src="https://commons.wikimedia.org/wiki/Special:FilePath/Warthog_11.JPG?width=500" alt="Phacochère">
+        </div>
+        <p class="tag present">Présent aujourd'hui</p>
+        <h4>Phacochère</h4>
+      </div>
+      <div class="species-card">
+        <div class="ph zoom" data-fallback="Chat sauvage africain — photo indisponible">
+          <img loading="lazy" decoding="async" src="https://commons.wikimedia.org/wiki/Special:FilePath/African_Wildcat-001.jpg?width=500" alt="Chat sauvage africain">
+        </div>
+        <p class="tag present">Présent aujourd'hui</p>
+        <h4>Chat sauvage africain</h4>
+      </div>
+      <div class="species-card">
+        <div class="ph zoom" data-fallback="Singe patas — photo indisponible">
+          <img loading="lazy" decoding="async" src="https://commons.wikimedia.org/wiki/Special:FilePath/Patas_monkey_group.jpg?width=500" alt="Singe patas">
+        </div>
+        <p class="tag present">Présent aujourd'hui</p>
+        <h4>Singe patas</h4>
+      </div>
+      <div class="species-card">
+        <div class="ph zoom" data-fallback="Phoque moine de Méditerranée — photo indisponible">
+          <img loading="lazy" decoding="async" src="https://commons.wikimedia.org/wiki/Special:FilePath/Mediterranean_Monk_Seal.jpg?width=500" alt="Phoque moine de Méditerranée">
+        </div>
+        <p class="tag present">Présent — Nouadhibou</p>
+        <h4>Phoque moine</h4>
+      </div>
+      <div class="species-card">
+        <div class="ph zoom" data-fallback="Lion — photo indisponible">
+          <img loading="lazy" decoding="async" src="https://commons.wikimedia.org/wiki/Special:FilePath/Lion_(close-up_face).jpg?width=500" alt="Lion">
+        </div>
+        <p class="tag gone">Disparu — dernier vu en 1970</p>
+        <h4>Lion</h4>
+      </div>
+      <div class="species-card">
+        <div class="ph zoom" data-fallback="Oryx algazelle — photo indisponible">
+          <img loading="lazy" decoding="async" src="https://commons.wikimedia.org/wiki/Special:FilePath/Scimitar-horned_oryx.jpg?width=500" alt="Oryx algazelle">
+        </div>
+        <p class="tag gone">Disparu à l'état sauvage</p>
+        <h4>Oryx algazelle</h4>
+      </div>
+      <div class="species-card">
+        <div class="ph zoom" data-fallback="Addax — photo indisponible">
+          <img loading="lazy" decoding="async" src="https://commons.wikimedia.org/wiki/Special:FilePath/Addax_057.jpg?width=500" alt="Addax">
+        </div>
+        <p class="tag gone">Disparu à l'état sauvage</p>
+        <h4>Addax</h4>
+      </div>
+      <div class="species-card">
+        <div class="ph zoom" data-fallback="Gazelle dama — photo indisponible">
+          <img loading="lazy" decoding="async" src="https://commons.wikimedia.org/wiki/Special:FilePath/Nanger_dama_8630039.jpg?width=500" alt="Gazelle dama">
+        </div>
+        <p class="tag gone">Disparue à l'état sauvage</p>
+        <h4>Gazelle dama</h4>
+      </div>
+    </div>
+    <p class="figcaption-like" style="font-size:.78rem; color:var(--ink-faint); margin-top:6px">Faites glisser pour voir les 10 espèces — photos : <a href="https://commons.wikimedia.org/wiki/Category:Mauritania" target="_blank" rel="noopener" style="color:var(--ink-faint); text-decoration:underline">Wikimedia Commons</a>.</p>
+
+    <div class="grid cols-4" style="margin-top:34px">
+      <div class="stat-card"><span class="num">500+</span><p class="lab">Espèces d'oiseaux recensées, dont près de 2 millions d'hivernants sur le littoral.</p></div>
+      <div class="stat-card"><span class="num">86</span><p class="lab">Espèces de reptiles&nbsp;: varans du Nil, vipères à cornes, pythons, tortues.</p></div>
+      <div class="stat-card"><span class="num">2</span><p class="lab">Parcs nationaux littoraux majeurs — Banc d'Arguin et Diawling, détaillés dans <a href="parcs.html">Parcs</a>.</p></div>
+      <div class="stat-card"><span class="num">1970</span><p class="lab">Dernière observation attestée d'un lion sauvage dans le pays.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DÉSERTIFICATION ============ -->
+<section id="desertification" class="chapter">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="eyebrow"><span class="flagrule"><i></i><i></i><i></i></span> Un combat quotidien</p>
+      <h2>Freiner l'avancée du sable</h2>
+      <p class="lede">L'érosion éolienne et l'avancée des dunes menacent directement les terres cultivables et jusqu'aux abords de la capitale, Nouakchott — construite au contact direct du désert. La Mauritanie est aujourd'hui considérée comme un exemple régional de lutte contre la désertification.</p>
+    </div>
+
+    <div class="duo">
+      <figure>
+        <div class="ph zoom" data-fallback="Nouakchott — photo indisponible">
+          <img loading="lazy" decoding="async"
+               src="https://commons.wikimedia.org/wiki/Special:FilePath/15-Nouakchott-eH-R0058185.jpg?width=1200"
+               alt="Rue de Nouakchott, capitale de la Mauritanie construite au contact direct du désert">
+        </div>
+        <figcaption>Nouakchott, une capitale construite sur le sable. <a href="https://commons.wikimedia.org/wiki/File:15-Nouakchott-eH-R0058185.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+      </figure>
+      <div class="prose">
+        <p>Autour de Nouakchott, une <strong>« ceinture verte »</strong> de plusieurs centaines d'hectares a été plantée pour fixer les dunes qui menaçaient d'ensevelir certains quartiers de la ville, à partir de centaines de milliers de plants produits en pépinières locales.</p>
+        <p>Le pays participe aussi à la <strong>Grande Muraille Verte</strong>, une initiative panafricaine visant à créer une bande végétale continue à travers tout le Sahel, du Sénégal à Djibouti, pour freiner collectivement l'avancée du Sahara — un chantier de plusieurs décennies, mené avec la participation directe des communautés locales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div style="max-width:400px">
+        <h4>Mauritanie</h4>
+        <p style="font-size:.89rem; color:var(--ink-soft)">Relief, climat, hydrographie et écologie de la République Islamique de Mauritanie, entre grand désert saharien et vallée du fleuve Sénégal.</p>
+        <span class="flagrule" style="width:90px; height:5px; margin-top:14px"><i></i><i></i><i></i></span>
+      </div>
+      <div style="flex:1; min-width:280px">
+        <h4>Sources &amp; crédits</h4>
+        <ul class="sources">
+          <li><a href="https://fr.wikipedia.org/wiki/G%C3%A9ographie_de_la_Mauritanie" target="_blank" rel="noopener">Wikipédia — Géographie</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Wildlife_of_Mauritania" target="_blank" rel="noopener">Wikipedia — Wildlife of Mauritania</a></li>
+          <li><a href="https://news.un.org/fr/story/2010/06/187002" target="_blank" rel="noopener">ONU Info — Lutte contre la désertification</a></li>
+          <li><a href="https://whc.unesco.org/en/list/506/" target="_blank" rel="noopener">UNESCO — Banc d'Arguin</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/Parc_national_du_Diawling" target="_blank" rel="noopener">Wikipédia — Diawling</a></li>
+          <li><a href="https://commons.wikimedia.org/wiki/Category:Mauritania" target="_blank" rel="noopener">Photos — Wikimedia Commons</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine">Photographies issues de Wikimedia Commons, sous licences libres — chaque image renvoie vers sa page d'origine où figurent l'auteur et la licence exacte ; vérifiez-les avant tout usage commercial. Chiffres climatiques et écologiques donnés à titre indicatif, à partir des données les plus récentes disponibles.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- repli si une photo ne charge pas ---- */
+  document.querySelectorAll('.ph img').forEach(function(img){
+    function fail(){ if(img.parentElement) img.parentElement.classList.add('failed'); }
+    img.addEventListener('error', fail);
+    if(img.complete && img.naturalWidth === 0) fail();
+  });
+
+  /* ---- apparition au défilement ---- */
+  var chapters = document.querySelectorAll('section.chapter');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } });
+    }, {threshold:0.08});
+    chapters.forEach(function(c){ io.observe(c); });
+  } else {
+    chapters.forEach(function(c){ c.classList.add('in-view'); });
+  }
+
+  /* ---- menu mobile ---- */
+  var navToggle = document.getElementById('navToggle');
+  document.querySelectorAll('nav.links a').forEach(function(a){
+    a.addEventListener('click', function(){ if(navToggle) navToggle.checked = false; });
+  });
+  var burger = document.querySelector('label.burger');
+  if(burger){
+    burger.addEventListener('keydown', function(e){
+      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); navToggle.checked = !navToggle.checked; }
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
